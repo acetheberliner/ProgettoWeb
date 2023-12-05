@@ -14,7 +14,7 @@ export async function allNotes(req: Request, res: Response) {
 }
 
 // note per categoria
-export async function notesPerCategory(req: Request, res: Response) {
+export async function notesCategory(req: Request, res: Response) {
     // await getConnection
     connection.execute(
         "SELECT titolo, categoria, autore, testo FROM note WHERE categoria = ?",
