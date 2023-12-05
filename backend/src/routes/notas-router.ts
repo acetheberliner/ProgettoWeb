@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as notaController from '../controllers/nota-controller'
+import * as notaController from '../controllers/notes-controller'
 
 const router: Router = Router()
 
