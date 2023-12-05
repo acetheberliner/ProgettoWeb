@@ -1,5 +1,5 @@
 import express, { Express } from 'express'
-import notaRouter from './routes/notas-router'
+import notaRouter from './routes/notes-router'
 
 const app: Express = express()
 const port : number = 3000
