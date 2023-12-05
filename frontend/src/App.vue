@@ -1,7 +1,4 @@
 <template>
-  <header>
-    <h1>Home</h1>
-  </header>
   <main>
     <RouterView />
   </main>
