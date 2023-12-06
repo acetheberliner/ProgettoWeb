@@ -8,7 +8,6 @@
         <router-link class="nav-link" to="/register">Register</router-link>
       </div>
     </nav>
-
     <main>
       <router-view />
     </main>

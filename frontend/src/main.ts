@@ -6,6 +6,7 @@ import Home from './pages/Home.vue'
 import Login from './pages/Login.vue'
 import Esplora from './pages/Esplora.vue'
 import Register from './pages/Register.vue'
+import MyAccount from './pages/MyAccount.vue'
 import NotFound from './pages/NotFound.vue'
 
 const router: Router = createRouter ({
@@ -15,6 +16,7 @@ const router: Router = createRouter ({
         {path: "/login", component: Login},
         {path: "/explore", component: Esplora},
         {path: "/register", component: Register},
+        {path: "/myaccount", component: MyAccount},
         {path: "/:pathMatch(.*)*", component: NotFound}
     ]
 });
