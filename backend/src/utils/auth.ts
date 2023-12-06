@@ -17,3 +17,20 @@ export const setAccessToken = (req: Request, res: Response, user: any) => {
     })
 }
 
+export async function decodeAccessToken(req: Request, res: Response) {
+    // Otteniamo il cookie dell'access token
+    const accessToken = req.cookies[COOKIE_NAME]
+    //Restiusce id ati dell'utente contenuto nell'access token oppure null se il token  non c'e o invalido
+    if (!accessToken) return null
+    try {
+        const user = jwt.verify(accessToken, JWT_SECRET) as User
+        return user
+    } catch {
+        return null
+    }
+}
+
+export const deleteAccessToken = (req: Request, res: Response) => {
+    // Cancella il cookie dell'access token
+    res.clearCookie(COOKIE_NAME)
+  }
