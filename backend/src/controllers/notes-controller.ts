@@ -3,7 +3,6 @@ import { connection } from '../utils/db'
 
 // tutte le note
 export async function allNotes(req: Request, res: Response) {
-    // await getConnection
     connection.execute(
         "SELECT titolo, categoria, autore, testo FROM note",
         [],
@@ -15,7 +14,6 @@ export async function allNotes(req: Request, res: Response) {
 
 // note per categoria
 export async function notesCategory(req: Request, res: Response) {
-    // await getConnection
     connection.execute(
         "SELECT titolo, categoria, autore, testo FROM note WHERE categoria = ?",
         [req.params.n],
@@ -23,4 +21,8 @@ export async function notesCategory(req: Request, res: Response) {
             res.json(results);
         }
     )
+}
+
+export async function createNotes() {
+    
 }

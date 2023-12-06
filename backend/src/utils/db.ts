@@ -1,8 +1,8 @@
 import mysql, { Connection } from 'mysql2'
 
-export const connection: Connection = mysql.createConnection({
+export const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'progetto_prova1'
-});
+})
