@@ -15,9 +15,7 @@ export async function register(req: Request, res: Response) {
     }
     //Prendiamo username e pwd
     //const { username, passoword } = req.body
-    const username = "guido.mosconi"
-    const password = ""
-    const nome = "Guido"
+    const { username, email, password } = req.body 
     //Verifichiamo che l'username non sia usato
     
     const connection = await getConnection()
@@ -32,13 +30,13 @@ export async function register(req: Request, res: Response) {
 
     const pwdHash = await bcrypt.hash(password, 10)
 
-    await connection.execute("INSERT INTO utenti (username, nome, password) VALUES (?, ?, ?)",
+    await connection.execute("INSERT INTO utenti (username, email, password) VALUES (?, ?, ?)",
     [username,
-    nome,
+    email,
     pwdHash,
     ])
 
-    const resutls = await connection.execute("SELECT username, nome FROM utenti WHERE username = ?",
+    const resutls = await connection.execute("SELECT username, email FROM utenti WHERE username = ?",
     [username])
 
     setAccessToken(req, res, (resutls as any)[0])
