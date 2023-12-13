@@ -6,10 +6,11 @@ import { parseArgs } from 'util'
 
 export async function getLastNotesID() {
     const connection = await getConnection()
-    const results = await connection.execute(
+    const [results]: any = await connection.execute(
         "SELECT idnote FROM note ORDER BY idnote DESC LIMIT 1",
     [])    
-    const lastID = (results[0] as any)?.[0]?.idnote
+    const lastID = results[0].idnote
+    
     return lastID
 }
 
