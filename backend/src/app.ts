@@ -1,10 +1,12 @@
 import express, { Express } from 'express'
 import notaRouter from './routes/notes-router'
+import postRouter from './routes/post-notes-router'
 
 const app: Express = express()
 const port : number = 3000
 
 app.use(notaRouter)
+app.use(postRouter)
 
 app.use(function(req, res, next) {
     res.setHeader("Content-Type", "text/plain");
