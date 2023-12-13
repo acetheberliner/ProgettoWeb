@@ -43,3 +43,56 @@ export async function register(req: Request, res: Response) {
 
     setAccessToken(req, res, (resutls as any)[0])
 }
+
+export async function login(req: Request, res: Response) {
+    const user = await decodeAccessToken(req, res)
+
+    if (user) {
+        res.status(403).send("Questa operazione richiede il logout.")
+        return
+    }
+
+    const { username, password } = req.body
+
+    const connection = await getConnection()
+    const [results] = await connection.execute(
+        "SELECT username, password FROM utenti WHERE username = ?",
+        [username]
+    )
+
+    // Errore se l'utente non è stato trovato
+    if (!Array.isArray(results) || results.length == 0) {
+        res.status(400).send("Credenziali errate.")
+        return
+    }
+
+    const userData = results[0] as any
+
+    const pwdOk = await bcrypt.compare(password, userData.password)
+
+    if(pwdOk == false) { // o (!pwdOk)
+        res.status(400).send("Credenziali errate.")
+        return
+    }
+    // RIMUOVE la pass dall'oggetto utente
+    delete userData.password
+
+    setAccessToken(req, res, userData)
+}
+
+export async function logout(req: Request, res: Response) {
+    const user = decodeAccessToken(req, res)
+
+    if(!user) {
+        res.status(403).send("Questa operazione richiede l'autenticazione.")
+        return
+    }
+
+    deleteAccessToken(req, res)
+    
+}
+
+export async function getProfile(req: Request, res: Response) {
+    const user = decodeAccessToken(req, res)
+    res.json(user)
+}
