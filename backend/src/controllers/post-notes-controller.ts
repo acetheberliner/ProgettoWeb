@@ -18,10 +18,20 @@ export async function createNotes(req: Request, res: Response) {
         res.status(403).send("Questa operazione richiede l'autenticazione.")
         return
     }
-    
+
     const connection = await getConnection()
-    connection.execute(
+    await connection.execute(
         "INSERT INTO note (idnote, titolo, categoria, autore, testo) VALUES (?, ?, ?, ?, ?)",
         [await getLastNotesID() + 1, req.headers, req.body, req.body, req.body] // da finire
     )
+}
+
+export async function deletePost(req: Request, res: Response) {
+    const user = decodeAccessToken(req, res)
+    if (!user) {
+        res.status(403).send("Questa operazione richiede l'autenticazione.")
+        return
+    }
+
+    
 }
