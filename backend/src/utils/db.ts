@@ -1,8 +1,15 @@
-import mysql, { Connection } from 'mysql2'
+import mysql, { Connection } from 'mysql2/promise'
 
-export const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'progetto_prova1'
-})
+let connection: Connection | null = null
+
+export async function getConnection() {
+    if(!connection) {
+        connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'progetto_prova1'
+        })
+    }
+    return connection
+}
