@@ -1,4 +1,5 @@
 import express, { Express } from 'express'
+import history from 'connect-history-api-fallback'
 import notaRouter from './routes/notes-router'
 import postRouter from './routes/post-notes-router'
 import authRouter from './routes/auth-router'
@@ -6,6 +7,7 @@ import authRouter from './routes/auth-router'
 const app: Express = express()
 const port : number = 3000
 
+app.use(history())
 app.use(notaRouter)
 app.use(postRouter)
 app.use(authRouter)
