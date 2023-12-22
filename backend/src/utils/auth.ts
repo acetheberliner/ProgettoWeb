@@ -5,7 +5,7 @@ import { User } from '../types'
 const JWT_SECRET = "foo"
 const COOKIE_NAME = "access-token"
 
-export const setAccessToken = (req: Request, res: Response, user: any) => {
+export async function setAccessToken(req: Request, res: Response, user: any) {
     // Crea l'access token con JWT
     const accessToken = jwt.sign(user, JWT_SECRET, {expiresIn: "15 min"})
     // Imposta l'access token come cookie

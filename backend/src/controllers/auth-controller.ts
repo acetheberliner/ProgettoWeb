@@ -14,10 +14,10 @@ export async function register(req: Request, res: Response) {
         return
     }
     //Prendiamo username e pwd
-    //const { username, passoword } = req.body
-    const { username, email, password } = req.body 
-    //Verifichiamo che l'username non sia usato
     
+    const { username, email, password } = req.body
+    
+    //Verifichiamo che l'username non sia usato
     const connection = await getConnection()
     const [users] = await connection.execute("SELECT username FROM users WHERE username=?", [
         username,
