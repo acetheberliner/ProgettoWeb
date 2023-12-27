@@ -8,7 +8,7 @@ import { getConnection } from '../utils/db'
 export async function register(req: Request, res: Response) {
     // Blocca la richiesta se l'utente ha già effettuato il login
     
-    const user = await decodeAccessToken(req, res)
+    const user = decodeAccessToken(req, res)
     if (user) {
         res.status(403).send("Questa operazione richiede il logout")
         return
@@ -16,10 +16,10 @@ export async function register(req: Request, res: Response) {
     //Prendiamo username e pwd
     
     const { username, email, password } = req.body
-    
+
     //Verifichiamo che l'username non sia usato
     const connection = await getConnection()
-    const [users] = await connection.execute("SELECT username FROM users WHERE username=?", [
+    const [users] = await connection.execute("SELECT username FROM utenti WHERE username=?", [
         username,
     ])
 
@@ -36,14 +36,16 @@ export async function register(req: Request, res: Response) {
     pwdHash,
     ])
 
-    const resutls = await connection.execute("SELECT username, email FROM utenti WHERE username = ?",
+    const [results] = await connection.execute("SELECT username, email FROM utenti WHERE username = ?",
     [username])
 
-    setAccessToken(req, res, (resutls as any)[0])
+    const newUser = (results as any)[0]
+
+    setAccessToken(req, res, newUser)
 }
 
 export async function login(req: Request, res: Response) {
-    const user = await decodeAccessToken(req, res)
+    const user = decodeAccessToken(req, res)
 
     if (user) {
         res.status(403).send("Questa operazione richiede il logout.")

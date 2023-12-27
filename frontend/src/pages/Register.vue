@@ -3,33 +3,51 @@
     <form>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="username" v-model="username" required />
+            <input type="text" id="username" v-model="username" />
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" v-model="email" required />
+            <input type="email" id="email" v-model="email" />
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" id="password" v-model="password" required />
+            <input type="password" id="password" v-model="password" />
         </div>
         <div class="form-group">
-            <button type="submit">Registrati</button>
+            <button type="submit" @click="onSubmit">Registrati</button>
         </div>
     </form>
-  </template>
+</template>
   
-  <script lang="ts">
-  export default {
+<script lang="ts">
+  import axios from 'axios'
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     data() {
       return {
         username: '',
         email: '',
         password: '',
-      };
+      }
     },
-  };
-  </script>
+    methods: {
+      async onSubmit() { // occhio gestione errori
+        await axios.post("/api/auth/register", {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        });
+
+        // Gestisci la risposta dal server
+        alert("Ecco" + this.username)
+        
+        
+      }
+    }
+  })
+
+</script>
   
   <style scoped>
   h2 {
