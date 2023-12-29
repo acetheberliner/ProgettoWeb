@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <nav>
-      <router-link class="nav-link" to="/">Home</router-link>
+  <div class="full-page">
+    <nav class="container">
+      <div class="left-section">
+        <img src="../public/vite.svg" class="header-logo" alt="">
+        <router-link class="nav-link" to="/">Home</router-link>
+      </div>
       <div class="right-buttons">
         <router-link class="nav-link" to="/explore">Esplora</router-link>
         <router-link class="nav-link" to="/login">Login</router-link>
@@ -14,14 +17,58 @@
   </div>
 </template>
 
-<style scoped>
-nav {
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+*{
+  font-family: 'Montserrat', sans-serif;
+}
+
+body, html {
+  margin: 0px;
+  padding: 0;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+.full-page{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+main {
+  padding: 40px; /* Aggiungi spazio sopra il contenuto per non sovrapporre la nav-bar */
+  color: #fff; /* Cambia il colore del testo per contrastare con l'immagine di sfondo */
+  font-family: Arial, sans-serif;
+  background-image: url('link_all_immagine_di_sfondo.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.container{
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background-color: #4caf50; /* Colore di sfondo */
+  box-sizing: border-box;
+  background-color: #024454;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+  margin-right: 10px; /* Adjust spacing between the logo and text as needed */
+}
+
+.left-section {
+  display: flex;
+  align-items: center;
 }
 
 .right-buttons {
@@ -43,6 +90,7 @@ nav .nav-link:hover {
 }
 
 main {
-  padding: 20px;
+  flex: 1;
+  padding: 0px;
 }
 </style>
