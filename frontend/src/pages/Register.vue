@@ -67,7 +67,6 @@
   }
 
  .background {
-    background-image: url('../../public/vectors.svg');
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -109,7 +108,7 @@
 
   h2 {
     text-align: center;
-    color: #e38c2b;
+    color: #ffffff;
   }
   
   .input {
@@ -126,11 +125,12 @@
   }
 
   .input:is(:focus, :valid) ~ label {
-    transform: translateY(-115%) scale(0.65);
+    transform: translateY(-90%) translateX(-20%) scale(0.65);
     border-radius: 10px;
     background-color: #d4d4d4;
-    padding-inline: 0.3rem;
-    font-size: 1.35rem;
+    padding-inline: 0.4rem;
+    font-weight: bold;
+    font-size: 1.3rem;
     color: var(--primary);
   }
 
