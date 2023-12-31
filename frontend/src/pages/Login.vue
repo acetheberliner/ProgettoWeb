@@ -71,13 +71,13 @@ export default {
   margin-bottom: 2rem;
 }
 .form-container {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.3);
   /* background:transparent;
     backdrop-filter:blur(20px); */
   padding: 5vh;
   border-radius: 10px;
   border: 1px solid gray;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .form-elements {
@@ -98,17 +98,25 @@ form {
 h2 {
   text-align: center;
   color: #ffffff;
+  font-weight: bold;
 }
 
 p {
   font-size: 13px;
   text-align: center;
+  text-transform: none;
 }
 
 a {
-  text-decoration: underline;
   font-size: 14px;
   font-weight: bold;
+  color: #0011fa;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+  filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.884));
 }
 
 .input {
@@ -175,5 +183,6 @@ button {
 
 button:hover {
   background-color: #502ace;
+  filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
 }
 </style>
