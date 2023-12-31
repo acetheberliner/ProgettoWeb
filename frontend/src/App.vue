@@ -2,7 +2,9 @@
   <div class="full-page">
     <main>
       <nav class="container">
-        <img src="../public/vite.svg" class="header-logo" alt="" />
+        <div class="header-logo">
+          <p>Note<span>Sync</span></p>
+        </div>
         <router-link class="nav-link button glow-button btn1" to="/"
           >Home</router-link
         >
@@ -46,6 +48,31 @@ html {
   left: 0;
   width: 100%;
   z-index: 999;
+}
+
+p {
+  margin: 0px;
+  font-weight: bold;
+  font-style: italic;
+  color: rgb(209, 233, 236);
+  font-size: 45px;
+  text-transform: uppercase;
+  font-family: myFirstFont;
+  filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
+}
+
+span {
+  color: #169df7;
+  font-style: italic;
+  background: linear-gradient(to right, #0af3e0 0%, #0985eb 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@font-face {
+  font-family: myFirstFont;
+  src: url("../public/junegull.otf");
 }
 
 main {
