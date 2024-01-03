@@ -64,13 +64,13 @@ img:not(:hover) {
 }
 
 .header-logo > p {
-  margin: 0px;
   font-weight: bold;
   font-style: italic;
-  color: rgb(209, 233, 236);
   font-size: 45px;
-  text-transform: uppercase;
   font-family: myFirstFont;
+  text-transform: uppercase;
+  color: rgb(209, 233, 236);
+  margin: 0px;
   filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
 }
 
@@ -150,21 +150,37 @@ nav .nav-link {
 .btn1:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 5px 5px 15px #c6d8ff;
+  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .btn2:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 5px 5px 15px #1265da;
+  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .btn3:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 5px 5px 15px #6b5ca5;
+  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 .btn4:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 5px 5px 15px #ee42c0;
+  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 main {
