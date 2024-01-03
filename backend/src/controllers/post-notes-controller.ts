@@ -15,12 +15,12 @@ export async function getLastNotesID() {
 }
 
 export async function createPost(req: Request, res: Response) {
-    /*const user = decodeAccessToken(req, res)
+    const user = decodeAccessToken(req, res)
     
     if (!user) {
         res.status(403).send("Questa operazione richiede l'autenticazione.")
         return
-    }*/
+    } // COMMENTARE LA PARTE DI DECODE E USER PER EVITARE ERRORI DURANTE LA PROVA SENZA LOGIN
 
     const text = req.body.textInput
 
