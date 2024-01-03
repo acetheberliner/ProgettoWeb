@@ -85,7 +85,7 @@ span {
 
 @font-face {
   font-family: myFirstFont;
-  src: url("../public/fonts/junegull.otf");
+  src: url("/fonts/junegull.otf");
 }
 
 main {
