@@ -30,7 +30,10 @@
         </div>
       </form>
       <div class="paragraph">
-        <p>Non hai un account? <a href="/register">Registrati</a></p>
+        <p>
+          Non hai un account?
+          <router-link to="/register">Registrati</router-link>
+        </p>
       </div>
     </div>
   </div>
