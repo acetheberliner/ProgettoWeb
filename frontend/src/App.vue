@@ -3,7 +3,12 @@
     <main>
       <nav class="container">
         <div class="header-logo">
-          <p>Note<span>Sync</span></p>
+          <p>
+            <img src="../public/PaperFileText.svg" alt="" /><i
+              class="bsc-paper-file"
+            ></i
+            >Note<span>Sync</span>
+          </p>
         </div>
         <router-link class="nav-link button glow-button btn1" to="/"
           >Home</router-link
@@ -37,6 +42,24 @@ html {
   height: 100%;
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+  aspect-ratio: 40/40;
+  object-fit: cover;
+  margin-right: 25px;
+}
+
+img:hover {
+  scale: 1.2;
+  filter: drop-shadow(0px 0px 10px rgba(243, 179, 1, 0.733));
+}
+
+img:not(:hover) {
+  opacity: 0.8;
 }
 
 .full-page {
