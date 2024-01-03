@@ -20,12 +20,14 @@ export async function createPost(req: Request, res: Response) {
     if (!user) {
         res.status(403).send("Questa operazione richiede l'autenticazione.")
         return
-    }
+    } // COMMENTARE LA PARTE DI DECODE E USER PER EVITARE ERRORI DURANTE LA PROVA SENZA LOGIN
+
+    const text = req.body.textInput
 
     const connection = await getConnection()
     await connection.execute(
         "INSERT INTO note (idnote, titolo, categoria, autore, testo) VALUES (?, ?, ?, ?, ?)",
-        [await getLastNotesID() + 1, req.headers, req.body, req.body, req.body] // da finire
+        [await getLastNotesID() + 1, "PSS123", "Informatica", "tommaso", text] // da finire
     )
 }
 
