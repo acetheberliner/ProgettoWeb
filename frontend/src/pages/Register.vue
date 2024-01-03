@@ -14,42 +14,47 @@
             <input type="password" id="password" v-model="password" />
         </div>
         <div class="form-group">
-            <button type="submit" @click="onSubmit">Registrati</button>
+            <button @click="onSubmit">Registrati</button>
         </div>
     </form>
 </template>
-  
-<script lang="ts">
-  import axios from 'axios'
-  import { defineComponent } from 'vue'
 
-  export default defineComponent({
-    data() {
-      return {
-        username: '',
-        email: '',
-        password: '',
-      }
-    },
-    methods: {
-      async onSubmit() { // occhio gestione errori
-        await axios.post("/api/auth/register", {
+<script lang="ts">
+import axios from 'axios'
+import { defineComponent } from 'vue'
+//import { useRouter } from 'vue-router'
+
+export default defineComponent({
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    onSubmit() {
+      try {
+        axios.post("/api/auth/register", {
           username: this.username,
           email: this.email,
-          password: this.password
-        });
-
-        // Gestisci la risposta dal server
-        alert("Ecco" + this.username)
+          password: this.password,
+        })
+        // fare reinderizzamento con router.push o window.location
         
-        
+      } catch (e: any) {
+        if (e.response) {
+          alert(`${e.response.status} - ${e.response.statusText}\n${e.response.data}`)
+        } else {
+          alert(e.message)
+        }
       }
     }
-  })
-
+  }
+})
 </script>
   
-  <style scoped>
+<style scoped>
   h2 {
     text-align: center;
     color: #333;
@@ -91,5 +96,5 @@
   button:hover {
     background-color: #2e7d32;
   }
-  </style>
-  
+</style>
+  <!---->

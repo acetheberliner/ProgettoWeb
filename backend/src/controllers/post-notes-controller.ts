@@ -15,17 +15,19 @@ export async function getLastNotesID() {
 }
 
 export async function createPost(req: Request, res: Response) {
-    const user = decodeAccessToken(req, res)
+    /*const user = decodeAccessToken(req, res)
     
     if (!user) {
         res.status(403).send("Questa operazione richiede l'autenticazione.")
         return
-    }
+    }*/
+
+    const text = req.body.textInput
 
     const connection = await getConnection()
     await connection.execute(
         "INSERT INTO note (idnote, titolo, categoria, autore, testo) VALUES (?, ?, ?, ?, ?)",
-        [await getLastNotesID() + 1, req.headers, req.body, req.body, req.body] // da finire
+        [await getLastNotesID() + 1, "PSS123", "Informatica", "tommaso", text] // da finire
     )
 }
 
