@@ -3,12 +3,7 @@
     <main>
       <nav class="container">
         <div class="header-logo">
-          <p>
-            <img src="../public/PaperFileText.svg" alt="" /><i
-              class="bsc-paper-file"
-            ></i
-            >Note<span>Sync</span>
-          </p>
+          <p><img src="/PaperFileText.svg" alt="" />Note<span>Sync</span></p>
         </div>
         <router-link class="nav-link button glow-button btn1" to="/"
           >Home</router-link
@@ -28,7 +23,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
 * {
@@ -50,12 +45,7 @@ img {
   width: 50px;
   aspect-ratio: 40/40;
   object-fit: cover;
-  margin-right: 25px;
-}
-
-img:hover {
-  scale: 1.2;
-  filter: drop-shadow(0px 0px 10px rgba(243, 179, 1, 0.733));
+  margin-right: 15px;
 }
 
 img:not(:hover) {
@@ -73,7 +63,7 @@ img:not(:hover) {
   z-index: 999;
 }
 
-p {
+.header-logo > p {
   margin: 0px;
   font-weight: bold;
   font-style: italic;
@@ -95,22 +85,23 @@ span {
 
 @font-face {
   font-family: myFirstFont;
-  src: url("../public/junegull.otf");
+  src: url("../public/fonts/junegull.otf");
 }
 
 main {
   padding: 40px; /* Aggiungi spazio sopra il contenuto per non sovrapporre la nav-bar */
   color: #fff; /* Cambia il colore del testo per contrastare con l'immagine di sfondo */
-  background-image: url("../../public/Cloudy.svg");
-  background-size: cover;
+  /* background-image: url("../../public/Cloudy.svg"); */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
+    url(/Cloudy.svg);
   background-repeat: no-repeat;
+  background-size: cover;
   background-position: center;
+  background-attachment: fixed;
   height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-attachment: fixed;
+  /* justify-content: center; */
 }
 
 .container {
