@@ -4,7 +4,7 @@
       <h1>Errore <span>404</span></h1>
       <p>La pagina che stai cercando non è disponibile.</p>
       <router-link to="/"
-        ><span class="back">Torna alla pagina principale</span></router-link
+        ><span class="back">Torna alla Home</span></router-link
       >
     </div>
   </div>
