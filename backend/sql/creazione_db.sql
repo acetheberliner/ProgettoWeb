@@ -6,7 +6,7 @@ USE porgetto_prova1;
 
 CREATE TABLE `note` (
   `idnote` int(11) NOT NULL,
-  `titolo` varchar(20) NOT NULL,
+  `titolo` varchar(50) NOT NULL,
   `categoria` varchar(45) NOT NULL,
   `data` varchar(20) NOT NULL,
   `autore` varchar(20) NOT NULL,
