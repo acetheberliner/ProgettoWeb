@@ -1,6 +1,7 @@
 export interface Nota {
-    titolo: string,
-    categoria: string,
-    autore: string,
-    testo: string
+  titolo: string;
+  categoria: string;
+  autore: string;
+  testo: string;
+  anteprima: string;
 }

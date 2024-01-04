@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import * as notaController from '../controllers/notes-controller'
+import { Router } from "express";
+import * as notaController from "../controllers/notes-controller";
 
-const router: Router = Router()
+const router: Router = Router();
 
-router.get("/api/note", notaController.allNotes) 
-router.get("/api/note/:n", notaController.notesCategory)
+router.get("/api/note", notaController.allNotes);
+router.get("/api/note/:n", notaController.notesCategory);
 
-export default router
+export default router;

@@ -1,9 +1,9 @@
-import { Router } from 'express'
-import * as postNotesController from '../controllers/post-notes-controller'
+import { Router } from "express";
+import * as postNotesController from "../controllers/post-notes-controller";
 
-const router: Router = Router()
+const router: Router = Router();
 
-router.post("/api/createPost", postNotesController.createPost)
-router.delete("/api/deletePost/:id", postNotesController.deletePost)
+router.post("/api/createPost", postNotesController.createPost);
+router.delete("/api/deletePost/:id", postNotesController.deletePost);
 
-export default router
+export default router;

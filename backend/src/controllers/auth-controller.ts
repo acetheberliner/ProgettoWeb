@@ -1,98 +1,102 @@
-import bcrypt from 'bcrypt'
-import { Request, Response } from 'express'
-import { decodeAccessToken, deleteAccessToken, setAccessToken } from '../utils/auth'
-import { getConnection } from '../utils/db'
-
-
+import bcrypt from "bcrypt";
+import { Request, Response } from "express";
+import {
+  decodeAccessToken,
+  deleteAccessToken,
+  setAccessToken,
+} from "../utils/auth";
+import { getConnection } from "../utils/db";
 
 export async function register(req: Request, res: Response) {
-    // Blocca la richiesta se l'utente ha già effettuato il login
-    
-    const user = decodeAccessToken(req, res)
-    if (user) {
-        res.status(403).send("Questa operazione richiede il logout")
-        return
-    }
-    //Prendiamo username e pwd
-    
-    const { username, email, password } = req.body
+  // Blocca la richiesta se l'utente ha già effettuato il login
 
-    //Verifichiamo che l'username non sia usato
-    const connection = await getConnection()
-    const [users] = await connection.execute("SELECT username FROM utenti WHERE username=?", [
-        username,
-    ])
+  const user = decodeAccessToken(req, res);
+  if (user) {
+    res.status(403).send("Questa operazione richiede il logout");
+    return;
+  }
+  //Prendiamo username e pwd
 
-    if (Array.isArray(users) && users.length > 0) {
-        res.status(400).send("Username già in uso")
-        return
-    }
+  const { username, email, password } = req.body;
 
-    const pwdHash = await bcrypt.hash(password, 10)
+  //Verifichiamo che l'username non sia usato
+  const connection = await getConnection();
+  const [users] = await connection.execute(
+    "SELECT username FROM utenti WHERE username=?",
+    [username]
+  );
 
-    await connection.execute("INSERT INTO utenti (username, email, password) VALUES (?, ?, ?)",
-    [username,
-    email,
-    pwdHash,
-    ])
+  if (Array.isArray(users) && users.length > 0) {
+    res.status(400).send("Username già in uso");
+    return;
+  }
 
-    const [results] = await connection.execute("SELECT username, email FROM utenti WHERE username = ?",
-    [username])
+  const pwdHash = await bcrypt.hash(password, 10);
 
-    const newUser = (results as any)[0]
+  await connection.execute(
+    "INSERT INTO utenti (username, email, password) VALUES (?, ?, ?)",
+    [username, email, pwdHash]
+  );
 
-    setAccessToken(req, res, newUser)
+  const [results] = await connection.execute(
+    "SELECT username, email FROM utenti WHERE username = ?",
+    [username]
+  );
+
+  const newUser = (results as any)[0];
+
+  setAccessToken(req, res, newUser);
 }
 
 export async function login(req: Request, res: Response) {
-    const user = decodeAccessToken(req, res)
+  const user = decodeAccessToken(req, res);
 
-    if (user) {
-        res.status(403).send("Questa operazione richiede il logout.")
-        return
-    }
+  if (user) {
+    res.status(403).send("Questa operazione richiede il logout.");
+    return;
+  }
 
-    const { username, password } = req.body
+  const { username, password } = req.body;
 
-    const connection = await getConnection()
-    const [results] = await connection.execute(
-        "SELECT username, password FROM utenti WHERE username = ?",
-        [username]
-    )
+  const connection = await getConnection();
+  const [results] = await connection.execute(
+    "SELECT username, password FROM utenti WHERE username = ?",
+    [username]
+  );
 
-    // Errore se l'utente non è stato trovato
-    if (!Array.isArray(results) || results.length == 0) {
-        res.status(400).send("Credenziali errate.")
-        return
-    }
+  // Errore se l'utente non è stato trovato
+  if (!Array.isArray(results) || results.length == 0) {
+    res.status(400).send("Credenziali errate.");
+    return;
+  }
 
-    const userData = results[0] as any
+  const userData = results[0] as any;
 
-    const pwdOk = await bcrypt.compare(password, userData.password)
+  const pwdOk = await bcrypt.compare(password, userData.password);
 
-    if(pwdOk == false) { // o (!pwdOk)
-        res.status(400).send("Credenziali errate.")
-        return
-    }
-    // RIMUOVE la pass dall'oggetto utente
-    delete userData.password
+  if (pwdOk == false) {
+    // o (!pwdOk)
+    res.status(400).send("Credenziali errate.");
+    return;
+  }
+  // RIMUOVE la pass dall'oggetto utente
+  delete userData.password;
 
-    setAccessToken(req, res, userData)
+  setAccessToken(req, res, userData);
 }
 
 export async function logout(req: Request, res: Response) {
-    const user = decodeAccessToken(req, res)
+  const user = decodeAccessToken(req, res);
 
-    if(!user) {
-        res.status(403).send("Questa operazione richiede l'autenticazione.")
-        return
-    }
+  if (!user) {
+    res.status(403).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
 
-    deleteAccessToken(req, res)
-    
+  deleteAccessToken(req, res);
 }
 
 export async function getProfile(req: Request, res: Response) {
-    const user = decodeAccessToken(req, res)
-    res.json(user)
+  const user = decodeAccessToken(req, res);
+  res.json(user);
 }
