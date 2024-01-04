@@ -1,8 +1,17 @@
 <template>
-  <div class="background">
+  <div class="pre">
     <div class="title">
-      <h2>Note di Studenti</h2>
+      <h2>Appunti di studenti</h2>
     </div>
+    <div class="intro">
+      <p class="slogan">
+        Esplora un ricco assortimento di appunti per ogni materia, arricchisci
+        la tua cultura ed espandi i limiti della tua conoscenza in un solo
+        click!
+      </p>
+    </div>
+  </div>
+  <div class="background">
     <div class="content">
       <PostNotes v-for="nota in datiNote" :nota="nota" />
     </div>
@@ -36,16 +45,42 @@ export default defineComponent({
 </script>
 
 <style scoped>
+/*- SCROLLBAR -----------------------------------------------------------------------------------------------------------------------------------*/
+
+.content {
+  --sb-thumb-color: #ffffff;
+  --sb-track-color: #2568bf00;
+  --sb-size: 4px;
+
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+}
+
+.content::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.content::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 12px;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 12px;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------*/
+
 .content {
   /* flex-grow: 1; Per far crescere questo div per occupare lo spazio rimanente */
   overflow: auto; /* Abilita lo scrolling verticale quando il contenuto supera l'altezza massima */
   padding: 20px; /* Aggiunge spazio interno per evitare che il contenuto sia troppo vicino ai bordi */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1400px) {
   .content {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -69,7 +104,20 @@ export default defineComponent({
   overflow: auto;
 }
 
-.title {
-  display: inline-grid;
+.pre {
+  margin-left: 2.2em;
+}
+
+h2 {
+  color: #169df7;
+  font-weight: bold;
+  background: linear-gradient(to right, #0af3e0 0%, #038cfc 25%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.slogan {
+  font-size: 18px;
 }
 </style>
