@@ -38,11 +38,11 @@ export default defineComponent({
 <style scoped>
 .content {
   /* flex-grow: 1; Per far crescere questo div per occupare lo spazio rimanente */
-  overflow-y: auto; /* Abilita lo scrolling verticale quando il contenuto supera l'altezza massima */
+  overflow: auto; /* Abilita lo scrolling verticale quando il contenuto supera l'altezza massima */
   padding: 20px; /* Aggiunge spazio interno per evitare che il contenuto sia troppo vicino ai bordi */
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 15px;
 }
 
 @media (max-width: 768px) {
@@ -66,6 +66,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: auto;
 }
 
 .title {
