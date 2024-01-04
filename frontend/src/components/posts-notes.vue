@@ -19,7 +19,8 @@ export default defineComponent({
       <p class="categoria">{{ nota.categoria }}</p>
       <p class="autore">{{ nota.autore }}</p>
       <hr />
-      <p>{{ nota.testo }}</p>
+      <!-- <p>{{ nota.testo }}</p> -->
+      <p>{{ nota.anteprima }}</p>
     </section>
   </div>
 </template>
