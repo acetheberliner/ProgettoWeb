@@ -22,7 +22,7 @@ export default defineComponent({
       <!-- <p>{{ nota.testo }}</p> -->
       <p class="anteprima">{{ nota.anteprima }}</p>
     </section>
-    <button>
+    <button class="open">
       <span
         ><a
           id="open"
@@ -266,11 +266,11 @@ a#close:hover::after {
 h3 {
   /* font-family: clipFont; */
   font-family: "Quicksand", sans-serif;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: bold;
   text-align: start;
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 2px;
 }
 
 hr {
