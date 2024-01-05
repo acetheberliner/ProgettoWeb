@@ -5,20 +5,20 @@
         <div class="header-logo">
           <p><img src="/PaperFileText.svg" alt="" />Note<span>Sync</span></p>
         </div>
-        <router-link class="nav-link button glow-button btn1" to="/"
-          >Home</router-link
+        <RouterLink class="nav-link button glow-button btn1" to="/"
+          >Home</RouterLink
         >
-        <router-link class="nav-link button glow-button btn2" to="/explore"
-          >Esplora</router-link
+        <RouterLink class="nav-link button glow-button btn2" to="/explore"
+          >Esplora</RouterLink
         >
-        <router-link class="nav-link button glow-button btn3" to="/login"
-          >Login</router-link
+        <RouterLink class="nav-link button glow-button btn3" to="/login"
+          >Login</RouterLink
         >
-        <router-link class="nav-link button glow-button btn4" to="/register"
-          >Registrati</router-link
+        <RouterLink class="nav-link button glow-button btn4" to="/register"
+          >Registrati</RouterLink
         >
       </nav>
-      <router-view />
+      <RouterView />
     </main>
   </div>
 </template>
