@@ -6,3 +6,9 @@ export interface Nota {
   testo: string;
   anteprima: string;
 }
+
+export interface User {
+  id: number;
+  username: string;
+  role: "admin" | "user";
+}
