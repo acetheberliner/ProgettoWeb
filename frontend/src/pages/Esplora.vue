@@ -11,6 +11,11 @@
       </p>
     </div>
   </div>
+  <div id="popup-window">
+    <h1>Pop-up Window</h1>
+    <p>This is a pop-up window.</p>
+    <button id="close-button">Close</button>
+  </div>
   <div class="background">
     <div class="content">
       <PostNotes v-for="nota in datiNote" :nota="nota" />
@@ -45,6 +50,22 @@ export default defineComponent({
 </script>
 
 <style scoped>
+#popup-window {
+  position: fixed;
+  width: 300px;
+  height: 200px;
+  background: white;
+  border: 1px solid black;
+  padding: 10px;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+}
+
 /*- SCROLLBAR -----------------------------------------------------------------------------------------------------------------------------------*/
 
 .content {
