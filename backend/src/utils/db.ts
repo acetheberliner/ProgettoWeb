@@ -2,7 +2,7 @@ import mysql, { Connection } from "mysql2/promise";
 
 let connection: Connection | null = null;
 
-export async function getConnection() {
+export const getConnection = async () => {
   if (!connection) {
     connection = await mysql.createConnection({
       host: "localhost",
@@ -12,4 +12,4 @@ export async function getConnection() {
     });
   }
   return connection;
-}
+};

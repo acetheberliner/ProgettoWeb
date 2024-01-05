@@ -7,16 +7,16 @@ import {
 } from "../utils/auth";
 import { getConnection } from "../utils/db";
 
-export async function register(req: Request, res: Response) {
+export const register = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
 
-  const user = decodeAccessToken(req, res);
-  if (user) {
-    res.status(403).send("Questa operazione richiede il logout");
-    return;
-  }
-  //Prendiamo username e pwd
+  // const user = decodeAccessToken(req, res);
+  // if (user) {
+  //   res.status(403).send("Questa operazione richiede il logout");
+  //   return;
+  // }
 
+  //Prendiamo username e pwd
   const { username, email, password } = req.body;
 
   //Verifichiamo che l'username non sia usato
@@ -31,26 +31,29 @@ export async function register(req: Request, res: Response) {
     return;
   }
 
+  //cript della password per l'archiviazione
   const pwdHash = await bcrypt.hash(password, 10);
 
+  //inserimento utente nel db
   await connection.execute(
     "INSERT INTO utenti (username, email, password) VALUES (?, ?, ?)",
     [username, email, pwdHash]
   );
 
+  //caso nuovo utente
   const [results] = await connection.execute(
-    "SELECT username, email FROM utenti WHERE username = ?",
+    "SELECT username, email FROM utenti WHERE username=?",
     [username]
   );
-
   const newUser = (results as any)[0];
-
+  //creazione cookie
   setAccessToken(req, res, newUser);
-}
+  res.json({ message: "Registrazione effettuata con successo" });
+};
 
-export async function login(req: Request, res: Response) {
+export const login = async (req: Request, res: Response) => {
+  //caso login gia effettuato
   const user = decodeAccessToken(req, res);
-
   if (user) {
     res.status(403).send("Questa operazione richiede il logout.");
     return;
@@ -58,6 +61,7 @@ export async function login(req: Request, res: Response) {
 
   const { username, password } = req.body;
 
+  //cerca nel db user e pass
   const connection = await getConnection();
   const [results] = await connection.execute(
     "SELECT username, password FROM utenti WHERE username = ?",
@@ -72,31 +76,34 @@ export async function login(req: Request, res: Response) {
 
   const userData = results[0] as any;
 
+  //controllo tra l'hash fornito e quello del db
   const pwdOk = await bcrypt.compare(password, userData.password);
 
-  if (pwdOk == false) {
+  if (!pwdOk) {
     // o (!pwdOk)
     res.status(400).send("Credenziali errate.");
     return;
   }
-  // RIMUOVE la pass dall'oggetto utente
+  // RIMUOVE la pass dall'oggetto utente per la sicurezza
   delete userData.password;
 
   setAccessToken(req, res, userData);
-}
+  res.json({ message: "Login effettuato con successo" });
+};
 
-export async function logout(req: Request, res: Response) {
+export const logout = async (req: Request, res: Response) => {
+  //verifica presenza di precedente login
   const user = decodeAccessToken(req, res);
-
   if (!user) {
     res.status(403).send("Questa operazione richiede l'autenticazione.");
     return;
   }
-
   deleteAccessToken(req, res);
-}
+  res.json({ message: "Logout effettuato con successo" });
+};
 
-export async function getProfile(req: Request, res: Response) {
+export const getProfile = async (req: Request, res: Response) => {
+  //decodifica del token
   const user = decodeAccessToken(req, res);
   res.json(user);
-}
+};
