@@ -96,11 +96,13 @@ p#inner_note {
 a#close {
   color: #183252;
   text-decoration: none;
-  position: absolute;
+  width: fit-content;
   bottom: 10px;
   right: 10px;
   padding: 0.8em 1em;
   display: flex;
+  margin-top: 10px;
+  margin-left: 8px;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -142,7 +144,7 @@ a#close {
   top: 25%;
   left: 25%;
   width: 50%;
-  height: 50%;
+  height: 60%;
   padding: 16px;
   border: 1px solid gray;
   border-radius: 10px;
