@@ -1,3 +1,28 @@
+<script lang="ts">
+import axios from "axios";
+import { defineComponent } from "vue";
+import UserInfo from "./components/user-info.vue";
+import { User } from "./types";
+
+export default defineComponent({
+  components: { UserInfo },
+  data() {
+    return {
+      user: null as User | null,
+    };
+  },
+  methods: {
+    async getUser() {
+      const res = await axios.get("/api/auth/profile");
+      this.user = res.data;
+    },
+  },
+  mounted() {
+    this.getUser();
+  },
+});
+</script>
+
 <template>
   <div class="full-page">
     <main>
@@ -11,14 +36,17 @@
         <RouterLink class="nav-link button glow-button btn2" to="/explore"
           >Esplora</RouterLink
         >
-        <RouterLink class="nav-link button glow-button btn3" to="/login"
-          >Login</RouterLink
-        >
-        <RouterLink class="nav-link button glow-button btn4" to="/register"
-          >Registrati</RouterLink
-        >
+        <div class="auth">
+          <UserInfo v-if="user" :user="user" />
+          <template v-else>
+            <RouterLink class="nav-link button" to="/login">Login</RouterLink>
+            <RouterLink class="nav-link button" to="/register"
+              >Registrati</RouterLink
+            >
+          </template>
+        </div>
       </nav>
-      <RouterView />
+      <RouterView :user="user" />
     </main>
   </div>
 </template>
@@ -28,6 +56,14 @@
 
 * {
   font-family: "Montserrat", sans-serif;
+}
+
+.auth {
+  display: flex;
+}
+
+UserInfo {
+  font-size: 20px;
 }
 
 body,

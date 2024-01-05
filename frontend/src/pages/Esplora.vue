@@ -18,7 +18,7 @@
   </div>
   <div class="background">
     <div class="content">
-      <PostNotes v-for="nota in datiNote" :nota="nota" />
+      <PostNotes v-for="nota in datiNote" :nota="nota" :key="nota.id" />
     </div>
   </div>
 </template>
@@ -37,10 +37,9 @@ export default defineComponent({
     };
   },
   methods: {
-    getNote() {
-      axios
-        .get("/api/note")
-        .then((response) => (this.datiNote = response.data));
+    async getNote() {
+      const res = await axios.get("/api/note");
+      this.datiNote = res.data;
     },
   },
   mounted() {

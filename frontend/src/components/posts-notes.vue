@@ -4,10 +4,7 @@ import { Nota } from "../types";
 
 export default defineComponent({
   props: {
-    nota: {
-      type: Object as PropType<Nota>,
-      required: true,
-    },
+    nota: Object as PropType<Nota>,
   },
 });
 </script>
@@ -15,12 +12,12 @@ export default defineComponent({
 <template>
   <div class="note">
     <section>
-      <h3>{{ nota.titolo }}</h3>
-      <p class="categoria">{{ nota.categoria }}</p>
-      <p class="autore">{{ nota.autore }}</p>
+      <h3>{{ nota?.titolo }}</h3>
+      <p class="categoria">{{ nota?.categoria }}</p>
+      <p class="autore">{{ nota?.autore }}</p>
       <hr />
       <!-- <p>{{ nota.testo }}</p> -->
-      <p class="anteprima">{{ nota.anteprima }}</p>
+      <p class="anteprima">{{ nota?.anteprima }}</p>
     </section>
     <button class="open">
       <span
@@ -36,31 +33,25 @@ export default defineComponent({
   <div id="light" class="white_content">
     <div class="title">
       <h2>
-        {{ nota.titolo }}
+        {{ nota?.titolo }}
         <div class="svgicon">
           <img src="/paper-document-svgrepo-com.svg" alt="" />
         </div>
       </h2>
     </div>
     <div class="secondary_info">
-      {{ nota.categoria }}<br />
-      {{ nota.autore }}<br />
-      {{ nota.data }}
+      {{ nota?.categoria }}<br />
+      {{ nota?.autore }}<br />
+      {{ nota?.data }}
     </div>
     <hr />
-    <p id="inner_note">{{ nota.testo }}</p>
+    <p id="inner_note">{{ nota?.testo }}</p>
     <a
       id="close"
       href="javascript:void(0)"
       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
       >Chiudi</a
     >
-    <!-- <a
-      id="download"
-      href="../../public/texts/{{& nota.titolo }}.txt"
-      download=""
-      >Scarica</a
-    > -->
   </div>
   <div id="fade" class="black_overlay"></div>
 </template>
@@ -141,10 +132,10 @@ a#close {
 .white_content {
   display: none;
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 60%;
+  top: 18%;
+  left: 20%;
+  width: 60%;
+  height: 65%;
   padding: 16px;
   border: 1px solid gray;
   border-radius: 10px;

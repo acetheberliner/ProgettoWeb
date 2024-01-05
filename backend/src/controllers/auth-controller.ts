@@ -7,17 +7,19 @@ import {
 } from "../utils/auth";
 import { getConnection } from "../utils/db";
 
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
 export const register = async (req: Request, res: Response) => {
   // Blocca la richiesta se l'utente ha già effettuato il login
 
-  // const user = decodeAccessToken(req, res);
-  // if (user) {
-  //   res.status(403).send("Questa operazione richiede il logout");
-  //   return;
-  // }
+  const user = decodeAccessToken(req, res);
+  if (user) {
+    res.status(403).send("Questa operazione richiede il logout");
+    return;
+  }
 
   //Prendiamo username e pwd
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
 
   //Verifichiamo che l'username non sia usato
   const connection = await getConnection();
@@ -36,13 +38,13 @@ export const register = async (req: Request, res: Response) => {
 
   //inserimento utente nel db
   await connection.execute(
-    "INSERT INTO utenti (username, email, password) VALUES (?, ?, ?)",
-    [username, email, pwdHash]
+    "INSERT INTO utenti (username, password) VALUES (?, ?)",
+    [username, pwdHash]
   );
 
   //caso nuovo utente
   const [results] = await connection.execute(
-    "SELECT username, email FROM utenti WHERE username=?",
+    "SELECT username, password FROM utenti WHERE username=?",
     [username]
   );
   const newUser = (results as any)[0];
@@ -50,6 +52,8 @@ export const register = async (req: Request, res: Response) => {
   setAccessToken(req, res, newUser);
   res.json({ message: "Registrazione effettuata con successo" });
 };
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
 
 export const login = async (req: Request, res: Response) => {
   //caso login gia effettuato
@@ -64,13 +68,13 @@ export const login = async (req: Request, res: Response) => {
   //cerca nel db user e pass
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT username, password FROM utenti WHERE username = ?",
+    "SELECT username, password FROM utenti WHERE username=?",
     [username]
   );
 
   // Errore se l'utente non è stato trovato
   if (!Array.isArray(results) || results.length == 0) {
-    res.status(400).send("Credenziali errate.");
+    res.status(400).send("Profilo inesistente.");
     return;
   }
 
@@ -79,7 +83,7 @@ export const login = async (req: Request, res: Response) => {
   //controllo tra l'hash fornito e quello del db
   const pwdOk = await bcrypt.compare(password, userData.password);
 
-  if (!pwdOk) {
+  if (pwdOk == true) {
     // o (!pwdOk)
     res.status(400).send("Credenziali errate.");
     return;
@@ -91,6 +95,8 @@ export const login = async (req: Request, res: Response) => {
   res.json({ message: "Login effettuato con successo" });
 };
 
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+
 export const logout = async (req: Request, res: Response) => {
   //verifica presenza di precedente login
   const user = decodeAccessToken(req, res);
@@ -101,6 +107,8 @@ export const logout = async (req: Request, res: Response) => {
   deleteAccessToken(req, res);
   res.json({ message: "Logout effettuato con successo" });
 };
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
 
 export const getProfile = async (req: Request, res: Response) => {
   //decodifica del token

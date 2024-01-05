@@ -1,10 +1,43 @@
+<script lang="ts">
+import axios from "axios";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    async onSubmit() {
+      try {
+        await axios.post("/api/auth/login", {
+          username: this.username,
+          password: this.password,
+        });
+        window.location.href = "/";
+      } catch (e: any) {
+        if (e.response) {
+          alert(
+            `${e.response.status} - ${e.response.statusText}\n${e.response.data}`
+          );
+        } else {
+          alert(e.message);
+        }
+      }
+    },
+  },
+});
+</script>
+
 <template>
   <div class="background">
     <div class="form-container">
       <div class="title">
         <h2>Login</h2>
       </div>
-      <form>
+      <form @submit.prevent="onSubmit">
         <div class="form-group">
           <input
             required
@@ -32,23 +65,12 @@
       <div class="paragraph">
         <p>
           Non hai un account?
-          <router-link to="/register">Registrati</router-link>
+          <RouterLink to="/register">Registrati</RouterLink>
         </p>
       </div>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-};
-</script>
 
 <style scoped>
 * {

@@ -6,8 +6,8 @@ export default defineComponent({
   data() {
     return {
       username: "",
-      email: "",
       password: "",
+      // email: "",
     };
   },
   methods: {
@@ -15,8 +15,8 @@ export default defineComponent({
       try {
         await axios.post("/api/auth/register", {
           username: this.username,
-          email: this.email,
           password: this.password,
+          // email: this.email,
         });
         window.location.href = "/";
       } catch (e: any) {
@@ -40,8 +40,8 @@ export default defineComponent({
         <div class="title">
           <h2>Registrazione</h2>
         </div>
-        <form>
-          <div class="form-group">
+        <form @submit.prevent="onSubmit">
+          <!-- <div class="form-group">
             <input
               required
               type="text"
@@ -50,7 +50,7 @@ export default defineComponent({
               v-model="email"
             />
             <label class="label" for="email">Email</label>
-          </div>
+          </div> -->
           <div class="form-group">
             <input
               required
@@ -72,7 +72,7 @@ export default defineComponent({
             <label class="label" for="password">Password</label>
           </div>
           <div class="form-group box-center">
-            <button type="submit" @click="onSubmit">Registrati</button>
+            <button type="submit">Registrati</button>
           </div>
         </form>
       </div>

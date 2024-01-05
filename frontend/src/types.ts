@@ -1,4 +1,5 @@
 export interface Nota {
+  id: number;
   titolo: string;
   categoria: string;
   autore: string;
@@ -8,7 +9,6 @@ export interface Nota {
 }
 
 export interface User {
-  id: number;
   username: string;
-  role: "admin" | "user";
+  password: string;
 }
