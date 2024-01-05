@@ -1,3 +1,38 @@
+<script lang="ts">
+import axios from "axios";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async onSubmit() {
+      try {
+        await axios.post("/api/auth/register", {
+          username: this.username,
+          email: this.email,
+          password: this.password,
+        });
+        window.location.href = "/";
+      } catch (e: any) {
+        if (e.response) {
+          alert(
+            `${e.response.status} - ${e.response.statusText}\n${e.response.data}`
+          );
+        } else {
+          alert(e.message);
+        }
+      }
+    },
+  },
+});
+</script>
+
 <template>
   <div class="background">
     <div class="form-container">
@@ -44,34 +79,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import axios from "axios";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  data() {
-    return {
-      username: "",
-      email: "",
-      password: "",
-    };
-  },
-  methods: {
-    async onSubmit() {
-      // occhio gestione errori
-      await axios.post("/api/auth/register", {
-        username: this.username,
-        email: this.email,
-        password: this.password,
-      });
-
-      // Gestisci la risposta dal server
-      alert("Ecco" + this.username);
-    },
-  },
-});
-</script>
 
 <style scoped>
 * {
