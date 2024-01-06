@@ -60,6 +60,8 @@ export default defineComponent({
 
 .auth {
   display: flex;
+  position: absolute;
+  right: 0;
 }
 
 UserInfo {
