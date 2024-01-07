@@ -19,16 +19,17 @@ export default defineComponent({
       <!-- <p>{{ nota.testo }}</p> -->
       <p class="anteprima">{{ nota?.anteprima }}</p>
     </section>
-    <button class="open">
-      <span
-        ><a
-          id="open"
-          href="javascript:void(0)"
-          onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
-          >Visualizza</a
-        ></span
-      >
-    </button>
+    <div>
+      <button class="open">
+        <span
+          ><a
+            id="open"
+            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
+            >Visualizza</a
+          ></span
+        >
+      </button>
+    </div>
   </div>
   <div id="light" class="white_content">
     <div class="title">
@@ -48,7 +49,6 @@ export default defineComponent({
     <p id="inner_note">{{ nota?.testo }}</p>
     <a
       id="close"
-      href="javascript:void(0)"
       onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
       >Chiudi</a
     >
@@ -59,20 +59,14 @@ export default defineComponent({
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand&display=swap");
 /*- ANTEPRIMA -------------------------------------------------------------------------------------------------------------------*/
-h2 {
-  font-weight: bold;
-  margin-left: 10px;
-  margin-top: 10px;
+.svgicon {
+  text-align: end;
+  margin-right: -12px;
 }
 
 img {
   width: 50px;
   margin-right: 15px;
-}
-
-.svgicon {
-  text-align: end;
-  margin-right: -12px;
 }
 
 a#open {
@@ -144,6 +138,118 @@ a#close {
   z-index: 1002;
   overflow: auto;
 }
+
+button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 0.8em 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  background-color: #356cb1;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 12px;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+button:hover,
+a#close:hover {
+  animation: sh0 0.5s ease-in-out both;
+}
+
+@keyframes sh0 {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: rotate(7deg) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-7deg) translate3d(0, 0, 0);
+  }
+
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+
+button:hover,
+a#close:hover span {
+  animation: storm 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+button::before,
+a#close:before button::after,
+a#close:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+  z-index: -1;
+  transform: translate(100%, -25%) translate3d(0, 0, 0);
+}
+
+button:hover::before,
+a#close:hover::before button:hover::after,
+a#close:hover::after {
+  opacity: 0.15;
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+button:hover::before,
+a#close:hover::before {
+  transform: translate3d(50%, 0, 0) scale(0.9);
+}
+
+button:hover::after,
+a#close:hover::after {
+  transform: translate(50%, 0) scale(1.1);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #235971;
+  margin: 10px 0;
+}
+
+p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  text-transform: none;
+  text-align: start;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  color: #235971;
+  filter: drop-shadow(normal);
+}
+
 /*- BUTTON -------------------------------------------------------------------------------------------------------------------*/
 button {
   position: absolute;
