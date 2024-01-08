@@ -4,21 +4,28 @@
       <h2>Appunti di studenti</h2>
     </div>
     <div class="intro">
-      <p class="slogan">
-        Esplora un ricco assortimento di appunti per ogni materia, arricchisci
-        la tua cultura ed espandi i limiti della tua conoscenza in un solo
-        click!
-      </p>
+      <p class="slogan">Esplora un ricco assortimento di appunti per ogni materia, arricchisci la tua cultura ed espandi i limiti della tua conoscenza in un solo click!</p>
     </div>
-  </div>
-  <div id="popup-window">
-    <h1>Pop-up Window</h1>
-    <p>This is a pop-up window.</p>
-    <button id="close-button">Close</button>
+    <div class="filter">
+      <form id="radio" action="#">
+        <select name="Categoria" id="lang" v-model="selectedCategory" @change="getNotebyCategory">
+          <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
+        </select>
+      </form>
+    </div>
   </div>
   <div class="background">
     <div class="content">
-      <PostNotes v-for="nota in datiNote" :nota="nota" :key="nota.id" />
+      <!-- <PostNotes
+        v-for="nota in datiNote"
+        :nota="nota"
+        :key="nota.id"
+        v-model="selectedNoteID"
+      /> -->
+      <PostNotes v-for="nota in datiNote" :nota="nota"/><!-- v-model="selectedId" @change="getNotebyID -->
+    </div>
+    <div class="visualization">
+      <!-- <PreviewNotes :note="getNota(selectedNoteID)" /> -->
     </div>
   </div>
 </template>
@@ -28,12 +35,16 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { Nota } from "../types";
 import PostNotes from "../components/posts-notes.vue";
+// import PreviewNotes from "../components/preview-note.vue";
 
 export default defineComponent({
   components: { PostNotes },
   data() {
     return {
       datiNote: [] as Nota[],
+      selectedCategory: "", // Imposta la categoria predefinita
+      // selectedId: 1,
+      categories: [] as String[],
     };
   },
   methods: {
@@ -41,9 +52,35 @@ export default defineComponent({
       const res = await axios.get("/api/note");
       this.datiNote = res.data;
     },
+
+    async getNotebyCategory() {
+      const res = await axios.get(`/api/note/${this.selectedCategory}`);
+      this.datiNote = res.data;
+    },
+
+    // async getNotebyID() {
+    //   const res = await axios.get(`/api/noteid/${this.selectedId}`);
+    //   this.datiNote = res.data;
+    // },
+
+    async getCategories() {
+      const res = await axios.get("/api/categories"); // Sostituisci con l'endpoint corretto
+      this.categories = res.data; // Supponendo che le categorie siano restituite come un array di stringhe
+    },
+  },
+  watch: {
+    selectedCategory() {
+      this.getNotebyCategory();
+    },
+    // selectedId() {
+    //   this.getNotebyID();
+    // },
   },
   mounted() {
+    this.getCategories();
     this.getNote();
+    this.getNotebyCategory();
+    // this.getNotebyID();
   },
 });
 </script>
@@ -64,7 +101,6 @@ export default defineComponent({
   z-index: 10;
   display: none;
 }
-
 /*- SCROLLBAR -----------------------------------------------------------------------------------------------------------------------------------*/
 
 .content {
