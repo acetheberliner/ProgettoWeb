@@ -8,7 +8,7 @@ export const getConnection = async () => {
       host: "localhost",
       user: "root",
       password: "",
-      database: "porgetto_prova1",
+      database: "notesync",
     });
   }
   return connection;
