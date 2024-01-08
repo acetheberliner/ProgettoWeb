@@ -1,10 +1,34 @@
 <script lang="ts">
 import { PropType, defineComponent } from "vue";
 import { Nota } from "../types";
+import axios from "axios";
 
 export default defineComponent({
   props: {
     nota: Object as PropType<Nota>,
+  },
+  data() {
+    return {
+      // showCondition: false,
+      notes: null as Nota | null,
+    };
+  },
+  methods: {
+    // async openNote() {
+    //   this.showCondition = true;
+    // },
+    // async closeNote() {
+    //   this.showCondition = false;
+    // },
+
+    getNota() {
+      axios
+        .get("/api/noteid/" + this.$route.params.id)
+        .then((response) => (this.notes = response.data[0]));
+    },
+  },
+  mounted() {
+    this.getNota();
   },
 });
 </script>
@@ -16,18 +40,19 @@ export default defineComponent({
       <p class="categoria">{{ nota?.categoria }}</p>
       <p class="autore">{{ nota?.autore }}</p>
       <hr />
-      <!-- <p>{{ nota.testo }}</p> -->
+      <!-- <p>{{ nota?.testo }}</p> -->
       <p class="anteprima">{{ nota?.anteprima }}</p>
     </section>
     <div>
       <button class="open">
-        <span
-          ><a
+        <span>
+          <a
             id="open"
             onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
             >Visualizza</a
-          ></span
-        >
+          >
+          <!-- <a>Visualizza</a> -->
+        </span>
       </button>
     </div>
   </div>
@@ -67,6 +92,11 @@ export default defineComponent({
 img {
   width: 50px;
   margin-right: 15px;
+}
+
+#light,
+#fade {
+  display: none;
 }
 
 a#open {
