@@ -24,9 +24,9 @@
       /> -->
       <PostNotes v-for="nota in datiNote" :nota="nota"/><!-- v-model="selectedId" @change="getNotebyID -->
     </div>
-    <div class="visualization">
-      <!-- <PreviewNotes :note="getNota(selectedNoteID)" /> -->
-    </div>
+    <!-- <div class="visualization">
+      <PreviewNotes :note="getNota(selectedNoteID)" />
+    </div> -->
   </div>
 </template>
 
