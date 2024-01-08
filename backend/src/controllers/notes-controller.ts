@@ -21,3 +21,13 @@ export async function notesCategory(req: Request, res: Response) {
   );
   res.json(results);
 }
+
+// note per id
+export async function notesFromID(req: Request, res: Response) {
+  const connection = await getConnection();
+  const [results] = await connection.execute(
+    "SELECT idnote, titolo, categoria, data, autore, testo, anteprima FROM note WHERE idnote = ?",
+    [req.params.id]
+  );
+  res.json(results);
+}

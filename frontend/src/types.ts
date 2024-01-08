@@ -3,7 +3,7 @@ export interface Nota {
   titolo: string;
   categoria: string;
   autore: string;
-  data: Date;
+  data: string;
   testo: string;
   anteprima: string;
 }

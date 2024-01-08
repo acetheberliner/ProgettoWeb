@@ -34,7 +34,7 @@ export default defineComponent({
           >Home</RouterLink
         >
         <RouterLink class="nav-link button glow-button btn2" to="/explore"
-          >Esplora</RouterLink
+          >Appunti</RouterLink
         >
         <div class="auth">
           <UserInfo v-if="user" :user="user" />
