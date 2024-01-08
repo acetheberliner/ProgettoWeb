@@ -8,7 +8,8 @@
     </div>
     <div class="filter">
       <form id="radio" action="#">
-        <select name="Categoria" id="lang" v-model="selectedCategory" @change="getNotebyCategory">
+        <select name="Categoria" v-model="selectedCategory" @change="onChangeCategory">
+          <option value="">Tutti</option>
           <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
         </select>
       </form>
@@ -24,9 +25,6 @@
       /> -->
       <PostNotes v-for="nota in datiNote" :nota="nota"/><!-- v-model="selectedId" @change="getNotebyID -->
     </div>
-    <!-- <div class="visualization">
-      <PreviewNotes :note="getNota(selectedNoteID)" />
-    </div> -->
   </div>
 </template>
 
@@ -42,7 +40,7 @@ export default defineComponent({
   data() {
     return {
       datiNote: [] as Nota[],
-      selectedCategory: "", // Imposta la categoria predefinita
+      selectedCategory: '', // Imposta la categoria predefinita
       // selectedId: 1,
       categories: [] as String[],
     };
@@ -65,8 +63,26 @@ export default defineComponent({
 
     async getCategories() {
       const res = await axios.get("/api/categories"); // Sostituisci con l'endpoint corretto
-      this.categories = res.data; // Supponendo che le categorie siano restituite come un array di stringhe
+      this.categories = res.data.map((categoria: { categoria: any; }) => categoria.categoria); // Supponendo che le categorie siano restituite come un array di stringhe
     },
+
+    async setCategoryDefalut() {
+      this.selectedCategory='';
+    },
+
+    resetCategoryFilter(): void {
+      this.selectedCategory = ''; // Imposta la variabile selectedCategory a una stringa vuota
+      this.getNote(); // Chiama la funzione per ottenere tutte le note senza filtro
+    },
+
+    onChangeCategory(): void {
+      if (this.selectedCategory === '') {
+        this.resetCategoryFilter(); // Se viene selezionato "Tutti", resetta il filtro
+      } else {
+        this.getNotebyCategory(); // Altrimenti, applica il filtro selezionato
+      }
+    },
+
   },
   watch: {
     selectedCategory() {
