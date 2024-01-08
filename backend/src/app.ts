@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import notaRouter from "./routes/notes-router";
 import postRouter from "./routes/post-notes-router";
 import authRouter from "./routes/auth-router";
+import categoryRouter from "./routes/categories-router";
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use(notaRouter);
 app.use(postRouter);
 app.use(authRouter);
+app.use(categoryRouter);
 
 app.use(history());
 app.use(express.static("dist-frontend"));
