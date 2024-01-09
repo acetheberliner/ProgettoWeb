@@ -6,10 +6,10 @@
     <div class="intro">
       <p class="slogan">Esplora un ricco assortimento di appunti per ogni materia, arricchisci la tua cultura ed espandi i limiti della tua conoscenza in un solo click!</p>
     </div>
-    <div class="filter">
+    <div class="filter selectdiv">
       <form id="radio" action="#">
         <select name="Categoria" v-model="selectedCategory" @change="onChangeCategory">
-          <option value="">Tutti</option>
+          <option id="tutti" value="">Tutti</option>
           <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
         </select>
       </form>
@@ -41,8 +41,8 @@ export default defineComponent({
     return {
       datiNote: [] as Nota[],
       selectedCategory: '', // Imposta la categoria predefinita
-      // selectedId: 1,
       categories: [] as String[],
+      selectedNoteID: null as number | null,
     };
   },
   methods: {
@@ -56,10 +56,10 @@ export default defineComponent({
       this.datiNote = res.data;
     },
 
-    // async getNotebyID() {
-    //   const res = await axios.get(`/api/noteid/${this.selectedId}`);
-    //   this.datiNote = res.data;
-    // },
+    async getNotebyID() {
+      const res = await axios.get(`/api/noteid/${this.selectedNoteID}`);
+      this.datiNote = res.data;
+    },
 
     async getCategories() {
       const res = await axios.get("/api/categories"); // Sostituisci con l'endpoint corretto
@@ -102,6 +102,39 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+select {
+  border: 1px solid white;
+  border-radius: 10px;
+  background: transparent;
+  color: white;
+  width: fit-content;
+  padding: 0.3em;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.selectdiv select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: fit-content;
+  float: left;
+  padding: 8px;
+  line-height: 1.75;
+  border: 1px solid #cccccc;
+}
+
+option {
+  color: #0c29ac;
+  background: transparent;
+  text-align: start;
+}
+
+option#tutti{
+  text-align: center;
+}
+
 #popup-window {
   position: fixed;
   width: 300px;
