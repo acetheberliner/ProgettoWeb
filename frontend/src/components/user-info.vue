@@ -19,7 +19,7 @@ export default defineComponent({
 <template>
   <div class="profile">
     <span id="user" class="text-sm">{{ user?.username }}</span>
-    <img src="../../public/user.svg" alt="user" />
+    <img src="/user.svg" alt="user" />
     <img id="logout" src="../../public/logout.svg" alt="Logout" @click="logout"/>
   </div>
 </template>
@@ -32,6 +32,10 @@ export default defineComponent({
 
 span#user{
   cursor: default;
+  background: white;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 .profile{
   border: 2px solid white;
@@ -54,7 +58,7 @@ span {
 }
 
 img {
-  width: 45px;
+  width: 35px;
   margin: 0px;
 }
 
