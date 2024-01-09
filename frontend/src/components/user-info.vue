@@ -20,7 +20,7 @@ export default defineComponent({
   <div class="profile">
     <span id="user" class="text-sm">{{ user?.username }}</span>
     <img src="/user.svg" alt="user" />
-    <img id="logout" src="../../public/logout.svg" alt="Logout" @click="logout"/>
+    <img id="logout" src="/logout.svg" alt="Logout" @click="logout"/>
   </div>
 </template>
 
