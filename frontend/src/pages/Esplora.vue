@@ -131,10 +131,6 @@ option {
   text-align: start;
 }
 
-option#tutti{
-  text-align: center;
-}
-
 #popup-window {
   position: fixed;
   width: 300px;
