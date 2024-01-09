@@ -28,7 +28,8 @@ export default defineComponent({
     <main>
       <nav class="container">
         <div class="header-logo">
-          <p><img src="/PaperFileText.svg" alt="" />Note<span>Sync</span></p>
+          <!-- <img src="/PaperFileText.svg" alt="" /> -->
+          <p>Note<span>Sync</span></p>
         </div>
         <RouterLink class="nav-link button glow-button btn1" to="/"
           >Home</RouterLink
@@ -39,7 +40,7 @@ export default defineComponent({
         <div class="auth">
           <UserInfo v-if="user" :user="user" />
           <template v-else>
-            <RouterLink class="nav-link button" to="/login">Login</RouterLink>
+            <RouterLink class="nav-link button" to="/login">Accedi</RouterLink>
             <RouterLink class="nav-link button" to="/register"
               >Registrati</RouterLink
             >
@@ -146,7 +147,8 @@ main {
   display: flex;
   justify-content: start;
   align-items: center;
-  padding: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
   min-width: 100%;
   box-sizing: border-box;
   background: transparent;
