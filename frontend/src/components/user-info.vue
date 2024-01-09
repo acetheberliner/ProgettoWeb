@@ -17,8 +17,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <span class="text-sm">{{ user?.username }}</span>
-  <button class="btn !px-2 btn-outline" @click="logout">Logout</button>
+  <div class="profile">
+    <span id="user" class="text-sm">{{ user?.username }}</span>
+    <img src="../../public/user.svg" alt="user" />
+    <img id="logout" src="../../public/logout.svg" alt="Logout" @click="logout"/>
+  </div>
 </template>
 
 <style scoped>
@@ -27,16 +30,36 @@ export default defineComponent({
   display: flex;
 }
 
+span#user{
+  cursor: default;
+}
+.profile{
+  border: 2px solid white;
+  border-radius: 15px;
+  margin-right: 25px;
+  width: fit-content;
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: rgb(29, 44, 59) 0px 20px 30px -10px;
+}
+
 span {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
-  padding: 15px 40px;
+  padding: 15px;
   border-radius: 4px;
-  font-weight: normal;
+  font-weight: bold;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
-  border: 1px solid white;
-  width: fit-content;
+}
+
+img {
+  width: 45px;
+  margin: 0px;
+}
+
+img#logout{
+  cursor: pointer;
 }
 
 button {
