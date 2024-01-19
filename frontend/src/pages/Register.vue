@@ -77,6 +77,9 @@ export default defineComponent({
         </form>
       </div>
     </div>
+    <div class="animation">
+      <lottie-player src="https://lottie.host/35a50614-44bb-4666-8b5d-6d06f16596b3/pRnAEAUoch.json" background="transparent" speed="1" style="width: 550px; height: 550px" direction="1" mode="normal" loop autoplay></lottie-player>
+    </div>
   </div>
 </template>
 
@@ -122,7 +125,7 @@ export default defineComponent({
     background-position: center;
     height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     /* align-items: center; */
     justify-content: center;
     vertical-align: middle;
@@ -147,11 +150,12 @@ export default defineComponent({
   .animation{
     display: flex;
     justify-content: flex-end;
-    margin-left: 15em;
+    margin-right: 15em;
     
   }
 
 }
+/*------------------------------------------------------------------------------ */
 
 * {
   font-family: "Montserrat", sans-serif;
@@ -160,17 +164,17 @@ export default defineComponent({
   box-sizing: border-box;
 }
 
-.background {
+/* .background {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+  height: 100%; /* Imposta l'altezza per rendere visibile il contenuto
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background-attachment: fixed;
-}
+} */
 
 .title {
   margin-bottom: 2rem;
