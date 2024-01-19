@@ -17,17 +17,16 @@ export default defineComponent({
 </script>
 
 <template>
-
-      <div class="profile">
-        <span id="user" class="text-sm">{{ user?.username }}</span>
-        <img src="/user.svg" alt="user" />
-        <img id="logout" src="/logout.svg" alt="Logout" @click="logout"/>
-      </div>
-
+  <RouterLink to="/myaccount">
+    <div class="profile">
+      <span id="user" class="text-sm">{{ user?.username }}</span>
+      <img src="/user.svg" alt="user" />
+    </div>
+  </RouterLink>
+  <img id="logout" src="/logout.svg" alt="Logout" @click="logout"/>
 </template>
 
 <style scoped>
-
 @media screen and (min-width: 768px){
   .profile{
     width: fit-content;
@@ -46,6 +45,8 @@ span#user{
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  cursor: pointer;
+  text-decoration: none;
 }
 .profile{
   border: 2px solid white;
@@ -55,6 +56,14 @@ span#user{
   padding: 4px;
   background-color: rgba(255, 255, 255, 0.3);
   box-shadow: rgb(29, 44, 59) 0px 20px 30px -10px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.profile:hover {
+  transform: scale(1.2);
+  text-decoration: none;
 }
 
 span {
@@ -77,10 +86,6 @@ svg{
   height: 30px;
 }
 
-img#logout{
-  cursor: pointer;
-}
-
 button {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
@@ -89,5 +94,16 @@ button {
   font-weight: normal;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
+  text-decoration: none;
 }
+
+img#logout{
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+img#logout:hover{
+  transform: scale(1.3);
+}
+
 </style>

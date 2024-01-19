@@ -69,12 +69,18 @@ export default defineComponent({
     justify-content: center;
   }
 
-  .auth {
+  /* .auth {
     justify-content: center;
     text-align: center;
     margin-top: 30px;
-  }
+  } */
 
+  .auth {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1em;
+  }
 
   .nav-link{
     border: 1px solid rgba(255, 255, 255, 0.356);
@@ -104,13 +110,16 @@ export default defineComponent({
     margin-top: 10px;
   }
 
-  .auth{
-    justify-content: space-between;
-    margin-top: 10px;
+  .auth {
+    display: flex;
+    position: absolute;
+    right: 1.5em;
+    top: 1em;
   }
 
-  .profile{
-    margin-right: 0px;
+  UserInfo {
+    font-size: 20px;
+    float: right;
   }
 
   btn1, btn2, btn3, btn4 {
@@ -135,17 +144,7 @@ export default defineComponent({
   font-family: "Montserrat", sans-serif;
 }
 
-.auth {
-  display: flex;
-  position: absolute;
-  right: 1.5em;
-  top: 1em;
-}
 
-UserInfo {
-  font-size: 20px;
-  float: right;
-}
 
 body,
 html {
