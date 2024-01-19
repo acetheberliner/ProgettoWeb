@@ -123,9 +123,11 @@ export default defineComponent({
     flex: 0 0 0;
     height: fit-content;
   }
-}
-/*------------------------------------------------------------------------------------ */
 
+  .nav-link {
+    border-radius: 10px;
+  }
+}
 
 /*------------------------------------------------------------------------------------ */
 
@@ -135,12 +137,14 @@ export default defineComponent({
 
 .auth {
   display: flex;
-  position: relative;
-  right: 0;
+  position: absolute;
+  right: 1.5em;
+  top: 1em;
 }
 
 UserInfo {
   font-size: 20px;
+  float: right;
 }
 
 body,
@@ -184,6 +188,9 @@ img:not(:hover) {
   display: flex;
 }
 
+nav{
+  margin-top: 1em;
+}
 
 span {
   color: #169df7;
@@ -192,6 +199,12 @@ span {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+  overflow-x: visible;
+}
+
+p {
+  z-index: 10000;
+  overflow-x: visible;
 }
 
 @font-face {
@@ -215,20 +228,6 @@ main {
   /* justify-content: center; */
 }
 
-/* .inside {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding-right: 10px;
-  padding-left: 10px;
-  min-width: 100%;
-  box-sizing: border-box;
-  background: transparent;
-  /* background-color: #024454;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
-
-
 nav .nav-link {
   margin-left: 10px;
   margin-right: 10px;
@@ -240,10 +239,6 @@ nav .nav-link {
   /* border-radius: 5px; Bordo arrotondato */
   transition: background-color 0.3s ease; /* Effetto di transizione sul cambio di colore */
 }
-
-/* nav .nav-link:hover {
-  background-color: #1b5e20; /* Colore di sfondo quando il link è in hover
-} */
 
 .button {
   text-decoration: none;
