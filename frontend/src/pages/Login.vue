@@ -36,7 +36,7 @@ export default defineComponent({
   <div class="background">
     <div class="form-container">
       <div class="title">
-        <h2>Login</h2>
+        <h2>Accesso</h2>
       </div>
       <form @submit.prevent="onSubmit">
         <div class="form-group">
@@ -148,6 +148,7 @@ export default defineComponent({
   }
 
 }
+/*------------------------------------------------------------------------------ */
 
 * {
   font-family: "Montserrat", sans-serif;
@@ -161,10 +162,6 @@ export default defineComponent({
   margin-bottom: 2rem;
 }
 
-
-.form-elements {
-  margin: 10px;
-}
 
 form {
   margin: 0 auto;
