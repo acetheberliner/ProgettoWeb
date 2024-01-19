@@ -9,10 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^2.0.2",
     "axios": "^1.6.3",
+    "jspdf": "^2.5.1",
     "vue": "^3.3.8",
-    "vue-router": "^4.2.5",
-    "jspdf": "^2.5.1"
+    "vue-router": "^4.2.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

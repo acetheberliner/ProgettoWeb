@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS porgetto_prova1;
+DROP DATABASE IF EXISTS notesync;
 
-CREATE DATABASE porgetto_prova1;
+CREATE DATABASE notesync;
 
-USE porgetto_prova1;
+USE notesync;
 
 CREATE TABLE `note` (
   `idnote` int(11) NOT NULL,

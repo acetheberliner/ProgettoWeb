@@ -17,13 +17,8 @@
   </div>
   <div class="background">
     <div class="content">
-      <!-- <PostNotes
-        v-for="nota in datiNote"
-        :nota="nota"
-        :key="nota.id"
-        v-model="selectedNoteID"
-      /> -->
-      <PostNotes v-for="nota in datiNote" :nota="nota"/><!-- v-model="selectedId" @change="getNotebyID -->
+      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" :identita="index + 1"  @viewNote="getNoteById(index)"/>
+      <!-- v-model="selectedId" @change="getNotebyID @viewNote="viewNoteDetails(nota.id)" -->
     </div>
   </div>
 </template>
@@ -40,6 +35,7 @@ export default defineComponent({
   data() {
     return {
       datiNote: [] as Nota[],
+      idnote: [] as Nota[],
       selectedCategory: '', // Imposta la categoria predefinita
       categories: [] as String[],
       selectedNoteID: null as number | null,
@@ -56,13 +52,20 @@ export default defineComponent({
       this.datiNote = res.data;
     },
 
-    async getNotebyID() {
-      const res = await axios.get(`/api/noteid/${this.selectedNoteID}`);
-      this.datiNote = res.data;
-    },
+    async getNoteById(id: number) {
+    try {
+      const res = await axios.get(`/api/noteid/${id}`);
+      const nota = res.data; // Supponendo che la risposta contenga direttamente i dati della nota
+      console.log('Nota ottenuta con successo:', nota);
+      // Fai qualcosa con la nota ottenuta, ad esempio aggiornare una variabile di stato o visualizzarla nell'applicazione
+    } catch (error) {
+      console.error('Errore durante la richiesta della nota:', error);
+      // Gestisci eventuali errori, ad esempio mostrando un messaggio all'utente
+    }
+  },
 
     async getCategories() {
-      const res = await axios.get("/api/categories"); // Sostituisci con l'endpoint corretto
+      const res = await axios.get("/api/categories");
       this.categories = res.data.map((categoria: { categoria: any; }) => categoria.categoria); // Supponendo che le categorie siano restituite come un array di stringhe
     },
 
@@ -84,19 +87,16 @@ export default defineComponent({
     },
 
   },
+  emits: ['viewNote'],
   watch: {
     selectedCategory() {
       this.getNotebyCategory();
     },
-    // selectedId() {
-    //   this.getNotebyID();
-    // },
   },
   mounted() {
     this.getCategories();
     this.getNote();
     this.getNotebyCategory();
-    // this.getNotebyID();
   },
 });
 </script>
@@ -111,7 +111,7 @@ select {
   width: fit-content;
   padding: 0.3em;
   cursor: pointer;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .selectdiv select {
@@ -154,6 +154,7 @@ option {
   --sb-size: 4px;
 
   scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  overflow: scroll;
 }
 
 .content::-webkit-scrollbar {

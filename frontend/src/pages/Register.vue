@@ -81,6 +81,78 @@ export default defineComponent({
 </template>
 
 <style scoped>
+
+@media screen and (max-width: 1300px){
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* background:transparent;
+      backdrop-filter:blur(20px); */
+    padding: 5vh;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin-top: 200px;
+    margin: 3.5em;
+  }
+
+  .background {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-attachment: fixed;
+}
+
+.animation {
+  display: none;
+}
+
+}
+/*------------------------------------------------------------------------------------ */
+
+@media screen and (min-width: 1301px){
+  .background {
+    margin-top: 130px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: center;
+    vertical-align: middle;
+    background-attachment: fixed;
+    overflow: hidden;
+  }
+
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* background:transparent;
+      backdrop-filter:blur(20px); */
+    padding: 8vh;
+    border-radius: 10px;
+    border: 1px solid gray;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    display: block;
+    /* margin-right: auto; */
+    width: fit-content;
+    height: fit-content;
+  }
+  
+  .animation{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 15em;
+    
+  }
+
+}
+
 * {
   font-family: "Montserrat", sans-serif;
   margin: 0;

@@ -5,84 +5,128 @@ import axios from "axios";
 
 export default defineComponent({
   props: {
-    nota: Object as PropType<Nota>,
+    nota: {
+      type: Object as () => Nota,
+      required: true,
+    },
+    identita: {
+      type: [Number, String] as PropType<number>,
+      required: true,
+    },    
   },
   data() {
     return {
-      // showCondition: false,
       notes: null as Nota | null,
+      vocab: [] as Nota[],
+      noteid: 0 as Number,
     };
   },
   methods: {
-    // async openNote() {
-    //   this.showCondition = true;
-    // },
-    // async closeNote() {
-    //   this.showCondition = false;
-    // },
-
-    getNota() {
-      axios
-        .get("/api/noteid/" + this.$route.params.id)
-        .then((response) => (this.notes = response.data[0]));
+    async visualizzaNota(id: number) {
+      const response = await axios.get(`/api/noteid/${id}`);
+      this.notes = response.data;
     },
+
+    async getNote() {
+      const res = await axios.get("/api/note");
+      this.vocab = res.data;
+    },
+
+    closeNote(){
+      document.getElementById('light')!.style.display = 'none';
+      document.getElementById('fade')!.style.display = 'none';
+      window.location.reload();
+    },
+
+    openNote(){
+      document.getElementById('light')!.style.display = 'block';
+      document.getElementById('fade')!.style.display = 'block';
+    }
   },
+
   mounted() {
-    this.getNota();
-  },
+    this.getNote();
+  }
 });
 </script>
 
 <template>
-  <div class="note">
+  <div class="note"> 
     <section>
       <h3>{{ nota?.titolo }}</h3>
       <p class="categoria">{{ nota?.categoria }}</p>
       <p class="autore">{{ nota?.autore }}</p>
       <hr />
-      <!-- <p>{{ nota?.testo }}</p> -->
       <p class="anteprima">{{ nota?.anteprima }}</p>
     </section>
     <div>
-      <button class="open">
-        <span>
-          <a
-            id="open"
-            onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'"
-            >Visualizza</a
-          >
-          <!-- <a>Visualizza</a> -->
-        </span>
-      </button>
+      <button class="open" @click="visualizzaNota(+noteid); openNote()" id="open">Visualizza</button>
     </div>
   </div>
-  <div id="light" class="white_content">
+  <div id="light" class="white_content" v-if="notes">
     <div class="title">
       <h2>
-        {{ nota?.titolo }}
+        {{ nota.titolo }}
         <div class="svgicon">
           <img src="/paper-document-svgrepo-com.svg" alt="" />
         </div>
       </h2>
     </div>
     <div class="secondary_info">
-      {{ nota?.categoria }}<br />
-      {{ nota?.autore }}<br />
-      {{ nota?.data }}
+      {{ nota.categoria }}<br />
+      {{ nota.autore }}<br />
+      {{ nota.data }}
     </div>
     <hr />
-    <p id="inner_note">{{ nota?.testo }}</p>
-    <a
-      id="close"
-      onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'"
-      >Chiudi</a
-    >
+    <p id="inner_note">{{ nota.testo }}</p>
+    <a id="close" @click="closeNote">Chiudi</a>
   </div>
   <div id="fade" class="black_overlay"></div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand&display=swap");
+
+@media screen and (max-width: 767px) {
+  .white_content {
+    display: none;
+    position: absolute;
+    top: 2.5em;
+    bottom: 3em;
+    right: 1em;
+    left: 1em;
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    color: #183252;
+    z-index: 1002;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+    .white_content {
+    display: none;
+    position: absolute;
+    /* top: 18%;
+    left: 20%;
+    width: 60%;
+    height: 65%; */
+    margin-right: 20em;
+    margin-left: 20em;
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    color: #183252;
+    z-index: 1002;
+    overflow: auto;
+}
+
+}
+
 /*- ANTEPRIMA -------------------------------------------------------------------------------------------------------------------*/
 .svgicon {
   text-align: end;
@@ -143,8 +187,8 @@ a#close {
 .black_overlay {
   display: none;
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.815);
@@ -153,21 +197,7 @@ a#close {
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
-.white_content {
-  display: none;
-  position: absolute;
-  top: 18%;
-  left: 20%;
-  width: 60%;
-  height: 65%;
-  padding: 16px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  background-color: white;
-  color: #183252;
-  z-index: 1002;
-  overflow: auto;
-}
+
 
 button {
   position: absolute;
@@ -391,7 +421,6 @@ a#close:hover::after {
 }
 
 h3 {
-  /* font-family: clipFont; */
   font-family: "Quicksand", sans-serif;
   font-size: 28px;
   font-weight: bold;

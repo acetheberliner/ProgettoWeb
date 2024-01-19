@@ -24,36 +24,110 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="full-page">
-    <main>
-      <nav class="container">
-        <div class="header-logo">
-          <!-- <img src="/PaperFileText.svg" alt="" /> -->
-          <p>Note<span>Sync</span></p>
+<div class="full-page">
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <nav id="nav" class="container-fluid">
+            <div class="header-logo col-12 col-md-2">
+              <!-- <img src="/PaperFileText.svg" alt="" /> -->
+              <p>Note<span>Sync</span></p><br>
+            </div>
+            <div class="navigation ">
+              <RouterLink class="nav-link button btn1 col-6" to="/">Home</RouterLink>
+              <RouterLink class="nav-link button btn2 col-6" to="/explore">Appunti</RouterLink>
+            </div>
+            <div class="auth">
+              <UserInfo v-if="user" :user="user" />
+              <template v-else>
+                <RouterLink class="nav-link button btn3 col-6" to="/login">Accedi</RouterLink>
+                <RouterLink class="nav-link button btn4 col-6" to="/register">Registrati</RouterLink>
+              </template>
+            </div>
+          </nav>
         </div>
-        <RouterLink class="nav-link button glow-button btn1" to="/"
-          >Home</RouterLink
-        >
-        <RouterLink class="nav-link button glow-button btn2" to="/explore"
-          >Appunti</RouterLink
-        >
-        <div class="auth">
-          <UserInfo v-if="user" :user="user" />
-          <template v-else>
-            <RouterLink class="nav-link button" to="/login">Accedi</RouterLink>
-            <RouterLink class="nav-link button" to="/register"
-              >Registrati</RouterLink
-            >
-          </template>
-        </div>
-      </nav>
-      <RouterView :user="user" />
-    </main>
-  </div>
+      </div>
+      <div class="row"><br></div>
+    </div>
+    <RouterView :user="user" />
+  </main>
+</div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+@media screen and (max-width: 1550px){
+  .header-logo {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .navigation{
+    text-align: center;
+    justify-content: center;
+  }
+
+  .auth {
+    justify-content: center;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+
+  .nav-link{
+    border: 1px solid rgba(255, 255, 255, 0.356);
+    border-radius: 10px;
+  }
+
+  .header-logo > p {
+    text-align: center;
+  }
+}
+/*------------------------------------------------------------------------------------ */
+
+@media screen and (min-width: 1551px){
+  
+  main {
+    padding: 0; /* Rimuovi il padding */
+    background-size: 100% 100%; /* Copri completamente l'area del main */
+  }
+  #nav{
+    display: flex;
+    z-index: 1;
+    height: 100%; /* Imposta l'altezza al 100% della viewport */
+  }
+
+  .navigation{
+    justify-content: space-evenly;
+    margin-top: 10px;
+  }
+
+  .auth{
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+  .profile{
+    margin-right: 0px;
+  }
+
+  btn1, btn2, btn3, btn4 {
+    color: white;
+    height: fit-content;
+    width: fit-content;
+  }
+
+  .col-6{
+    flex: 0 0 0;
+    height: fit-content;
+  }
+}
+/*------------------------------------------------------------------------------------ */
+
+
+/*------------------------------------------------------------------------------------ */
 
 * {
   font-family: "Montserrat", sans-serif;
@@ -61,7 +135,7 @@ export default defineComponent({
 
 .auth {
   display: flex;
-  position: absolute;
+  position: relative;
   right: 0;
 }
 
@@ -93,13 +167,6 @@ img:not(:hover) {
 
 .full-page {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 999;
 }
 
 .header-logo > p {
@@ -112,6 +179,11 @@ img:not(:hover) {
   margin: 0px;
   filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
 }
+
+.navigation {
+  display: flex;
+}
+
 
 span {
   color: #169df7;
@@ -143,7 +215,7 @@ main {
   /* justify-content: center; */
 }
 
-.container {
+/* .inside {
   display: flex;
   justify-content: start;
   align-items: center;
@@ -153,13 +225,9 @@ main {
   box-sizing: border-box;
   background: transparent;
   /* background-color: #024454;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-}
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+} */
 
-.header-logo {
-  margin-right: 10px; /* Adjust spacing between the logo and text as needed */
-  margin: 30px;
-}
 
 nav .nav-link {
   margin-left: 10px;
@@ -169,7 +237,7 @@ nav .nav-link {
   font-size: 20px;
   font-weight: bold;
   padding: 8px 12px; /* Spaziatura interna */
-  border-radius: 5px; /* Bordo arrotondato */
+  /* border-radius: 5px; Bordo arrotondato */
   transition: background-color 0.3s ease; /* Effetto di transizione sul cambio di colore */
 }
 
@@ -181,7 +249,7 @@ nav .nav-link {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   padding: 15px 40px;
-  border-radius: 4px;
+  /* border-radius: 4px; */
   font-weight: normal;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
