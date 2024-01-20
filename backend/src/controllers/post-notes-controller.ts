@@ -16,20 +16,29 @@ export async function getLastNotesID() {
 }
 
 export async function createPost(req: Request, res: Response) {
-  const user = decodeAccessToken(req, res);
+  // const user = decodeAccessToken(req, res);
 
-  if (!user) {
-    res.status(403).send("Questa operazione richiede l'autenticazione.");
-    return;
-  } // COMMENTARE LA PARTE DI DECODE E USER PER EVITARE ERRORI DURANTE LA PROVA SENZA LOGIN
+  // if (!user) {
+  //   res.status(403).send("Questa operazione richiede l'autenticazione.");
+  //   return;
+  // } // COMMENTARE LA PARTE DI DECODE E USER PER EVITARE ERRORI DURANTE LA PROVA SENZA LOGIN
 
-  const text = req.body.textInput;
-
-  const connection = await getConnection();
-  await connection.execute(
-    "INSERT INTO note (idnote, titolo, categoria, autore, testo) VALUES (?, ?, ?, ?, ?)",
-    [(await getLastNotesID()) + 1, "PSS123", "Informatica", "tommaso", text] // da finire
-  );
+  try {
+    const { title, category, author, date, text } = req.body;
+  
+    const connection = await getConnection();
+    const newNoteID = (await getLastNotesID()) + 1;
+  
+    await connection.execute(
+      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo) VALUES (?, ?, ?, ?, ?, ?)',
+      [newNoteID, title, category, date, author, text]
+    );
+    res.status(201).json({ idnote: newNoteID, title, category, date, author, text });
+  } catch (error) {
+    console.error('Errore durante la creazione della nota:', error);
+    // Gestisci eventuali errori, ad esempio inviando una risposta di errore al client
+    res.status(500).send('Errore durante la creazione della nota.');
+  }
 }
 
 export async function deletePost(req: Request, res: Response) {

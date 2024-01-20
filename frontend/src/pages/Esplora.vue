@@ -15,15 +15,39 @@
       </form>
     </div>
     <div class="create" v-if="user" :user="user">
-      <button class="add btn btn-outline-success"><img src="/plus.svg" alt=""></button>
+      <button class="add btn btn-outline-success" @click="openCreateNoteForm"><img src="/plus.svg" alt=""></button>
     </div>
   </div>
+  <!------------------------------------------------------------------------------------------------------------------------------------------->
   <div class="background">
     <div class="content">
       <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" :identita="index + 1"  @viewNote="getNoteById(index)"/>
-      <!-- v-model="selectedId" @change="getNotebyID @viewNote="viewNoteDetails(nota.id)" -->
     </div>
   </div>
+  <!------------------------------------------------------------------------------------------------------------------------------------------->
+  <div class="contenitore">
+    <div id="light" class="white_content" v-if="isCreateNoteFormVisible">
+      <div class="title">
+        <h2>
+          <input v-model="newNote.title" placeholder="Titolo" />
+          <div class="svgicon">
+            <img src="/paper-document-svgrepo-com.svg" alt="" />
+          </div>
+        </h2>
+      </div>
+      <div class="secondary_info">
+        <input v-model="newNote.category" placeholder="Categoria" /><br />
+        <input v-model="newNote.author" placeholder="Autore" /><br />
+        <input v-model="newNote.date" placeholder="Data" /><br />
+      </div>
+      <hr />
+      <textarea v-model="newNote.text" placeholder="Testo"></textarea>
+      <button @click="createNote">Crea nota</button>
+      <a id="close" @click="closeCreateNoteForm">Chiudi</a>
+    </div>
+  </div>
+  <div id="fade" class="black_overlay" v-if="isCreateNoteFormVisible"></div>
+  <!------------------------------------------------------------------------------------------------------------------------------------------->
 </template>
 
 <script lang="ts">
@@ -32,7 +56,6 @@ import axios from "axios";
 import { Nota } from "../types";
 import { User } from "../types";
 import PostNotes from "../components/posts-notes.vue";
-// import PreviewNotes from "../components/preview-note.vue";
 
 export default defineComponent({
   components: { PostNotes },
@@ -44,9 +67,39 @@ export default defineComponent({
       categories: [] as String[],
       selectedNoteID: null as number | null,
       user: null as User | null,
+      isCreateNoteFormVisible: false,
+      newNote: {
+        title: '',
+        category: '',
+        author: '',
+        date: '',
+        text: '',
+      },
     };
   },
   methods: {
+    
+    async createNote() {
+      const res = await axios.post("/api/createPost", {
+        titolo: this.newNote.title,
+        categoria: this.newNote.category,
+        autore: this.newNote.author,
+        data: this.newNote.date,
+        testo: this.newNote.text,
+      });
+
+      this.datiNote.push(res.data);
+      this.closeCreateNoteForm();
+    },
+
+    openCreateNoteForm() {
+      this.isCreateNoteFormVisible = true;
+    },
+
+    closeCreateNoteForm() {
+      this.isCreateNoteFormVisible = false;
+    },
+
     async getNote() {
       const res = await axios.get("/api/note");
       this.datiNote = res.data;
@@ -113,6 +166,48 @@ export default defineComponent({
 </script>
 
 <style scoped>
+
+@media screen and (min-width: 768px) {
+  .contenitore{
+    display: flex;
+    justify-content: center;
+  }
+  
+  .white_content {
+    display: block;
+    position: relative;
+    width: fit-content;
+    overflow: visible;
+    
+
+    /* top: 18%;
+    left: 20%;
+    width: 60%;
+    height: 65%; */
+    /* margin-right: 20em;
+    margin-left: 20em; */
+    padding: 16px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    background-color: white;
+    color: #183252;
+    z-index: 1003;
+  }
+}
+
+.black_overlay {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.815);
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
 
 select {
   border: 1px solid white;
