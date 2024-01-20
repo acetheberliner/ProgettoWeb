@@ -17,7 +17,7 @@ export default defineComponent({
           username: this.username,
           password: this.password,
         });
-        window.location.href = "/";
+        window.location.href = "/myaccount";
       } catch (e: any) {
         if (e.response) {
           alert(

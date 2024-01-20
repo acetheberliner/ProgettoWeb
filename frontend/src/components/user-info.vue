@@ -10,7 +10,7 @@ export default defineComponent({
   methods: {
     async logout() {
       await axios.post("/api/auth/logout");
-      window.location.reload();
+      window.location.href="/";
     },
   },
 });
@@ -100,6 +100,10 @@ button {
 img#logout{
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+
+img#red-logout {
+  display: none;
 }
 
 img#logout:hover{

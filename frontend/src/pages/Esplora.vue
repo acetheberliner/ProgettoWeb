@@ -14,6 +14,9 @@
         </select>
       </form>
     </div>
+    <div class="create" v-if="user" :user="user">
+      <button class="add btn btn-outline-success"><img src="/plus.svg" alt=""></button>
+    </div>
   </div>
   <div class="background">
     <div class="content">
@@ -27,6 +30,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { Nota } from "../types";
+import { User } from "../types";
 import PostNotes from "../components/posts-notes.vue";
 // import PreviewNotes from "../components/preview-note.vue";
 
@@ -39,6 +43,7 @@ export default defineComponent({
       selectedCategory: '', // Imposta la categoria predefinita
       categories: [] as String[],
       selectedNoteID: null as number | null,
+      user: null as User | null,
     };
   },
   methods: {
@@ -53,16 +58,16 @@ export default defineComponent({
     },
 
     async getNoteById(id: number) {
-    try {
-      const res = await axios.get(`/api/noteid/${id}`);
-      const nota = res.data; // Supponendo che la risposta contenga direttamente i dati della nota
-      console.log('Nota ottenuta con successo:', nota);
-      // Fai qualcosa con la nota ottenuta, ad esempio aggiornare una variabile di stato o visualizzarla nell'applicazione
-    } catch (error) {
-      console.error('Errore durante la richiesta della nota:', error);
-      // Gestisci eventuali errori, ad esempio mostrando un messaggio all'utente
-    }
-  },
+      try {
+        const res = await axios.get(`/api/noteid/${id}`);
+        const nota = res.data; // Supponendo che la risposta contenga direttamente i dati della nota
+        console.log('Nota ottenuta con successo:', nota);
+        // Fai qualcosa con la nota ottenuta, ad esempio aggiornare una variabile di stato o visualizzarla nell'applicazione
+      } catch (error) {
+        console.error('Errore durante la richiesta della nota:', error);
+        // Gestisci eventuali errori, ad esempio mostrando un messaggio all'utente
+      }
+    },
 
     async getCategories() {
       const res = await axios.get("/api/categories");
@@ -86,6 +91,11 @@ export default defineComponent({
       }
     },
 
+    async getUser() {
+      const res = await axios.get("/api/auth/profile");
+      this.user = res.data;
+    },
+
   },
   emits: ['viewNote'],
   watch: {
@@ -97,6 +107,7 @@ export default defineComponent({
     this.getCategories();
     this.getNote();
     this.getNotebyCategory();
+    this.getUser();
   },
 });
 </script>
@@ -111,7 +122,19 @@ select {
   width: fit-content;
   padding: 0.3em;
   cursor: pointer;
+  height: 50px;
   /* margin-left: 10px; */
+}
+
+img {
+  width: 35px;
+  margin: 0px;
+}
+
+button.add {
+  border-radius: 10px;
+  margin-left: 1em;
+  height: 50px;
 }
 
 .selectdiv select {
