@@ -15,7 +15,7 @@
       </form>
     </div>
     <div class="create" v-if="user" :user="user">
-      <button class="add btn btn-outline-success" @click="openCreateNoteForm"><img src="/plus.svg" alt=""></button>
+      <button class="add btn btn-outline-success" @click="openCreateNoteForm"><img id="create" src="/plus.svg" alt=""></button>
     </div>
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
@@ -31,24 +31,24 @@
         <h2>
           <input v-model="newNote.title" placeholder="Titolo" />
           <div class="svgicon">
-            <img src="/paper-document-svgrepo-com.svg" alt="" />
+            <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
           </div>
         </h2>
       </div>
       <div class="secondary_info">
         <input v-model="newNote.category" placeholder="Categoria" /><br />
         <input v-model="newNote.author" placeholder="Autore" /><br />
-        <input v-model="newNote.date" placeholder="Data" /><br />
+        <input type="date" v-model="newNote.date" placeholder="Data" /><br />
       </div>
       <hr />
       <textarea v-model="newNote.text" placeholder="Testo"></textarea>
-      <button @click="createNote">Crea nota</button>
-      <a id="close" @click="closeCreateNoteForm">Chiudi</a>
+      <button class="create bg-success" @click="createNote">Crea nota</button>
+      <a id="close" class="bg-danger" @click="closeCreateNoteForm">Chiudi</a>
     </div>
   </div>
   <div id="fade" class="black_overlay" v-if="isCreateNoteFormVisible"></div>
-  <!------------------------------------------------------------------------------------------------------------------------------------------->
 </template>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
 
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -74,6 +74,7 @@ export default defineComponent({
         author: '',
         date: '',
         text: '',
+        preview: '',
       },
     };
   },
@@ -86,6 +87,7 @@ export default defineComponent({
         author: this.newNote.author,
         date: this.newNote.date,
         text: this.newNote.text,
+        preview: this.newNote.text,
       });
 
       this.datiNote.push(res.data);
@@ -98,6 +100,7 @@ export default defineComponent({
 
     closeCreateNoteForm() {
       this.isCreateNoteFormVisible = false;
+      window.location.reload();
     },
 
     async getNote() {
@@ -168,24 +171,15 @@ export default defineComponent({
 <style scoped>
 
 @media screen and (min-width: 768px) {
-  .contenitore{
-    display: flex;
-    justify-content: center;
-  }
-  
   .white_content {
     display: block;
-    position: relative;
+    position: absolute;
     width: fit-content;
     overflow: visible;
-    
-
-    /* top: 18%;
+    top: 18%;
     left: 20%;
     width: 60%;
-    height: 65%; */
-    /* margin-right: 20em;
-    margin-left: 20em; */
+    height: 65%;
     padding: 16px;
     border: 1px solid gray;
     border-radius: 10px;
@@ -193,6 +187,38 @@ export default defineComponent({
     color: #183252;
     z-index: 1003;
   }
+}
+
+/*------------------------------------------------------------------- */
+
+.svgicon {
+  text-align: end;
+  margin-right: 10px;
+}
+
+a#close {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 0.8em 1em;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 12px;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+.secondary_info {
+  text-align: end;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .black_overlay {
@@ -209,6 +235,123 @@ export default defineComponent({
   filter: alpha(opacity=80);
 }
 
+button.create {
+  position: absolute;
+  bottom: 10px;
+  right: 90px;
+  padding: 0.8em 1em;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  background-color: #356cb1;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 12px;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+button:hover,
+a#close:hover {
+  animation: sh0 0.5s ease-in-out both;
+}
+
+@keyframes sh0 {
+  0% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: rotate(7deg) translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: rotate(-7deg) translate3d(0, 0, 0);
+  }
+
+  75% {
+    transform: rotate(1deg) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+
+button:hover,
+a#close:hover span {
+  animation: storm 0.7s ease-in-out both;
+  animation-delay: 0.06s;
+}
+
+button::before,
+a#close:before button::after,
+a#close:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+  z-index: -1;
+  transform: translate(100%, -25%) translate3d(0, 0, 0);
+}
+
+button:hover::before,
+a#close:hover::before button:hover::after,
+a#close:hover::after {
+  opacity: 0.15;
+  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1),
+    opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+button:hover::before,
+a#close:hover::before {
+  transform: translate3d(50%, 0, 0) scale(0.9);
+}
+
+button:hover::after,
+a#close:hover::after {
+  transform: translate(50%, 0) scale(1.1);
+}
+
+hr {
+  border: none;
+  height: 1px;
+  background-color: #235971;
+  margin: 10px 0;
+}
+
+input {
+  border: 1px solid rgb(211, 208, 208);
+  border-radius: 10px;
+  padding: 8px;
+  margin-top: 5px;
+}
+
+textarea {
+  border: 1px solid rgb(211, 208, 208);
+  border-radius: 10px;
+  padding: 8px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  resize:none;
+  width: 100%;
+  height: 40%;
+  font-size: 18px;
+}
+
+/*------------------------------------------------------------------- */
+
 select {
   border: 1px solid white;
   border-radius: 10px;
@@ -221,7 +364,12 @@ select {
   /* margin-left: 10px; */
 }
 
-img {
+img#document{
+  width: 50px;
+  margin: 0px;
+}
+
+img#create {
   width: 35px;
   margin: 0px;
 }
