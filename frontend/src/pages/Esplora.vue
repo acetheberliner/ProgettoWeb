@@ -81,11 +81,11 @@ export default defineComponent({
     
     async createNote() {
       const res = await axios.post("/api/createPost", {
-        titolo: this.newNote.title,
-        categoria: this.newNote.category,
-        autore: this.newNote.author,
-        data: this.newNote.date,
-        testo: this.newNote.text,
+        title: this.newNote.title,
+        category: this.newNote.category,
+        author: this.newNote.author,
+        date: this.newNote.date,
+        text: this.newNote.text,
       });
 
       this.datiNote.push(res.data);
