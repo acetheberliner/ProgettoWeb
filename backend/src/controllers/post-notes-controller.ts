@@ -24,16 +24,16 @@ export async function createPost(req: Request, res: Response) {
   // } // COMMENTARE LA PARTE DI DECODE E USER PER EVITARE ERRORI DURANTE LA PROVA SENZA LOGIN
 
   try {
-    const { title, category, author, date, text } = req.body;
+    const { title, category, author, date, text, preview } = req.body;
   
     const connection = await getConnection();
     const newNoteID = (await getLastNotesID()) + 1;
   
     await connection.execute(
-      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo) VALUES (?, ?, ?, ?, ?, ?)',
-      [newNoteID, title, category, date, author, text]
+      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [newNoteID, title, category, date, author, text, preview]
     );
-    res.status(201).json({ idnote: newNoteID, title, category, date, author, text });
+    res.status(201).json({ idnote: newNoteID, title, category, date, author, text, preview });
   } catch (error) {
     console.error('Errore durante la creazione della nota:', error);
     // Gestisci eventuali errori, ad esempio inviando una risposta di errore al client
