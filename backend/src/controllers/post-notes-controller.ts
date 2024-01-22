@@ -24,8 +24,11 @@ export async function createPost(req: Request, res: Response) {
   }
 
   try {
-    const { title, category, date, text, preview } = req.body; // tolto author
-  
+    const data = new Date();
+    const date: string = data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
+
+    const { title, category, text, preview } = req.body; // tolto author e data
+    // preview piuttosto che mandarlo con axios lo crerei qua con const preview = 'qua metterei una funzione che mi accorci text'  
     const connection = await getConnection();
     const newNoteID = (await getLastNotesID()) + 1;
   
