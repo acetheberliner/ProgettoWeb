@@ -37,8 +37,8 @@
       </div>
       <div class="secondary_info">
         <input v-model="newNote.category" placeholder="Categoria" /><br />
-        <input v-model="newNote.author" placeholder="Autore" /><br />
-        <input type="date" v-model="newNote.date" placeholder="Data" /><br />
+        <!--<input v-model="newNote.author" placeholder="Autore" /><br /> 
+        <input type="date" v-model="newNote.date" placeholder="Data" /><br /> -->
       </div>
       <hr />
       <textarea v-model="newNote.text" placeholder="Testo"></textarea>
@@ -71,7 +71,7 @@ export default defineComponent({
       newNote: {
         title: '',
         category: '',
-        author: '',
+        //author: '',
         date: '',
         text: '',
         preview: '',
