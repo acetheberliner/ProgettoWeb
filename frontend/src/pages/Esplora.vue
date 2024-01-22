@@ -84,7 +84,7 @@ export default defineComponent({
       const res = await axios.post("/api/createPost", {
         title: this.newNote.title,
         category: this.newNote.category,
-        author: this.newNote.author,
+        //author: this.newNote.author, va tolto come l'input
         date: this.newNote.date,
         text: this.newNote.text,
         preview: this.newNote.text,
