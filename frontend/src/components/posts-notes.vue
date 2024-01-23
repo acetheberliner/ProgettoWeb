@@ -198,6 +198,7 @@ a#close {
 }
 
 button.delete {
+  bottom: 10px;
   width: fit-content;
   padding: 0.8em 1em;
   cursor: pointer;
