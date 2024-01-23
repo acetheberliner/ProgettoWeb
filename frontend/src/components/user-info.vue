@@ -36,7 +36,7 @@ export default defineComponent({
 
 * {
   font-size: 20px;
-
+  text-decoration: none;
 }
 
 span#user{
@@ -46,7 +46,6 @@ span#user{
   -webkit-background-clip: text;
   color: transparent;
   cursor: pointer;
-  text-decoration: none;
 }
 .profile{
   border: 2px solid white;
@@ -58,16 +57,13 @@ span#user{
   box-shadow: rgb(29, 44, 59) 0px 20px 30px -10px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-  text-decoration: none;
 }
 
 .profile:hover {
   transform: scale(1.2);
-  text-decoration: none;
 }
 
 span {
-  text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   padding: 15px;
   border-radius: 4px;
@@ -87,14 +83,12 @@ svg{
 }
 
 button {
-  text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   padding: 15px 40px;
   border-radius: 4px;
   font-weight: normal;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
-  text-decoration: none;
 }
 
 img#logout{

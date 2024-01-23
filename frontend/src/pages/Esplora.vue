@@ -79,7 +79,6 @@ export default defineComponent({
     };
   },
   methods: {
-    
     async createNote() {
       const res = await axios.post("/api/createPost", {
         title: this.newNote.title,

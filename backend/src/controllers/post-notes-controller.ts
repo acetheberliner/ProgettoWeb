@@ -51,24 +51,30 @@ export async function deletePost(req: Request, res: Response) {
     return;
   }
 
-  const connection = await getConnection();
-  const [posts] = await connection.execute(
-    "SELECT * FROM note WHERE idnote = ?",
-    [req.params.id]
-  );
+  try {
+    const connection = await getConnection();
+    
+    const [posts] = await connection.execute(
+      "SELECT * FROM note WHERE idnote = ?",
+      [req.params.id]
+    );
 
-  if (!Array.isArray(posts) || posts.length == 0) {
-    res.status(404).send("Post non trovato.");
-    return;
+    if (!Array.isArray(posts) || posts.length === 0) {
+      res.status(404).send("Nota non trovata.");
+      return;
+    }
+
+    const post = posts[0] as any;
+    if (post.autore !== user.username) {
+      res.status(403).send("Non hai i permessi per eliminare questa nota.");
+      return;
+    }
+
+    await connection.execute("DELETE FROM note WHERE idnote = ?", [req.params.id]);
+
+    res.status(200).send("Nota eliminata con successo.");
+  } catch (error) {
+    console.error("Errore durante l'eliminazione della nota:", error);
+    res.status(500).send("Errore interno del server durante l'eliminazione della nota.");
   }
-
-  const post = posts[0] as any;
-  if (post.autore != user.username) {
-    res.status(403).send("Non hai i permessi per eliminare questo post.");
-    return;
-  }
-
-  await connection.execute("DELETE FROM note WHERE idnote = ?", [
-    req.params.id,
-  ]);
 }

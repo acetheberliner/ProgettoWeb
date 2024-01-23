@@ -22,6 +22,22 @@ export default defineComponent({
     };
   },
   methods: {
+    async deleteNote() {
+      if (confirm("Sei sicuro di voler eliminare questa nota?")) {
+        try {
+          const response = await axios.delete(`/api/deletePost/${this.noteid}`);
+          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
+          console.log("Nota eliminata con successo:", response.data);
+          // Puoi aggiornare la lista delle note richiamando il metodo getNote
+          this.getNote();
+          // Chiudi la finestra di visualizzazione della nota
+          this.closeNote();
+        } catch (error) {
+          console.error("Errore durante l'eliminazione della nota:", error);
+        }
+      }
+    },
+
     async visualizzaNota(id: number) {
       const response = await axios.get(`/api/noteid/${id}`);
       this.notes = response.data;
@@ -80,6 +96,7 @@ export default defineComponent({
     <hr />
     <p id="inner_note">{{ nota.testo }}</p>
     <a id="close" @click="closeNote">Chiudi</a>
+    <button class="delete btn bg-danger " @click="deleteNote">Elimina</button>
   </div>
   <div id="fade" class="black_overlay"></div>
 </template>
@@ -87,11 +104,11 @@ export default defineComponent({
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand&display=swap");
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1589px) {
   .white_content {
     display: none;
     position: absolute;
-    top: 2.5em;
+    top: 8.5em;
     bottom: 3em;
     right: 1em;
     left: 1em;
@@ -101,12 +118,14 @@ export default defineComponent({
     background-color: white;
     color: #183252;
     z-index: 1002;
+    font-size: 12px;
     overflow-x: hidden;
     overflow-y: auto;
+    height: 80%;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1590px) {
     .white_content {
     display: none;
     position: absolute;
@@ -156,10 +175,10 @@ a#close {
   color: #183252;
   text-decoration: none;
   width: fit-content;
-  bottom: 10px;
-  right: 10px;
   padding: 0.8em 1em;
   display: flex;
+  bottom: 10px;
+  right: 10px;
   margin-top: 10px;
   margin-left: 8px;
   justify-content: center;
@@ -173,6 +192,22 @@ a#close {
   font-weight: 300;
   font-size: 12px;
   font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+
+button.delete {
+  width: fit-content;
+  padding: 0.8em 1em;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  /* background-color: #356cb1; */
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 300;
+  font-size: 12px;
   z-index: 0;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
