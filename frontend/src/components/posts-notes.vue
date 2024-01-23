@@ -22,10 +22,10 @@ export default defineComponent({
     };
   },
   methods: {
-    async deleteNote() {
+    async deleteNote(id: number) {
       if (confirm("Sei sicuro di voler eliminare questa nota?")) {
         try {
-          const response = await axios.delete(`/api/deletePost/${this.noteid}`);
+          const response = await axios.delete(`/api/deletePost/${id}`);
           // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
           console.log("Nota eliminata con successo:", response.data);
           // Puoi aggiornare la lista delle note richiamando il metodo getNote
@@ -96,7 +96,7 @@ export default defineComponent({
     <hr />
     <p id="inner_note">{{ nota.testo }}</p>
     <a id="close" @click="closeNote">Chiudi</a>
-    <button class="delete btn bg-danger " @click="deleteNote">Elimina</button>
+    <button class="delete btn bg-danger " @click="deleteNote(+noteid)">Elimina</button>
   </div>
   <div id="fade" class="black_overlay"></div>
 </template>
