@@ -44,7 +44,7 @@ export const register = async (req: Request, res: Response) => {
 
   //caso nuovo utente
   const [results] = await connection.execute(
-    "SELECT username, password FROM utenti WHERE username=?",
+    "SELECT username, password, role FROM utenti WHERE username=?",
     [username]
   );
   const newUser = (results as any)[0];
@@ -68,7 +68,7 @@ export const login = async (req: Request, res: Response) => {
   //cerca nel db user e pass
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT username, password FROM utenti WHERE username=?",
+    "SELECT username, password, role FROM utenti WHERE username=?",
     [username]
   );
 

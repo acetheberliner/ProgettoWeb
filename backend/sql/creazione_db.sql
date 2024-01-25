@@ -15,11 +15,11 @@ CREATE TABLE `note` (
   PRIMARY KEY (`idnote`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
   
-  CREATE TABLE `utenti` (
-  `username` varchar(20) NOT NULL,
-
-  `password` varchar(20) NOT NULL,
-  PRIMARY KEY (`username`)
+CREATE TABLE `utenti` (
+username varchar(20) NOT NULL,
+password varchar(20) NOT NULL,
+role ENUM("mod", "user") default "user",
+PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   -- `email` varchar(20) NOT NULL,

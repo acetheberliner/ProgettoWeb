@@ -18,7 +18,7 @@ export default defineComponent({
           password: this.password,
           // email: this.email,
         });
-        window.location.href = "/";
+        window.location.href = "/myaccount";
       } catch (e: any) {
         if (e.response) {
           alert(

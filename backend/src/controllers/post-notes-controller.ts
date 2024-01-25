@@ -59,13 +59,13 @@ export async function deletePost(req: Request, res: Response) {
       [req.params.id]
     );
 
-    if (!Array.isArray(posts) || posts.length === 0) {
+    if (!Array.isArray(posts) || posts.length == 0) {
       res.status(404).send("Nota non trovata.");
       return;
     }
 
     const post = posts[0] as any;
-    if (post.autore !== user.username) {
+    if (post.autore != user.username) {
       res.status(403).send("Non hai i permessi per eliminare questa nota.");
       return;
     }

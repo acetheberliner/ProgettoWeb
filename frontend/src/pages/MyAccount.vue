@@ -27,12 +27,12 @@ export default defineComponent({
         <h2>Bentornato,</h2>
         <h2 class="username">{{ user?.username }}!</h2>
       </div>
+      <div class="ruolo">
+        <p class="role">Ruolo: <span class="role">{{ user?.role }}</span></p>
+      </div>
       <div class="buttons">
-        <!-- <div class="create">
-          <button class="btn btn-outline-success"><img id="logout" src="/plus.svg" alt="Logout" @click="logout"/></button>
-        </div> -->
-        <div class="logout">
-          <button class="btn btn-outline-danger"><img id="logout" src="/logout.svg" alt="Logout" @click="logout"/></button>
+        <div class="logout" @click="logout">
+          <button class="btn btn-outline-danger"><img id="logout" src="/logout.svg" alt="Logout"/></button>
         </div>
       </div>
     </article>  
@@ -86,9 +86,42 @@ export default defineComponent({
   font-family: "Montserrat", sans-serif;
 }
 
-img {
+img, svg {
   width: 25px;
   margin: 0px;
+}
+
+.ruolo {
+  margin-left: 25%;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.4em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s ease-in-out;
+  cursor: default;
+}
+
+.ruolo:hover {
+  transform: scale(1.2);
+}
+
+p.role {
+  color: rgb(255, 255, 255);
+  margin: 0;
+  font-weight: bold;
+}
+
+span.role{
+  color: white;
+  text-transform: uppercase;
+}
+
+span.role:hover {
+  color: #ffa600;
+  font-weight: bold;
 }
 
 img#user{
@@ -132,7 +165,7 @@ h2 {
 }
 
 h2.username{
-  color: rgb(255, 166, 0);
+  color: #ffa600;
   filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.884));
 
 }
