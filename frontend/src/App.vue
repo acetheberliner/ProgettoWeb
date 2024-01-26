@@ -37,6 +37,7 @@ export default defineComponent({
             <div class="navigation ">
               <RouterLink class="nav-link button btn1 col-6" to="/">Home</RouterLink>
               <RouterLink class="nav-link button btn2 col-6" to="/explore">Appunti</RouterLink>
+              <RouterLink class="nav-link button btn5 col-6" to="/aggiungi" v-if="user" :user="user">Aggiungi</RouterLink>
             </div>
             <div class="auth">
               <UserInfo v-if="user" :user="user" />
@@ -279,6 +280,15 @@ nav .nav-link {
 .btn4:hover {
   color: rgba(255, 255, 255, 1);
   box-shadow: 5px 5px 15px #ee42c0;
+  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.btn5:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 5px 5px 15px #7efc00;
   background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
   background-clip: text;
   -webkit-background-clip: text;

@@ -14,9 +14,9 @@
         </select>
       </form>
     </div>
-    <div class="create" v-if="user" :user="user">
+    <!-- <div class="create" v-if="user" :user="user">
       <button class="add btn btn-outline-success" @click="openCreateNoteForm"><img id="create" src="/plus.svg" alt=""></button>
-    </div>
+    </div> -->
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
   <div class="background">
@@ -25,7 +25,7 @@
     </div>
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
-  <div class="contenitore">
+  <!-- <div class="contenitore">
     <div id="light" class="white_content" v-if="isCreateNoteFormVisible">
       <div class="title">
         <h2>
@@ -37,8 +37,8 @@
       </div>
       <div class="secondary_info">
         <input v-model="newNote.category" placeholder="Categoria" /><br />
-        <!--<input v-model="newNote.author" placeholder="Autore" /><br /> 
-        <input type="date" v-model="newNote.date" placeholder="Data" /><br /> -->
+        <input v-model="newNote.author" placeholder="Autore" /><br /> 
+        <input type="date" v-model="newNote.date" placeholder="Data" /><br />
       </div>
       <hr />
       <textarea v-model="newNote.text" placeholder="Testo"></textarea>
@@ -46,7 +46,7 @@
       <a id="close" class="bg-danger" @click="closeCreateNoteForm">Chiudi</a>
     </div>
   </div>
-  <div id="fade" class="black_overlay" v-if="isCreateNoteFormVisible"></div>
+  <div id="fade" class="black_overlay" v-if="isCreateNoteFormVisible"></div> -->
 </template>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 

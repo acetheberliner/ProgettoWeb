@@ -31,33 +31,33 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1>Profilo Utente</h1>
+  <h1 v-if="user?.role == 'mod'">Profilo <span :class="{
+    'bg-warning': user?.role == 'mod'
+  }">Moderatore</span></h1>
+  <h1 v-else>Profilo Utente</h1>
   <main>
     <article>
       <div class="user-image">
         <img id="user" src="/user.svg" alt="User image empty">
       </div>
       <div class="title">
-        <h2>Bentornato,</h2>
+        <h2>Bentornato</h2>
         <h2 class="username">{{ user?.username }}!</h2>
       </div>
       <div class="ruolo">
-        <p class="role">Ruolo: <span class="role">{{ user?.role }}</span></p>
+        <p class="role" v-if="user?.role == 'mod' ">Ruolo: <span class="role">Moderatore</span></p>
+        <p class="role" v-else>Ruolo: <span class="role">Utente</span></p>
       </div>
-      <div class="buttons">
-        <div class="logout" @click="logout">
-          <button class="btn btn-outline-danger"><img id="logout" src="/logout.svg" alt="Logout"/></button>
-        </div>
-      </div>
+      <button @click="logout()" class="btn btn-outline-danger"><img id="logout" src="/logout.svg" alt="Logout"/></button>
     </article>
     <div class="animation">
       <lottie-player src="https://lottie.host/734e9cf7-ddf2-4380-a671-99d11d4a6240/JauVdy6sdh.json" background="transparent" speed="1" style="width: 550px; height: 550px" direction="1" mode="normal" loop autoplay></lottie-player>
     </div>
-    <div class="moderator">
+    <!-- <div class="moderator">
       <p>Password Moderatore:</p>
       <input type="text" name="password" id="password" placeholder="Password" v-model="passinput">
       <button type="submit" class="submit btn btn-outline-light">Invia</button>
-    </div>
+    </div> -->
   </main>
 </template>
 
@@ -91,12 +91,12 @@ export default defineComponent({
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    margin-left: 20em;
+    margin-left: 29em;
     padding: 4vh;
     border: 1px solid white;
     border-radius: 10px;
     background:transparent;
-    text-align: center;
+    place-items: center;
     backdrop-filter:blur(20px);
     box-shadow: rgb(100, 170, 245) 0px 20px 30px -10px;
   }
@@ -105,11 +105,12 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 4em;
+    margin-left: 10em;
     margin-right: 4em;
   }
 }
 /*------------------------------------------------------------------------------------ */
+
 
 * {
   font-family: "Montserrat", sans-serif;
@@ -120,7 +121,7 @@ img, svg {
   margin: 0px;
 }
 
-.moderator{
+/* .moderator{
   font-size: 16px;
   margin: 0;
   display: flex;
@@ -135,9 +136,9 @@ img, svg {
   backdrop-filter:blur(20px);
   box-shadow: rgb(100, 170, 245) 0px 20px 30px -10px;
   align-items: center;
-}
+} */
 
-input {
+/* input {
   border: white;
   border-radius: 10px;
   padding: 1vh;
@@ -150,7 +151,7 @@ input {
 input::placeholder {
   color: white;
   opacity: 0.5;
-}
+} */
 
 .submit {
   cursor: pointer;
@@ -158,7 +159,6 @@ input::placeholder {
 }
 
 .ruolo {
-  margin-left: 25%;
   border: 1px solid rgb(255, 255, 255);
   border-radius: 10px;
   width: fit-content;
@@ -206,19 +206,14 @@ h1 {
   font-size: 36px;
 }
 
-.buttons {
-  display: inline-flex;
-  justify-content: center;
-}
-
-.logout {
-  width:100%
-}
-
 button {
-  margin: 10px;
   width: 60%;
   border-radius: 100px;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.2);
 }
 
 .title {
