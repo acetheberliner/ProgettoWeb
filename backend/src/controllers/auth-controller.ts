@@ -115,3 +115,21 @@ export const getProfile = async (req: Request, res: Response) => {
   const user = decodeAccessToken(req, res);
   res.json(user);
 };
+
+// export const setMod = async (req: Request, res: Response) => {
+//   const user = decodeAccessToken(req, res);
+ 
+//   if (!user) {
+//     res.status(403).send("Questa operazione richiede l'autenticazione.");
+//     return;
+//   }
+
+//   const { username} = req.body;
+
+//   const connection = await getConnection();
+
+//   await connection.execute(
+//     "UPDATE utenti SET role = 'mod' WHERE username = ? ",
+//     [username]
+//   );
+// }
