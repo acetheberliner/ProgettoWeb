@@ -15,6 +15,12 @@ export async function getLastNotesID() {
   return lastID;
 }
 
+function dateToString() {
+  const data = new Date();
+  const date: string = data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
+  return date
+}
+
 export async function createPost(req: Request, res: Response) {
   const user = decodeAccessToken(req, res);
 
@@ -24,8 +30,7 @@ export async function createPost(req: Request, res: Response) {
   }
 
   try {
-    const data = new Date();
-    const date: string = data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
+    const date = dateToString();
 
     const { title, category, text, preview } = req.body; // tolto author e data
     // preview piuttosto che mandarlo con axios lo crerei qua con const preview = 'qua metterei una funzione che mi accorci text'  
@@ -79,5 +84,36 @@ export async function deletePost(req: Request, res: Response) {
   } catch (error) {
     console.error("Errore durante l'eliminazione della nota:", error);
     res.status(500).send("Errore interno del server durante l'eliminazione della nota.");
+  }
+}
+
+export async function editPost(req: Request, res: Response) {
+  const user: any = decodeAccessToken(req, res);
+
+  if (!user) {
+    res.status(403).send("Questa operazione richiede l'autenticazione.");
+    return;
+  }
+  const { idnote, newTitle, newText, newCategory} = req.body;
+
+  try {
+    const connection = await getConnection();
+    const [posts] = await connection.execute("SELECT * FROM note WHERE idnote = ?",
+    [idnote]
+    );
+
+    if (!Array.isArray(posts) || posts.length == 0) {
+      res.status(404).send("Nota non trovata.");
+      return;
+    }
+    const date = dateToString();
+    const post = posts[0] as any;
+
+    await connection.execute("UPDATE note SET titolo = ?, categoria = ?, data = ?, testo = ?, stato ='da approvare' WHERE idnote = ?",
+    [newTitle, newCategory, date, newText, idnote]
+    );
+
+  } catch(e) {
+    console.log("Errore: ", e);
   }
 }
