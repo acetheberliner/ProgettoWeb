@@ -74,7 +74,7 @@ export async function deletePost(req: Request, res: Response) {
     }
 
     const post = posts[0] as any;
-    if (post.autore != user.username) {
+    if (post.autore != user.username || user.role == "mod") {
       res.status(403).send("Non hai i permessi per eliminare questa nota.");
       return;
     }
