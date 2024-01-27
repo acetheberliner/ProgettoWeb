@@ -5,8 +5,8 @@
 
 
 # manca
-- delete della nota (POST)
-- edit della nota
+- delete della nota (POST) [FATTO] (aggiornato ma la query delete commentata, prima va risolto il problema di idnote in post-notes.vue)
+- edit della nota [FATTO]  (aggiunta, bisogna passare i paramentri idnote, newTitle, newCategory, newText)
 - aggiungere pagina crea nota (e togliere da esplora)
 - approvazione delle note in esplora
 - interfaccia user/mod
