@@ -74,14 +74,15 @@ export async function deletePost(req: Request, res: Response) {
     }
 
     const post = posts[0] as any;
-    if (post.autore != user.username || user.role == "mod") {
+    
+    if (post.autore == user.username || user.role == "mod") {
+      await connection.execute("DELETE FROM note WHERE idnote = ?", [req.params.id]);
+      res.status(200).send("Nota eliminata con successo.");
+    } else {
       res.status(403).send("Non hai i permessi per eliminare questa nota.");
       return;
     }
-
-    await connection.execute("DELETE FROM note WHERE idnote = ?", [req.params.id]);
-
-    res.status(200).send("Nota eliminata con successo.");
+    
   } catch (error) {
     console.error("Errore durante l'eliminazione della nota:", error);
     res.status(500).send("Errore interno del server durante l'eliminazione della nota.");
