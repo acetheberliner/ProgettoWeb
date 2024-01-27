@@ -1,5 +1,5 @@
 <script lang="ts">
-import { PropType, defineComponent } from "vue";
+import {defineComponent } from "vue";
 import { Nota } from "../types";
 import axios from "axios";
 
@@ -8,11 +8,8 @@ export default defineComponent({
     nota: {
       type: Object as () => Nota,
       required: true,
-    },
-    identita: {
-      type: [Number, String] as PropType<number>,
-      required: true,
-    },    
+      default: () => ({})
+    }  
   },
   data() {
     return {
@@ -22,13 +19,14 @@ export default defineComponent({
     };
   },
   methods: {
-    async deleteNote() {
+    async deleteNote(id: Number) {
+      console.log("ID della nota:", id);
       if (confirm("Sei sicuro di voler eliminare questa nota?")) {
         try {
-          const response = await axios.delete(`/api/deletePost/${this.nota?.id}`);
+          const response = await axios.delete(`/api/deletePost/${id}`);
           // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
           console.log("Nota eliminata con successo:", response.data);
-          this.$emit("delete")
+          // this.$emit("delete")
           this.closeNote();
         } catch (error) {
           console.error("Errore durante l'eliminazione della nota:", error);
@@ -39,42 +37,34 @@ export default defineComponent({
     async visualizzaNota(id: number) {
       const response = await axios.get(`/api/noteid/${id}`);
       this.notes = response.data;
+      this.openNote();
     },
 
-    async getNote() {
-      const res = await axios.get("/api/note");
-      this.vocab = res.data;
+    openNote(){
+      document.getElementById('light')!.style.display = 'block';
+      document.getElementById('fade')!.style.display = 'block';
     },
 
     closeNote(){
       document.getElementById('light')!.style.display = 'none';
       document.getElementById('fade')!.style.display = 'none';
       window.location.reload();
-    },
-
-    openNote(){
-      document.getElementById('light')!.style.display = 'block';
-      document.getElementById('fade')!.style.display = 'block';
     }
   },
-
-  mounted() {
-    this.getNote();
-  }
 });
 </script>
 
 <template>
   <div class="note"> 
     <section>
-      <h3>{{ nota?.titolo }}</h3>
-      <p class="categoria">{{ nota?.categoria }}</p>
-      <p class="autore">{{ nota?.autore }}</p>
+      <h3>{{ nota.titolo }}</h3>
+      <p class="categoria">{{ nota.categoria }}</p>
+      <p class="autore">{{ nota.autore }}</p>
       <hr />
-      <p class="anteprima">{{ nota?.anteprima }}</p>
+      <p class="anteprima">{{ nota.anteprima }}</p>
     </section>
     <div>
-      <button class="open" @click="visualizzaNota(+noteid); openNote()" id="open">Visualizza</button>
+      <button class="open" @click="visualizzaNota(nota.id)" id="open">Visualizza</button>
     </div>
   </div>
   <div id="light" class="white_content" v-if="notes">
@@ -94,7 +84,7 @@ export default defineComponent({
     <hr />
     <p id="inner_note">{{ nota.testo }}</p>
     <a id="close" @click="closeNote">Chiudi</a>
-    <button class="delete btn bg-danger " @click="deleteNote">Elimina</button>
+    <button class="delete btn bg-danger " @click="deleteNote(nota.id)">Elimina</button>
   </div>
   <div id="fade" class="black_overlay"></div>
 </template>
@@ -155,8 +145,7 @@ img {
   margin-right: 15px;
 }
 
-#light,
-#fade {
+#light, #fade {
   display: none;
 }
 

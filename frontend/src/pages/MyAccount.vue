@@ -31,7 +31,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1 v-if="user?.role == 'mod'">Profilo <span :class="{
+  <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{
     'bg-warning': user?.role == 'mod'
   }">Moderatore</span></h1>
   <h1 v-else>Profilo Utente</h1>
@@ -111,6 +111,11 @@ export default defineComponent({
 }
 /*------------------------------------------------------------------------------------ */
 
+span#usermod {
+  border-radius: 15px;
+  padding: 5px;
+  vertical-align: middle;
+}
 
 * {
   font-family: "Montserrat", sans-serif;

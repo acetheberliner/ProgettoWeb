@@ -6,47 +6,22 @@
     <div class="intro">
       <p class="slogan">Esplora un ricco assortimento di appunti per ogni materia, arricchisci la tua cultura ed espandi i limiti della tua conoscenza in un solo click!</p>
     </div>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
     <div class="filter selectdiv">
       <form id="radio" action="#">
-        <select name="Categoria" v-model="selectedCategory" @change="onChangeCategory">
+        <select name="Categoria" v-model="selectedCategory">
           <option id="tutti" value="">Tutti</option>
           <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
         </select>
       </form>
     </div>
-    <!-- <div class="create" v-if="user" :user="user">
-      <button class="add btn btn-outline-success" @click="openCreateNoteForm"><img id="create" src="/plus.svg" alt=""></button>
-    </div> -->
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
   <div class="background">
     <div class="content">
-      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" :identita="index + 1"  @viewNote="getNoteById(index)"/>
+      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index"/>
     </div>
   </div>
-  <!------------------------------------------------------------------------------------------------------------------------------------------->
-  <!-- <div class="contenitore">
-    <div id="light" class="white_content" v-if="isCreateNoteFormVisible">
-      <div class="title">
-        <h2>
-          <input v-model="newNote.title" placeholder="Titolo" />
-          <div class="svgicon">
-            <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
-          </div>
-        </h2>
-      </div>
-      <div class="secondary_info">
-        <input v-model="newNote.category" placeholder="Categoria" /><br />
-        <input v-model="newNote.author" placeholder="Autore" /><br /> 
-        <input type="date" v-model="newNote.date" placeholder="Data" /><br />
-      </div>
-      <hr />
-      <textarea v-model="newNote.text" placeholder="Testo"></textarea>
-      <button class="create bg-success" @click="createNote">Crea nota</button>
-      <a id="close" class="bg-danger" @click="closeCreateNoteForm">Chiudi</a>
-    </div>
-  </div>
-  <div id="fade" class="black_overlay" v-if="isCreateNoteFormVisible"></div> -->
 </template>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -59,49 +34,28 @@ import PostNotes from "../components/posts-notes.vue";
 
 export default defineComponent({
   components: { PostNotes },
+  props: {
+    nota: {
+      type: Object as () => Nota,
+      required: true,
+    }  
+  },
   data() {
     return {
       datiNote: [] as Nota[],
-      idnote: [] as Nota[],
-      selectedCategory: '', // Imposta la categoria predefinita
-      categories: [] as String[],
-      selectedNoteID: null as number | null,
       user: null as User | null,
-      isCreateNoteFormVisible: false,
+      categories: [] as String[],
+      selectedCategory: '', // Imposta la categoria predefinita
       newNote: {
         title: '',
         category: '',
-        //author: '',
         date: '',
         text: '',
         preview: '',
-      },
+      }
     };
   },
   methods: {
-    async createNote() {
-      const res = await axios.post("/api/createPost", {
-        title: this.newNote.title,
-        category: this.newNote.category,
-        //author: this.newNote.author, va tolto come l'input
-        date: this.newNote.date,
-        text: this.newNote.text,
-        preview: this.newNote.text,
-      });
-
-      this.datiNote.push(res.data);
-      this.closeCreateNoteForm();
-    },
-
-    openCreateNoteForm() {
-      this.isCreateNoteFormVisible = true;
-    },
-
-    closeCreateNoteForm() {
-      this.isCreateNoteFormVisible = false;
-      window.location.reload();
-    },
-
     async getNote() {
       const res = await axios.get("/api/note");
       this.datiNote = res.data;
@@ -112,38 +66,9 @@ export default defineComponent({
       this.datiNote = res.data;
     },
 
-    async getNoteById(id: number) {
-      try {
-        const res = await axios.get(`/api/noteid/${id}`);
-        const nota = res.data; // Supponendo che la risposta contenga direttamente i dati della nota
-        console.log('Nota ottenuta con successo:', nota);
-        // Fai qualcosa con la nota ottenuta, ad esempio aggiornare una variabile di stato o visualizzarla nell'applicazione
-      } catch (error) {
-        console.error('Errore durante la richiesta della nota:', error);
-        // Gestisci eventuali errori, ad esempio mostrando un messaggio all'utente
-      }
-    },
-
     async getCategories() {
       const res = await axios.get("/api/categories");
       this.categories = res.data.map((categoria: { categoria: any; }) => categoria.categoria); // Supponendo che le categorie siano restituite come un array di stringhe
-    },
-
-    async setCategoryDefalut() {
-      this.selectedCategory='';
-    },
-
-    resetCategoryFilter(): void {
-      this.selectedCategory = ''; // Imposta la variabile selectedCategory a una stringa vuota
-      this.getNote(); // Chiama la funzione per ottenere tutte le note senza filtro
-    },
-
-    onChangeCategory(): void {
-      if (this.selectedCategory === '') {
-        this.resetCategoryFilter(); // Se viene selezionato "Tutti", resetta il filtro
-      } else {
-        this.getNotebyCategory(); // Altrimenti, applica il filtro selezionato
-      }
     },
 
     async getUser() {
@@ -159,10 +84,10 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.getCategories();
     this.getNote();
-    this.getNotebyCategory();
     this.getUser();
+    this.getCategories();
+    this.getNotebyCategory();
   },
 });
 </script>

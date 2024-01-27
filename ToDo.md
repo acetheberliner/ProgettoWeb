@@ -1,21 +1,20 @@
 ## Cose da fare
 
-- Aggiungere un nuovo message nel backend per il successo dell'operazione o implementare il messsaggio nel frontend tramite status della risposta axios (200) --> nella creazione post appunti
-- aggiungere...
-
+# correggere
+- Add Note (errore nella query di add)
 
 # manca
 - delete della nota (POST) [FATTO] (aggiornato ma la query delete commentata, prima va risolto il problema di idnote in post-notes.vue)
 - edit della nota [FATTO]  (aggiunta, bisogna passare i paramentri idnote, newTitle, newCategory, newText)
-- aggiungere pagina crea nota (e togliere da esplora)
-- approvazione delle note in esplora
+- aggiungere pagina crea nota (e togliere da esplora) [FATTO]
+- funzione substring per preview
+- togliere colonna preview se funziona 
 - interfaccia user/mod
-- funzione split/clip per preview
-- togliere colonna se funziona
+- approvazione delle note in esplora
 
 
 # prof
-- Utente moderatore.
+- Utente moderatore. [FATTO]
 - Quando un utente aggiunge o modifica gli appunti, questi vengono messi in stato di attesa di approvazione.
 - L'utente moderatore vede gli appunti in attesa di approvazione, può accettarli e questi vengono pubblicati. Se li rifiuta, può aggiungere un commento.
 - L'utente può modificare gli appunti rifiutati e provare a ripubblicarli.

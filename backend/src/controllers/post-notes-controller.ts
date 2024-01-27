@@ -3,6 +3,7 @@ import { getConnection } from "../utils/db";
 import { decodeAccessToken } from "../utils/auth";
 import { User } from "../types";
 import { parseArgs } from "util";
+/* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function getLastNotesID() {
   const connection = await getConnection();
@@ -20,6 +21,7 @@ async function dateToString() {
   const date: string = data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
   return date
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function createPost(req: Request, res: Response) {
   const user = decodeAccessToken(req, res);
@@ -32,13 +34,13 @@ export async function createPost(req: Request, res: Response) {
   try {
     const date = await dateToString();
 
-    const { title, category, text, preview } = req.body; // tolto author e data
+    const { title, category, text } = req.body; // tolto author e data
     // preview piuttosto che mandarlo con axios lo crerei qua con const preview = 'qua metterei una funzione che mi accorci text'  
     const connection = await getConnection();
     const newNoteID = (await getLastNotesID()) + 1;
   
     await connection.execute(
-      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?)',
+      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?, ?)',
       [newNoteID, title, category, date, user.username, text]
     );
     res.status(201).json({ idnote: newNoteID, title, category, date, author: user.username, text });
@@ -48,6 +50,7 @@ export async function createPost(req: Request, res: Response) {
     res.status(500).send('Errore durante la creazione della nota.');
   }
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function deletePost(req: Request, res: Response) {
   const user: any = decodeAccessToken(req, res);
@@ -86,6 +89,7 @@ export async function deletePost(req: Request, res: Response) {
     res.status(500).send("Errore interno del server durante l'eliminazione della nota.");
   }
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function editPost(req: Request, res: Response) {
   const user: any = decodeAccessToken(req, res);
@@ -116,3 +120,4 @@ export async function editPost(req: Request, res: Response) {
     console.log("Errore: ", e);
   }
 }
+/* ------------------------------------------------------------------------------------------------------------------- */
