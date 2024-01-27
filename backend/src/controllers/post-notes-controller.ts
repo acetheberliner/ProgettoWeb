@@ -54,20 +54,18 @@ export async function createPost(req: Request, res: Response) {
 
 export async function deletePost(req: Request, res: Response) {
   const user: any = decodeAccessToken(req, res);
+
   if (!user) {
     res.status(403).send("Questa operazione richiede l'autenticazione.");
     return;
   }
 
-  const { idnote } = req.body
-
   try {
-    console.log("INIZIO: ", idnote)
     const connection = await getConnection();
     
     const [posts] = await connection.execute(
       "SELECT * FROM note WHERE idnote = ?",
-      [idnote]
+      [req.params.id]
     );
 
     if (!Array.isArray(posts) || posts.length == 0) {
@@ -81,7 +79,7 @@ export async function deletePost(req: Request, res: Response) {
       return;
     }
 
-    //await connection.execute("DELETE FROM note WHERE idnote = ?", [idnote]);
+    await connection.execute("DELETE FROM note WHERE idnote = ?", [req.params.id]);
 
     res.status(200).send("Nota eliminata con successo.");
   } catch (error) {
