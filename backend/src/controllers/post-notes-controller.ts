@@ -51,12 +51,15 @@ export async function deletePost(req: Request, res: Response) {
     return;
   }
 
+  const { idnote } = req.body
+
   try {
+    console.log("INIZIO: ", idnote)
     const connection = await getConnection();
     
     const [posts] = await connection.execute(
       "SELECT * FROM note WHERE idnote = ?",
-      [req.params.id]
+      [idnote]
     );
 
     if (!Array.isArray(posts) || posts.length == 0) {
@@ -70,7 +73,7 @@ export async function deletePost(req: Request, res: Response) {
       return;
     }
 
-    await connection.execute("DELETE FROM note WHERE idnote = ?", [req.params.id]);
+    //await connection.execute("DELETE FROM note WHERE idnote = ?", [idnote]);
 
     res.status(200).send("Nota eliminata con successo.");
   } catch (error) {
