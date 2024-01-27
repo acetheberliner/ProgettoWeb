@@ -15,7 +15,7 @@ export async function getLastNotesID() {
   return lastID;
 }
 
-function dateToString() {
+async function dateToString() {
   const data = new Date();
   const date: string = data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate();
   return date
@@ -30,7 +30,7 @@ export async function createPost(req: Request, res: Response) {
   }
 
   try {
-    const date = dateToString();
+    const date = await dateToString();
 
     const { title, category, text, preview } = req.body; // tolto author e data
     // preview piuttosto che mandarlo con axios lo crerei qua con const preview = 'qua metterei una funzione che mi accorci text'  
@@ -38,10 +38,10 @@ export async function createPost(req: Request, res: Response) {
     const newNoteID = (await getLastNotesID()) + 1;
   
     await connection.execute(
-      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [newNoteID, title, category, date, user.username, text, preview]
+      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?)',
+      [newNoteID, title, category, date, user.username, text]
     );
-    res.status(201).json({ idnote: newNoteID, title, category, date, author: user.username, text, preview });
+    res.status(201).json({ idnote: newNoteID, title, category, date, author: user.username, text });
   } catch (error) {
     console.error('Errore durante la creazione della nota:', error);
     // Gestisci eventuali errori, ad esempio inviando una risposta di errore al client
@@ -106,8 +106,7 @@ export async function editPost(req: Request, res: Response) {
       res.status(404).send("Nota non trovata.");
       return;
     }
-    const date = dateToString();
-    const post = posts[0] as any;
+    const date = await dateToString();
 
     await connection.execute("UPDATE note SET titolo = ?, categoria = ?, data = ?, testo = ?, stato ='da approvare' WHERE idnote = ?",
     [newTitle, newCategory, date, newText, idnote]
