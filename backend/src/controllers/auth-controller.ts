@@ -48,6 +48,7 @@ export const register = async (req: Request, res: Response) => {
     [username]
   );
   const newUser = (results as any)[0];
+  delete newUser.password
   //creazione cookie
   setAccessToken(req, res, newUser);
   res.json({ message: "Registrazione effettuata con successo" });
@@ -82,8 +83,8 @@ export const login = async (req: Request, res: Response) => {
 
   //controllo tra l'hash fornito e quello del db
   const pwdOk = await bcrypt.compare(password, userData.password);
-
-  if (pwdOk == true) {
+  
+  if (!pwdOk) {
     // o (!pwdOk)
     res.status(400).send("Credenziali errate.");
     return;

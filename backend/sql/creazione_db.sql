@@ -18,7 +18,7 @@ CREATE TABLE `note` (
   
 CREATE TABLE `utenti` (
 username varchar(20) NOT NULL,
-password varchar(20) NOT NULL,
+password varchar(65) NOT NULL,
 role ENUM("mod", "user") default "user",
 PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
