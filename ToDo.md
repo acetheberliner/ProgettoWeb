@@ -11,6 +11,7 @@
 - togliere colonna preview se funziona 
 - interfaccia user/mod
 - approvazione delle note in esplora
+- problema login [RISOLTO]
 
 
 # prof
