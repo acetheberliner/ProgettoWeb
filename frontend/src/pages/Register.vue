@@ -75,6 +75,10 @@ export default defineComponent({
             <button type="submit">Registrati</button>
           </div>
         </form>
+        <div class="paragraph">
+        <p>Hai già un account?<RouterLink to="/login"> Accedi</RouterLink>
+        </p>
+      </div>
       </div>
     </div>
     <div class="animation">
@@ -275,4 +279,23 @@ button:hover {
   background-color: #502ace;
   filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
 }
+
+p {
+  font-size: 13px;
+  text-align: center;
+  text-transform: none;
+}
+
+a {
+  font-size: 14px;
+  font-weight: bold;
+  color: #0011fa;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+  filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.884));
+}
+
 </style>
