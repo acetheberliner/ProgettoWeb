@@ -7,7 +7,7 @@ export default defineComponent({
     return {
       username: "",
       password: "",
-      // email: "",
+      pasShow: false
     };
   },
   methods: {
@@ -29,6 +29,14 @@ export default defineComponent({
         }
       }
     },
+
+    togglePasswordVisibility() {
+      const passwordInput = document.getElementById("password") as HTMLInputElement;
+      if (passwordInput) {
+        passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+      }
+      this.pasShow = !this.pasShow;
+    }
   },
 });
 </script>
@@ -41,16 +49,6 @@ export default defineComponent({
           <h2>Registrazione</h2>
         </div>
         <form @submit.prevent="onSubmit">
-          <!-- <div class="form-group">
-            <input
-              required
-              type="text"
-              class="input"
-              id="email"
-              v-model="email"
-            />
-            <label class="label" for="email">Email</label>
-          </div> -->
           <div class="form-group">
             <input
               required
@@ -61,15 +59,11 @@ export default defineComponent({
             />
             <label class="label" for="username">Username</label>
           </div>
-          <div class="form-group">
-            <input
-              required
-              type="password"
-              class="input"
-              id="password"
-              v-model="password"
-            />
+          <div class="form-group password">
+            <input required type="password" class="input" id="password" v-model="password" />
             <label class="label" for="password">Password</label>
+            <i class="bi bi-eye-slash h4" v-if="pasShow" @click="togglePasswordVisibility"></i>
+            <i class="bi bi-eye h4" v-if="!pasShow" @click="togglePasswordVisibility"></i>
           </div>
           <div class="form-group box-center">
             <button type="submit">Registrati</button>
@@ -94,7 +88,7 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 0.3);
     /* background:transparent;
       backdrop-filter:blur(20px); */
-    padding: 5vh;
+    padding: 4vh;
     border-radius: 10px;
     border: 1px solid gray;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -141,7 +135,7 @@ export default defineComponent({
     background-color: rgba(255, 255, 255, 0.3);
     /* background:transparent;
       backdrop-filter:blur(20px); */
-    padding: 8vh;
+    padding: 7vh;
     border-radius: 10px;
     border: 1px solid gray;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
@@ -166,6 +160,18 @@ export default defineComponent({
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.password {
+  display: flex;
+}
+
+i {
+  margin-left: 7%;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* .background {
@@ -206,6 +212,7 @@ form {
   font-size: 1rem;
   position: relative;
   --primary: #024454;
+  place-items: center;
 }
 
 h2 {
