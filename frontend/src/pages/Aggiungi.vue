@@ -1,10 +1,14 @@
 <script lang="ts">
   import axios from 'axios';
   import { Nota } from "../types";
-//   import { User } from "../types";
-  import { defineComponent } from 'vue'
+  import { User } from "../types";
+  import { PropType, defineComponent } from 'vue'
+  import YourNotes from "../components/your-notes.vue";
 
   export default defineComponent({
+    props: {
+      user: Object as PropType<User>,
+    },
     data() {
       return {
         datiNote: [] as Nota[],
@@ -72,6 +76,13 @@
           <button class="create bg-success" @click="createNote">Crea nota</button>
           <a id="close" class="bg-danger">Chiudi</a>
         </div>
+        <div class="approvation" v-if="user?.role == 'mod' ">
+          <h2 class="approvation-title">Approva</h2>
+        </div>
+        <div class="approvation" v-if="user?.role == 'user' ">
+          <h2 class="approvation-title">Le tue Note</h2>
+          <YourNotes></YourNotes>
+        </div>
       </div>
     </div>
 </template>
@@ -96,20 +107,43 @@
 }
 
 .white_content {
-    display: block;
-    position: absolute;
-    width: fit-content;
-    overflow: visible;
-    top: 22%;
-    left: 20%;
-    width: 60%;
-    height: 65%;
-    padding: 16px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    color: #183252;
-    z-index: 1003;
+  display: block;
+  position: absolute;
+  width: fit-content;
+  overflow: visible;
+  top: 22%;
+  left: 8%;
+  width: 60%;
+  height: 65%;
+  padding: 16px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  color: #183252;
+  z-index: 1003;
+}
+
+.approvation {
+  display: block;
+  position: absolute;
+  width: fit-content;
+  overflow: visible;
+  top: 22%;
+  right: 8%;
+  width: 20%;
+  height: fit-content;
+  min-height: 20%;
+  padding: 16px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  background-color: white;
+  color: #183252;
+  z-index: 1003;
+}
+
+.approvation-title{
+  text-align: center;
+  font-weight: bold;
 }
 
 .svgicon {

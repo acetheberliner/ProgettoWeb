@@ -7,15 +7,15 @@
 - delete della nota (POST) [FATTO] (aggiornato ma la query delete commentata, prima va risolto il problema di idnote in post-notes.vue)
 - edit della nota [FATTO]  (aggiunta, bisogna passare i paramentri idnote, newTitle, newCategory, newText)
 - aggiungere pagina crea nota (e togliere da esplora) [FATTO]
-- funzione substring per preview
-- togliere colonna preview se funziona 
-- interfaccia user/mod
-- approvazione delle note in esplora
-- problema login [RISOLTO]
 
+- interfaccia user/mod [FATTO]
+- problema login [RISOLTO]
+- elimina solo se mod o creatore
+- modifica solo se mod o creatore
+- approvazione delle note in esplora
 
 # prof
 - Utente moderatore. [FATTO]
-- Quando un utente aggiunge o modifica gli appunti, questi vengono messi in stato di attesa di approvazione.
+- Quando un utente aggiunge o modifica gli appunti, questi vengono messi in stato di attesa di approvazione. [FATTO/2]
 - L'utente moderatore vede gli appunti in attesa di approvazione, può accettarli e questi vengono pubblicati. Se li rifiuta, può aggiungere un commento.
 - L'utente può modificare gli appunti rifiutati e provare a ripubblicarli.
