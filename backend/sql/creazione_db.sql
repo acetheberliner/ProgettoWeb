@@ -12,7 +12,7 @@ CREATE TABLE `note` (
   `autore` varchar(20) NOT NULL,
   `testo` varchar(2500) NOT NULL,
   `anteprima` varchar(2500) NOT NULL,
-  `stato` ENUM("da approvare", "approvato") default "da approvare",
+  `stato` ENUM("da approvare", "approvata", "rifiutata") default "da approvare",
   PRIMARY KEY (`idnote`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
   
