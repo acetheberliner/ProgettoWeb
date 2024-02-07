@@ -35,9 +35,12 @@ export default defineComponent({
     },
 
     async visualizzaNota(id: number) {
-      const response = await axios.get(`/api/noteid/${id}`);
-      this.notes = response.data;
-      this.openNote();
+      // const response = await axios.get(`/api/noteid/${id}`);
+      // this.notes = response.data;
+      // this.openNote();
+
+      // Aggiungi la navigazione a /view con l'id della nota
+      this.$router.push({ path: `/view/${id}` });
     },
 
     openNote(){
@@ -62,9 +65,10 @@ export default defineComponent({
       <p class="autore">{{ nota.autore }}</p>
       <hr />
       <p class="anteprima">{{ nota.anteprima }}</p>
+      <p class="anteprima">{{ nota.id }}</p>
     </section>
-    <div>
-      <button class="open" @click="visualizzaNota(nota.id)" id="open">Visualizza</button>
+    <div class="open">
+      <button @click="visualizzaNota(nota.id)" id="open">Visualizza</button>
     </div>
   </div>
   <div id="light" class="white_content" v-if="notes">
@@ -132,6 +136,10 @@ export default defineComponent({
     overflow: auto;
 }
 
+}
+
+.open{
+  margin-top: 50px;
 }
 
 /*- ANTEPRIMA -------------------------------------------------------------------------------------------------------------------*/
