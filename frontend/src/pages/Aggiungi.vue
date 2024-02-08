@@ -60,19 +60,19 @@
         <div id="light" class="white_content">
           <div class="title">
             <h2>
-              <input v-model="newNote.title" placeholder="Titolo" />
+              <input v-model="newNote.title" placeholder="Titolo" required/>
               <div class="svgicon">
                 <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
               </div>
             </h2>
           </div>
           <div class="secondary_info">
-            <input v-model="newNote.category" placeholder="Categoria" /><br />
+            <input v-model="newNote.category" placeholder="Categoria" required/><br />
             <!--<input v-model="newNote.author" placeholder="Autore" /><br /> 
             <input type="date" v-model="newNote.date" placeholder="Data" /><br /> -->
           </div>
           <hr />
-          <textarea v-model="newNote.text" placeholder="Scrivi qui..."></textarea>
+          <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
           <button class="create bg-success" @click="createNote">Crea nota</button>
           <a id="close" class="bg-danger">Chiudi</a>
         </div>

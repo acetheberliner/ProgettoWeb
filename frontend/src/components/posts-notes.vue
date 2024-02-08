@@ -40,7 +40,16 @@ export default defineComponent({
       // this.openNote();
 
       // Aggiungi la navigazione a /view con l'id della nota
-      this.$router.push({ path: `/view/${this.nota.idnote}` }); 
+      this.$router.push({ 
+        path: `/view/${this.nota.idnote}`,
+        query: { 
+          titolo: this.nota.titolo,
+          categoria: this.nota.categoria,
+          autore: this.nota.autore,
+          data: this.nota.data,
+          testo: this.nota.testo
+        }
+      });
     },
 
     openNote(){
