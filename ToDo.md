@@ -10,8 +10,8 @@
 
 - interfaccia user/mod [FATTO]
 - problema login [RISOLTO]
-- elimina solo se mod o creatore
-- modifica solo se mod o creatore
+- elimina solo se mod o creatore [FATTO]
+- modifica solo se mod o creatore [FATTO]
 - approvazione delle note in esplora
 
 # prof
