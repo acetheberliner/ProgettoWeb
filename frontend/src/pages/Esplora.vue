@@ -22,6 +22,11 @@
       <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index"/>
     </div>
   </div>
+  <div v-if="user?.role == 'mod'" class="container">
+    <div class="approva">
+      <h3>Approva</h3>
+    </div>
+  </div>
 </template>
 <!------------------------------------------------------------------------------------------------------------------------------------------->
 
@@ -35,10 +40,10 @@ import PostNotes from "../components/posts-notes.vue";
 export default defineComponent({
   components: { PostNotes },
   props: {
-    nota: {
-      type: Object as () => Nota,
-      required: true,
-    }  
+    // nota: {
+    //   type: Object as () => Nota,
+    //   required: true,
+    // }  
   },
   data() {
     return {
@@ -413,4 +418,30 @@ h2 {
 .slogan {
   font-size: 18px;
 }
+
+hr {
+  border: none;
+  height: 3px;
+  background-color: #fff;
+  margin: 10px 0;
+  justify-content: center;
+}
+
+.approva {
+  border: 1px solid white;
+  border-radius: 12px;
+  padding: 0.8em;
+  width: 100%;
+  background-color: white;
+  color: #183252;
+  box-shadow: 5px -5px 10px #f0f0f038, -5px 5px 10px #ffffff1c;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+h3{
+  font-weight: bold;
+  text-align: center;
+}
+
 </style>

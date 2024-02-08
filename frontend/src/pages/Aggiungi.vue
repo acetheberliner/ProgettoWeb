@@ -2,8 +2,7 @@
   import axios from 'axios';
   import { Nota } from "../types";
   import { User } from "../types";
-  import { PropType, defineComponent } from 'vue'
-  import YourNotes from "../components/your-notes.vue";
+  import { PropType, defineComponent } from 'vue';
 
   export default defineComponent({
     props: {
@@ -16,7 +15,6 @@
         newNote: {
         title: '',
         category: '',
-        //author: '',
         date: '',
         text: '',
         preview: '',
@@ -29,7 +27,6 @@
             axios.post("/api/createPost", {
               textInput: this.textInput
             })
-            // window.location.href = "/aggiungi"
         } catch(e) {
             console.error("Errore di creazione: ", e)
         }
@@ -39,7 +36,6 @@
       const res = await axios.post("/api/createPost", {
         title: this.newNote.title,
         category: this.newNote.category,
-        //author: this.newNote.author, va tolto come l'input
         date: this.newNote.date,
         text: this.newNote.text,
         preview: this.newNote.text,
@@ -54,37 +50,28 @@
   </script>
 
 <template>
-    <h2 class="titolo">Aggiungi Nota</h2>
-    <div class="page">
-        <div class="contenitore">
-        <div id="light" class="white_content">
-          <div class="title">
-            <h2>
-              <input v-model="newNote.title" placeholder="Titolo" required/>
-              <div class="svgicon">
-                <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
-              </div>
-            </h2>
-          </div>
-          <div class="secondary_info">
-            <input v-model="newNote.category" placeholder="Categoria" required/><br />
-            <!--<input v-model="newNote.author" placeholder="Autore" /><br /> 
-            <input type="date" v-model="newNote.date" placeholder="Data" /><br /> -->
-          </div>
-          <hr />
-          <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
-          <button class="create bg-success" @click="createNote">Crea nota</button>
-          <a id="close" class="bg-danger">Chiudi</a>
+  <h2 class="titolo">Aggiungi Nota</h2>
+  <div class="page">
+    <div class="contenitore">
+      <div id="light" class="white_content">
+        <div class="title">
+          <h2>
+            <input v-model="newNote.title" placeholder="Titolo" required/>
+            <div class="svgicon">
+              <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
+            </div>
+          </h2>
         </div>
-        <div class="approvation" v-if="user?.role == 'mod' ">
-          <h2 class="approvation-title">Approva</h2>
+        <div class="secondary_info">
+          <input v-model="newNote.category" placeholder="Categoria" required/><br />
         </div>
-        <div class="approvation" v-if="user?.role == 'user' ">
-          <h2 class="approvation-title">Le tue Note</h2>
-          <YourNotes></YourNotes>
-        </div>
+        <hr />
+        <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
+        <button class="create bg-success" @click="createNote">Crea nota</button>
+        <a id="close" class="bg-danger">Chiudi</a>
       </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
@@ -106,13 +93,18 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+.contenitore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .white_content {
   display: block;
   position: absolute;
   width: fit-content;
   overflow: visible;
   top: 22%;
-  left: 8%;
   width: 60%;
   height: 65%;
   padding: 16px;

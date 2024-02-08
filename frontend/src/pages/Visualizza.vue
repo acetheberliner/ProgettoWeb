@@ -18,73 +18,73 @@
   </div>
 </template>
   
-  <script lang="ts">
-  import { PropType, defineComponent } from "vue";
-  import axios from "axios";
-  import { Nota } from "../types";
-  import { User } from "../types";
-  
-  export default defineComponent({
-    props: {
-      user: Object as PropType<User>,
-    },
-    data() {
-      return {
-        nota: null as Nota | null // Inizializza nota come un oggetto vuoto di tipo Nota
-      };
-    },
-    methods: {
-      async created() {
-        // Recupera l'id della nota e le altre proprietà dalla query della rotta
-        const notaId = this.$route.params.id;
-        
-        try {
-          const response = await axios.get(`/api/noteid/${notaId}`);
-          this.nota = response.data[0];
-          console.log(this.nota);
-        } catch(error) {
-          console.error("Errore durante il recupero delle informazioni della nota:", error);
-        }
-      },
+<script lang="ts">
+import { PropType, defineComponent } from "vue";
+import axios from "axios";
+import { Nota } from "../types";
+import { User } from "../types";
 
-      async closeNote() {
-        window.location.href = "/explore";
-      },
-
-      async deleteNote(id: number) {
-        console.log("ID della nota:", id);
-        if (confirm("Sei sicuro di voler eliminare questa nota?")) {
-          try {
-            const response = await axios.delete(`/api/deletePost/${id}`);
-            // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
-            console.log("Nota eliminata con successo:", response.data);
-            // this.$emit("delete")
-            this.closeNote();
-          } catch (error) {
-            console.error("Errore durante l'eliminazione della nota:", error);
-          }
-        }
-      },
-
-      async editNote() {
-        try {
-          const response = await axios.post("/api/editPost", this.nota);
-          console.log("Nota modificata con successo:", response.data);
-          // Puoi gestire la risposta come preferisci
-        } catch (error) {
-          console.error("Errore durante la modifica della nota:", error);
-        }
-      },
-
-      checkUserPermission() {
-        return this.user && (this.user.role === 'mod' || this.user.username === this.nota?.autore);
+export default defineComponent({
+  props: {
+    user: Object as PropType<User>,
+  },
+  data() {
+    return {
+      nota: null as Nota | null // Inizializza nota come un oggetto vuoto di tipo Nota
+    };
+  },
+  methods: {
+    async created() {
+      // Recupera l'id della nota e le altre proprietà dalla query della rotta
+      const notaId = this.$route.params.id;
+      
+      try {
+        const response = await axios.get(`/api/noteid/${notaId}`);
+        this.nota = response.data[0];
+        console.log(this.nota);
+      } catch(error) {
+        console.error("Errore durante il recupero delle informazioni della nota:", error);
       }
     },
-    mounted() {
-      this.created()
+
+    async closeNote() {
+      window.location.href = "/explore";
+    },
+
+    async deleteNote(id: number) {
+      console.log("ID della nota:", id);
+      if (confirm("Sei sicuro di voler eliminare questa nota?")) {
+        try {
+          const response = await axios.delete(`/api/deletePost/${id}`);
+          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
+          console.log("Nota eliminata con successo:", response.data);
+          // this.$emit("delete")
+          this.closeNote();
+        } catch (error) {
+          console.error("Errore durante l'eliminazione della nota:", error);
+        }
+      }
+    },
+
+    async editNote() {
+      try {
+        const response = await axios.post("/api/editPost", this.nota);
+        console.log("Nota modificata con successo:", response.data);
+        // Puoi gestire la risposta come preferisci
+      } catch (error) {
+        console.error("Errore durante la modifica della nota:", error);
+      }
+    },
+
+    checkUserPermission() {
+      return this.user && (this.user.role === 'mod' || this.user.username === this.nota?.autore);
     }
-  });
-  </script>
+  },
+  mounted() {
+    this.created()
+  }
+});
+</script>
   
 <style scoped>
 
@@ -103,7 +103,8 @@
   width: 90%;
   height: fit-content;
   padding: 2em;
-  position: relative; /* Aggiunta */
+  position: relative;
+  box-shadow: 5px -5px 10px #f0f0f038, -5px 5px 10px #ffffff1c;
 }
 
 p {
@@ -137,9 +138,9 @@ hr {
 }
 
 .button-area {
-  position: absolute; /* Aggiunta */
-  bottom: 0; /* Aggiunta */
-  right: 0; /* Aggiunta */
+  position: absolute;
+  bottom: 0;
+  right: 0;
   margin: 20px;
 }
 

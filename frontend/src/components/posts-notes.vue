@@ -35,11 +35,6 @@ export default defineComponent({
     },
 
     async visualizzaNota() {
-      // const response = await axios.get(`/api/noteid/${id}`);
-      // this.notes = response.data;
-      // this.openNote();
-
-      // Aggiungi la navigazione a /view con l'id della nota
       this.$router.push({ 
         path: `/view/${this.nota.idnote}`,
         query: { 
