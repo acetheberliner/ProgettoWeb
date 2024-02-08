@@ -74,7 +74,6 @@ export default defineComponent({
       <p class="autore">{{ nota.autore }}</p>
       <hr />
       <p class="anteprima">{{ nota.anteprima }}</p>
-      <p class="anteprima">{{ nota.idnote }}</p>
     </section>
     <div class="open">
       <button @click="visualizzaNota()" id="open">Visualizza</button>

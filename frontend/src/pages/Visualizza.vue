@@ -10,9 +10,9 @@
       <hr>
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">
-        <button class="btn btn-danger">Elimina</button>
+        <button class="btn btn-danger" @click="nota && deleteNote(nota.idnote)">Elimina</button>
         <button class="btn btn-primary">Modifica</button>
-        <button class="btn btn-warning">Chiudi</button>
+        <button class="btn btn-warning" @click="closeNote()">Chiudi</button>
       </div>
     </div>
   </div>
@@ -41,7 +41,26 @@
         } catch(error) {
           console.error("Errore durante il recupero delle informazioni della nota:", error);
         }
+      },
+
+      async closeNote() {
+        window.location.href = "/explore";
+      },
+
+      async deleteNote(id: number) {
+      console.log("ID della nota:", id);
+      if (confirm("Sei sicuro di voler eliminare questa nota?")) {
+        try {
+          const response = await axios.delete(`/api/deletePost/${id}`);
+          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
+          console.log("Nota eliminata con successo:", response.data);
+          // this.$emit("delete")
+          this.closeNote();
+        } catch (error) {
+          console.error("Errore durante l'eliminazione della nota:", error);
+        }
       }
+    },
     },
     mounted() {
       this.created()
@@ -63,9 +82,10 @@
   border-radius: 10px;
   background-color: white;
   color: #183252;
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: fit-content;
   padding: 2em;
+  position: relative; /* Aggiunta */
 }
 
 p {
@@ -94,10 +114,21 @@ hr {
   margin: 10px 0;
 }
 
-.button-area{
-  position: absolute;
-  bottom: 0;
-  
+.testo {
+  margin-bottom: 5%;
+}
+
+.button-area {
+  position: absolute; /* Aggiunta */
+  bottom: 0; /* Aggiunta */
+  right: 0; /* Aggiunta */
+  margin: 20px;
+}
+
+button {
+  margin-right: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 </style>
   
