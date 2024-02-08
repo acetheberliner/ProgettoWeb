@@ -1,5 +1,5 @@
 export interface Nota {
-  id: number
+  idnote: number
   titolo: string
   categoria: string
   autore: string
