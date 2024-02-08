@@ -5,7 +5,7 @@ import { getConnection } from "../utils/db";
 export async function allNotes(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT titolo, categoria, data, autore, testo, stato anteprima FROM note",
+    "SELECT id, titolo, categoria, data, autore, testo, stato anteprima FROM note",
     []
   );
 
@@ -16,7 +16,7 @@ export async function allNotes(req: Request, res: Response) {
 export async function notesCategory(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT titolo, categoria, data, autore, testo, stato FROM note WHERE categoria = ?",
+    "SELECT id, titolo, categoria, data, autore, testo, stato FROM note WHERE categoria = ?",
     [req.params.n]
   );
   res.json(results);
