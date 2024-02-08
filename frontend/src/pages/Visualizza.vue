@@ -10,8 +10,8 @@
       <hr>
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">
-        <button class="btn btn-danger" @click="nota && deleteNote(nota.idnote)">Elimina</button>
-        <button class="btn btn-primary">Modifica</button>
+        <button class="btn btn-danger" v-if="checkUserPermission()" @click="nota && deleteNote(nota.idnote)">Elimina</button>
+        <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
         <button class="btn btn-warning" @click="closeNote()">Chiudi</button>
       </div>
     </div>
@@ -19,11 +19,15 @@
 </template>
   
   <script lang="ts">
-  import { defineComponent } from "vue";
+  import { PropType, defineComponent } from "vue";
   import axios from "axios";
   import { Nota } from "../types";
+  import { User } from "../types";
   
   export default defineComponent({
+    props: {
+      user: Object as PropType<User>,
+    },
     data() {
       return {
         nota: null as Nota | null // Inizializza nota come un oggetto vuoto di tipo Nota
@@ -48,19 +52,33 @@
       },
 
       async deleteNote(id: number) {
-      console.log("ID della nota:", id);
-      if (confirm("Sei sicuro di voler eliminare questa nota?")) {
-        try {
-          const response = await axios.delete(`/api/deletePost/${id}`);
-          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
-          console.log("Nota eliminata con successo:", response.data);
-          // this.$emit("delete")
-          this.closeNote();
-        } catch (error) {
-          console.error("Errore durante l'eliminazione della nota:", error);
+        console.log("ID della nota:", id);
+        if (confirm("Sei sicuro di voler eliminare questa nota?")) {
+          try {
+            const response = await axios.delete(`/api/deletePost/${id}`);
+            // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
+            console.log("Nota eliminata con successo:", response.data);
+            // this.$emit("delete")
+            this.closeNote();
+          } catch (error) {
+            console.error("Errore durante l'eliminazione della nota:", error);
+          }
         }
+      },
+
+      async editNote() {
+        try {
+          const response = await axios.post("/api/editPost", this.nota);
+          console.log("Nota modificata con successo:", response.data);
+          // Puoi gestire la risposta come preferisci
+        } catch (error) {
+          console.error("Errore durante la modifica della nota:", error);
+        }
+      },
+
+      checkUserPermission() {
+        return this.user && (this.user.role === 'mod' || this.user.username === this.nota?.autore);
       }
-    },
     },
     mounted() {
       this.created()
