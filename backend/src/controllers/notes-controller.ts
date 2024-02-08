@@ -26,7 +26,7 @@ export async function notesCategory(req: Request, res: Response) {
 export async function notesFromID(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE idnote = ?",
+    "SELECT idnote, titolo, categoria, data, autore, testo, anteprima, stato FROM note WHERE idnote = ?",
     [req.params.id]
   );
   res.json(results);

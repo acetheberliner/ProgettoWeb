@@ -116,7 +116,23 @@ export async function editPost(req: Request, res: Response) {
     );
 
   } catch(e) {
+    res.status(500).send("Errore interno del server durante l'update della nota.");
     console.log("Errore: ", e);
   }
 }
 /* ------------------------------------------------------------------------------------------------------------------- */
+
+export async function updateState(req: Request, res: Response) {
+  const {id, stato} = req.body
+
+  try{
+    const connection = await getConnection();
+    await connection.execute("UPDATE note SET stato = ? WHERE idnote = ?",
+      [stato, id]
+    );
+  } catch(e) {
+    res.status(500).send("Errore interno del server durante l'update dello stato.");
+    console.log("Errore: ", e);
+  }
+  
+}
