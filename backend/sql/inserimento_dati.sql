@@ -34,5 +34,5 @@ INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (15, 'S
 INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (16, 'Costituzione Italiana', 'Diritto', 'matteo.laghi', '2021-09-29', "La Costituzione Italiana, adottata nel 1947, rappresenta il pilastro del sistema legale e politico della Repubblica Italiana. È un documento che stabilisce i principi fondamentali, i diritti dei cittadini, le istituzioni pubbliche e i valori su cui si basa la nazione.");
 
 UPDATE notesync.note 
-SET stato = 'approvato'
+SET stato = 'approvata'
 WHERE stato = 'da approvare';
