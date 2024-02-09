@@ -6,6 +6,9 @@
       <p v-if="nota?.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
       <p v-if="nota?.stato == 'rifiutata'" class="stato bg-danger text-light">{{ nota.stato }}</p>
       <div v-if="nota" class="secondary_info">
+        <div class="svgicon">
+          <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
+        </div>
         {{ nota.categoria }}<br />
         {{ nota.autore }}<br />
         {{ nota.data }}
@@ -35,14 +38,12 @@ export default defineComponent({
   },
   data() {
     return {
-      nota: null as Nota | null // Inizializza nota come un oggetto vuoto di tipo Nota
+      nota: null as Nota | null
     };
   },
   methods: {
     async created() {
-      // Recupera l'id della nota e le altre proprietà dalla query della rotta
       const notaId = this.$route.params.id;
-      
       try {
         const response = await axios.get(`/api/noteid/${notaId}`);
         this.nota = response.data[0];
@@ -61,9 +62,7 @@ export default defineComponent({
       if (confirm("Sei sicuro di voler eliminare questa nota?")) {
         try {
           const response = await axios.delete(`/api/deletePost/${id}`);
-          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
           console.log("Nota eliminata con successo:", response.data);
-          // this.$emit("delete")
           this.closeNote();
         } catch (error) {
           console.error("Errore durante l'eliminazione della nota:", error);
@@ -75,7 +74,6 @@ export default defineComponent({
       try {
         const response = await axios.post("/api/editPost", this.nota);
         console.log("Nota modificata con successo:", response.data);
-        // Puoi gestire la risposta come preferisci
       } catch (error) {
         console.error("Errore durante la modifica della nota:", error);
       }
@@ -85,6 +83,7 @@ export default defineComponent({
       return this.user && (this.user.role === 'mod' || this.user.username === this.nota?.autore);
     }
   },
+
   mounted() {
     this.created()
   }
@@ -92,7 +91,6 @@ export default defineComponent({
 </script>
   
 <style scoped>
-
 .note {
   display: flex;
   justify-content: center;
@@ -165,6 +163,15 @@ button {
   margin-right: 8px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.svgicon {
+  text-align: end;
+}
+
+img#document{
+  width: 50px;
+  margin: 0px;
 }
 </style>
   
