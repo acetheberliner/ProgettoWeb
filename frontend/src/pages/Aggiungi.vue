@@ -13,11 +13,10 @@
         datiNote: [] as Nota[],
         textInput: '',
         newNote: {
-        title: '',
-        category: '',
-        // date: '',
-        text: ''
-      },
+          title: '',
+          category: '',
+          text: ''
+        },
       };
     },
     methods: {
@@ -35,7 +34,6 @@
       const res = await axios.post("/api/createPost", {
         title: this.newNote.title,
         category: this.newNote.category,
-        // date: this.newNote.date,
         text: this.newNote.text,
         preview: this.newNote.text,
         });
@@ -71,30 +69,23 @@
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
         <button class="create bg-success" @click="createNote">Crea nota</button>
-        <a id="close" class="bg-danger" @click="closeNote()">Chiudi</a>
+        <a id="close" class="btn btn-danger" @click="closeNote()">Chiudi</a>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
 * {
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .titolo {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 25px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 25px;
 }
 
-.create{
-    border: 1px solid white;
-    border-radius: 10px;
-    padding: 0.6em;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
 
 .contenitore {
   display: flex;
@@ -118,32 +109,9 @@
   z-index: 1003;
 }
 
-.approvation {
-  display: block;
-  position: absolute;
-  width: fit-content;
-  overflow: visible;
-  top: 22%;
-  right: 8%;
-  width: 20%;
-  height: fit-content;
-  min-height: 20%;
-  padding: 16px;
-  border: 1px solid gray;
-  border-radius: 10px;
-  background-color: white;
-  color: #183252;
-  z-index: 1003;
-}
-
-.approvation-title{
-  text-align: center;
-  font-weight: bold;
-}
-
 .svgicon {
-text-align: end;
-margin-right: 10px;
+  text-align: end;
+  margin-right: 10px;
 }
 
 img#document{
@@ -155,6 +123,13 @@ img#document{
   text-align: end;
   font-weight: bold;
   margin-right: 10px;
+}
+
+.create{
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 0.6em;
+  box-shadow: rgb(29, 44, 59) 0px 10px 30px -10px;
 }
 
 button.create {
@@ -174,76 +149,6 @@ button.create {
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-}
-
-button:hover,
-a#close:hover {
-  animation: sh0 0.5s ease-in-out both;
-}
-
-@keyframes sh0 {
-  0% {
-    transform: rotate(0deg) translate3d(0, 0, 0);
-  }
-
-  25% {
-    transform: rotate(7deg) translate3d(0, 0, 0);
-  }
-
-  50% {
-    transform: rotate(-7deg) translate3d(0, 0, 0);
-  }
-
-  75% {
-    transform: rotate(1deg) translate3d(0, 0, 0);
-  }
-
-  100% {
-    transform: rotate(0deg) translate3d(0, 0, 0);
-  }
-}
-
-button:hover,
-a#close:hover span {
-  animation: storm 0.7s ease-in-out both;
-  animation-delay: 0.06s;
-}
-
-button::before,
-a#close:before button::after,
-a#close:after {
-  content: "";
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0;
-  transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1),
-    opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
-  z-index: -1;
-  transform: translate(100%, -25%) translate3d(0, 0, 0);
-}
-
-button:hover::before,
-a#close:hover::before button:hover::after,
-a#close:hover::after {
-  opacity: 0.15;
-  transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1),
-    opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
-}
-
-button:hover::before,
-a#close:hover::before {
-  transform: translate3d(50%, 0, 0) scale(0.9);
-}
-
-button:hover::after,
-a#close:hover::after {
-  transform: translate(50%, 0) scale(1.1);
 }
 
 hr {
@@ -273,8 +178,8 @@ textarea {
 }
 
 input::placeholder, textarea::placeholder {
-    color: black;
-    opacity: 0.6;
+  color: black;
+  opacity: 0.6;
 }
 
 a#close {
@@ -295,5 +200,4 @@ a#close {
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
-
 </style>
