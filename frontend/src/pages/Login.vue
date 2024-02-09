@@ -2,7 +2,6 @@
 import axios from "axios";
 import { defineComponent } from "vue";
 
-
 export default defineComponent({
   data() {
     return {
@@ -82,12 +81,16 @@ export default defineComponent({
 </template>
 
 <style scoped>
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 @media screen and (max-width: 1300px){
   .form-container {
     background-color: rgba(255, 255, 255, 0.3);
-    /* background:transparent;
-      backdrop-filter:blur(20px); */
     padding: 4vh;
     border-radius: 10px;
     border: 1px solid gray;
@@ -100,7 +103,7 @@ export default defineComponent({
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,10 +124,9 @@ export default defineComponent({
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+    height: 100vh;
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     justify-content: center;
     vertical-align: middle;
     background-attachment: fixed;
@@ -133,14 +135,11 @@ export default defineComponent({
 
   .form-container {
     background-color: rgba(255, 255, 255, 0.3);
-    /* background:transparent;
-      backdrop-filter:blur(20px); */
     padding: 7vh;
     border-radius: 10px;
     border: 1px solid gray;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     display: block;
-    /* margin-right: auto; */
     width: fit-content;
     height: fit-content;
   }
@@ -149,18 +148,9 @@ export default defineComponent({
     display: flex;
     justify-content: flex-end;
     margin-left: 15em;
-    
   }
-
 }
 /*------------------------------------------------------------------------------ */
-
-* {
-  font-family: "Montserrat", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
 
 .title {
@@ -177,10 +167,6 @@ i {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-
-form {
-  margin: 0 auto;
 }
 
 .form-group {
@@ -248,23 +234,10 @@ a:hover {
   transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #d4d4d4;
-}
-
-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #024454;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
 button.submit {
   background-color: #6141ce;
   color: #fff;
+  font-weight: bold;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -273,12 +246,12 @@ button.submit {
   text-align: center;
 }
 
-.box-center {
-  text-align: center;
-}
-
 button.submit:hover {
   background-color: #502ace;
   filter: drop-shadow(0px 0px 10px rgba(255, 242, 242, 0.733));
+}
+
+.box-center {
+  text-align: center;
 }
 </style>
