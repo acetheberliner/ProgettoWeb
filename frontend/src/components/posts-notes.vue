@@ -24,10 +24,7 @@ export default defineComponent({
       if (confirm("Sei sicuro di voler eliminare questa nota?")) {
         try {
           const response = await axios.delete(`/api/deletePost/${id}`);
-          // Gestisci la risposta come preferisci, ad esempio aggiornando la lista delle note
           console.log("Nota eliminata con successo:", response.data);
-          // this.$emit("delete")
-          this.closeNote();
         } catch (error) {
           console.error("Errore durante l'eliminazione della nota:", error);
         }
@@ -47,17 +44,6 @@ export default defineComponent({
         }
       });
     },
-
-    openNote(){
-      document.getElementById('light')!.style.display = 'block';
-      document.getElementById('fade')!.style.display = 'block';
-    },
-
-    closeNote(){
-      document.getElementById('light')!.style.display = 'none';
-      document.getElementById('fade')!.style.display = 'none';
-      window.location.reload();
-    }
   },
 });
 </script>
@@ -69,9 +55,11 @@ export default defineComponent({
       <p class="categoria">{{ nota.categoria }}</p>
       <p class="autore">{{ nota.autore }}</p>
       <hr />
-      <p v-if="nota.stato == 'approvata'" class="stato bg-success">{{ nota.stato }}</p>
-      <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
-      <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p>
+      <div>
+        <p v-if="nota.stato == 'approvata'" class="stato bg-success">{{ nota.stato }}</p>
+        <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+        <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p>
+      </div>
     </section>
     <div class="open">
       <button @click="visualizzaNota()" id="open">Visualizza</button>
@@ -82,57 +70,13 @@ export default defineComponent({
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Quicksand&display=swap");
 
-@media screen and (max-width: 1589px) {
-  .white_content {
-    display: none;
-    position: absolute;
-    top: 8.5em;
-    bottom: 3em;
-    right: 1em;
-    left: 1em;
-    padding: 16px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    color: #183252;
-    z-index: 1002;
-    font-size: 12px;
-    overflow-x: hidden;
-    overflow-y: auto;
-    height: 80%;
-  }
-}
+@media screen and (max-width: 1589px) {}
 
-@media screen and (min-width: 1590px) {
-    .white_content {
-    display: none;
-    position: absolute;
-    /* top: 18%;
-    left: 20%;
-    width: 60%;
-    height: 65%; */
-    margin-right: 20em;
-    margin-left: 20em;
-    padding: 16px;
-    border: 1px solid gray;
-    border-radius: 10px;
-    background-color: white;
-    color: #183252;
-    z-index: 1002;
-    overflow: auto;
-  }
-}
-
+@media screen and (min-width: 1590px) {}
 .open{
   margin-top: 50px;
 }
 
-img {
-  width: 50px;
-  margin-right: 15px;
-}
-
-/*- BUTTON -------------------------------------------------------------------------------------------------------------------*/
 button {
   position: absolute;
   bottom: 10px;
@@ -153,8 +97,6 @@ button {
   z-index: 0;
   overflow: hidden;
 }
-
-/*----------------------------------------------------------------------------------------------------------------------------*/
 
 .note {
   position: relative;
@@ -196,8 +138,7 @@ p {
   filter: drop-shadow(normal);
 }
 
-p.categoria,
-p.autore {
+p.categoria, p.autore {
   font-weight: bold;
   text-align: end;
   margin-right: 10px;
@@ -214,5 +155,4 @@ p.stato {
   color: #fff;
   cursor: default;
 }
-/*--------------------------------------------------------------------------------------------------------------------*/
 </style>
