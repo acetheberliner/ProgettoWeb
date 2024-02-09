@@ -13,7 +13,7 @@
 - elimina solo se mod o creatore [FATTO]
 - modifica solo se mod o creatore [FATTO]
 - approvazione delle note in esplora
-- aggiunto updateState (sottoforma di post, dove si deve passare per parametro url l'id della nota e lo stato per post) [FATTO]
+- aggiunto updateState (sottoforma di post, sia l'id della nota e che lo stato) [FATTO]
 
 # prof
 - Utente moderatore. [FATTO]
