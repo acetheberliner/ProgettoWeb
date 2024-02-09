@@ -25,7 +25,7 @@ const router: Router = createRouter({
     { path: "/register", component: Register, meta: { requireLogout: true } },
     { path: "/myaccount", component: MyAccount },
     { path: "/aggiungi", component: Aggiungi },
-    { path: "/edit", component: Modifica },
+    { path: "/edit/:id", component: Modifica },
     { path: "/view/:id", component: Visualizza, name: 'viewNote' },
     { path: "/:pathMatch(.*)*", component: NotFound },
   ],

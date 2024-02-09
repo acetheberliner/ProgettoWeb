@@ -10,10 +10,10 @@
     },
     data() {
       return {
-        datiNote: [] as Nota[],
+        nota: null as Nota | null,
         textInput: '',
         newNote: {
-            idnote: '',
+            idnote: 0,
             title: '',
             category: '',
             text: '',
@@ -21,25 +21,35 @@
       };
     },
     methods: {
-      pubblica() {
+      async getNote() {
+        const notaId = this.$route.params.id;
         try {
-            axios.post("/api/createPost", {
-              textInput: this.textInput
-            })
-        } catch(e) {
-            console.error("Errore di creazione: ", e)
+          const response = await axios.get(`/api/noteid/${notaId}`);
+          this.nota = response.data[0];
+          console.log(this.nota);
+        } catch(error) {
+          console.error("Errore durante il recupero delle informazioni della nota:", error);
         }
+        if(this.nota) {
+          this.newNote.idnote = this.nota.idnote;
+          this.newNote.title = this.nota.titolo;
+          this.newNote.category = this.nota.categoria;
+          this.newNote.text = this.nota.testo;
+        }
+        
       },
 
       async editNote() {
-      const res = await axios.post("/api/editPost", {
-        idnote: this.newNote.idnote,
-        title: this.newNote.title,
-        category: this.newNote.category,
-        text: this.newNote.text,
-        });
-
-        this.datiNote.push(res.data);
+        try {
+          await axios.post("/api/editPost", {
+            idnote: this.newNote.idnote,
+            title: this.newNote.title,
+            category: this.newNote.category,
+            text: this.newNote.text,
+          });
+        } catch(e) {
+          console.error('Errore', e)
+        }
         alert("Nota modificata con successo!");
         window.location.href = "/explore";
       },
@@ -48,6 +58,9 @@
         window.location.href = "/explore";
       },
     },
+    mounted() {
+      this.getNote();
+    }
   })
   </script>
 

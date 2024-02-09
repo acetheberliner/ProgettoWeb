@@ -17,9 +17,9 @@
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">
         <button class="btn btn-danger" v-if="checkUserPermission()" @click="nota && deleteNote(nota.idnote)">Elimina</button>
-        <RouterLink to="/edit">
-          <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
-        </RouterLink>
+        
+        <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
+        
         <button class="btn btn-warning" @click="closeNote()">Chiudi</button>
       </div>
     </div>
@@ -42,7 +42,7 @@ export default defineComponent({
     };
   },
   methods: {
-    async created() {
+    async getNote() {
       const notaId = this.$route.params.id;
       try {
         const response = await axios.get(`/api/noteid/${notaId}`);
@@ -71,12 +71,13 @@ export default defineComponent({
     },
 
     async editNote() {
-      try {
-        const response = await axios.post("/api/editPost", this.nota);
-        console.log("Nota modificata con successo:", response.data);
-      } catch (error) {
-        console.error("Errore durante la modifica della nota:", error);
-      }
+      window.location.href = `/edit/${this.$route.params.id}`
+      // try {
+      //   const response = await axios.post("/api/editPost", this.nota);
+      //   console.log("Nota modificata con successo:", response.data);
+      // } catch (error) {
+      //   console.error("Errore durante la modifica della nota:", error);
+      // }
     },
 
     checkUserPermission() {
@@ -85,7 +86,7 @@ export default defineComponent({
   },
 
   mounted() {
-    this.created()
+    this.getNote()
   }
 });
 </script>
