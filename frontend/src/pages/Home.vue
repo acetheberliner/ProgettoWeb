@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
 
 export default defineComponent({});
+
 </script>
 
 <template>
@@ -54,7 +55,7 @@ export default defineComponent({});
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 * {
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .page {
@@ -71,7 +72,6 @@ export default defineComponent({});
   width: 80%;
   padding: 1em;
   margin-top: 20px;
-  box-shadow: rgb(29, 44, 59) 0px 20px 30px -10px;
 }
 
 h1 {
