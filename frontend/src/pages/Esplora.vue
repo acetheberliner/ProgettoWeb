@@ -19,7 +19,7 @@
   <!------------------------------------------------------------------------------------------------------------------------------------------->
   <div class="background">
     <div class="content">
-      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index"/>
+      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" class="postnotes"/>
     </div>
   </div>
   <div v-if="user?.role == 'mod'" class="container">
@@ -442,6 +442,14 @@ hr {
 h3{
   font-weight: bold;
   text-align: center;
+}
+
+.postnotes {
+  transition: all 0.2s ease-in-out;
+}
+
+.postnotes:hover {
+  transform: scale(1.04);
 }
 
 </style>
