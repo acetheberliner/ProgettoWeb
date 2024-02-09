@@ -71,13 +71,7 @@ export default defineComponent({
     },
 
     async editNote() {
-      window.location.href = `/edit/${this.$route.params.id}`
-      // try {
-      //   const response = await axios.post("/api/editPost", this.nota);
-      //   console.log("Nota modificata con successo:", response.data);
-      // } catch (error) {
-      //   console.error("Errore durante la modifica della nota:", error);
-      // }
+      window.location.href = `/edit/${this.$route.params.id}`;
     },
 
     checkUserPermission() {

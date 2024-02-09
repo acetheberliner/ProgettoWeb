@@ -51,7 +51,7 @@
           console.error('Errore', e)
         }
         alert("Nota modificata con successo!");
-        window.location.href = "/explore";
+        window.location.href = "/";
       },
 
       async closeNote() {
