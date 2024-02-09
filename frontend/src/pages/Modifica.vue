@@ -13,12 +13,11 @@
         datiNote: [] as Nota[],
         textInput: '',
         newNote: {
-        title: '',
-        category: '',
-        date: '',
-        text: '',
-        preview: '',
-      },
+            idnote: '',
+            title: '',
+            category: '',
+            text: '',
+        },
       };
     },
     methods: {
@@ -34,15 +33,14 @@
 
       async editNote() {
       const res = await axios.post("/api/editPost", {
+        idnote: this.newNote.idnote,
         title: this.newNote.title,
         category: this.newNote.category,
-        date: this.newNote.date,
         text: this.newNote.text,
-        preview: this.newNote.text,
         });
 
         this.datiNote.push(res.data);
-        alert("Nota creata con successo!");
+        alert("Nota modificata con successo!");
         window.location.href = "/explore";
       },
 

@@ -15,9 +15,8 @@
         newNote: {
         title: '',
         category: '',
-        date: '',
-        text: '',
-        preview: '',
+        // date: '',
+        text: ''
       },
       };
     },
@@ -36,7 +35,7 @@
       const res = await axios.post("/api/createPost", {
         title: this.newNote.title,
         category: this.newNote.category,
-        date: this.newNote.date,
+        // date: this.newNote.date,
         text: this.newNote.text,
         preview: this.newNote.text,
         });
