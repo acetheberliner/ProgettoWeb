@@ -29,16 +29,16 @@ export default defineComponent({
 </template>
 
 <style scoped>
+* {
+  font-size: 20px;
+  text-decoration: none;
+}
+
 @media screen and (min-width: 768px){
   .profile{
     width: fit-content;
     height: fit-content;
   }
-}
-
-* {
-  font-size: 20px;
-  text-decoration: none;
 }
 
 span#user{
@@ -49,6 +49,7 @@ span#user{
   color: transparent;
   cursor: pointer;
 }
+
 .profile{
   border: 2px solid white;
   border-radius: 15px;
@@ -79,27 +80,9 @@ img {
   margin: 0px;
 }
 
-svg{
-  width: 30px;
-  height: 30px;
-}
-
-button {
-  color: rgba(255, 255, 255, 0.8);
-  padding: 15px 40px;
-  border-radius: 4px;
-  font-weight: normal;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-}
-
 img#logout{
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-}
-
-img#red-logout {
-  display: none;
 }
 
 img#logout:hover{
@@ -109,5 +92,4 @@ img#logout:hover{
 .routerlink:hover {
   text-decoration: none;
 }
-
 </style>

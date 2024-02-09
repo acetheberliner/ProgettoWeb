@@ -36,10 +36,8 @@ export default defineComponent({
                   <p>Note<span>Sync</span></p><br>
                 </div>
               </RouterLink>
-              <!-- <img src="/PaperFileText.svg" alt="" /> -->
             </div>
             <div class="navigation ">
-              <!-- <RouterLink class="nav-link button btn1 col-6" to="/">Home</RouterLink> -->
               <RouterLink class="nav-link button btn2 col-6" to="/explore">Appunti</RouterLink>
               <RouterLink class="nav-link button btn5 col-6" to="/aggiungi" v-if="user" :user="user">Aggiungi</RouterLink>
             </div>
@@ -63,6 +61,10 @@ export default defineComponent({
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 @media screen and (max-width: 1550px){
   .header-logo {
     text-align: center;
@@ -73,13 +75,6 @@ export default defineComponent({
     text-align: center;
     justify-content: center;
   }
-
-  /* .auth {
-    justify-content: center;
-    text-align: center;
-    margin-top: 30px;
-  } */
-
   .auth {
     display: flex;
     justify-content: center;
@@ -101,13 +96,14 @@ export default defineComponent({
 @media screen and (min-width: 1551px){
   
   main {
-    padding: 0; /* Rimuovi il padding */
-    background-size: 100% 100%; /* Copri completamente l'area del main */
+    padding: 0;
+    background-size: 100% 100%;
   }
+
   #nav{
     display: flex;
     z-index: 1;
-    height: 100%; /* Imposta l'altezza al 100% della viewport */
+    height: 100%;
   }
 
   .navigation{
@@ -122,55 +118,25 @@ export default defineComponent({
     top: 1em;
   }
 
-  UserInfo {
-    font-size: 20px;
-    float: right;
-  }
-
-  btn1, btn2, btn3, btn4 {
-    color: white;
-    height: fit-content;
-    width: fit-content;
-  }
-
   .col-6{
     flex: 0 0 0;
     height: fit-content;
+    max-width: 100%;
   }
 
   .nav-link {
     border-radius: 10px;
   }
 }
-
 /*------------------------------------------------------------------------------------ */
 
-* {
-  font-family: "Montserrat", sans-serif;
-}
-
-
-
-body,
-html {
+body, html {
   margin: 0px;
   padding: 0;
   height: 100%;
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
-}
-
-img {
-  height: 50px;
-  width: 50px;
-  aspect-ratio: 40/40;
-  object-fit: cover;
-  margin-right: 15px;
-}
-
-img:not(:hover) {
-  opacity: 0.8;
 }
 
 .full-page {
@@ -226,50 +192,39 @@ p {
 }
 
 main {
-  padding: 40px; /* Aggiungi spazio sopra il contenuto per non sovrapporre la nav-bar */
-  color: #fff; /* Cambia il colore del testo per contrastare con l'immagine di sfondo */
-  /* background-image: url("../../public/Cloudy.svg"); */
+  padding: 40px;
+  color: #fff;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
     url(/Cloudy.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 100%; /* Imposta l'altezza per rendere visibile il contenuto */
+  height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  flex: 1;
+  padding: 0px;
 }
 
 nav .nav-link {
   margin-left: 10px;
   margin-right: 10px;
   text-decoration: none;
-  color: #fff; /* Colore del testo */
+  color: #fff;
   font-size: 20px;
   font-weight: bold;
-  padding: 8px 12px; /* Spaziatura interna */
-  /* border-radius: 5px; Bordo arrotondato */
-  transition: background-color 0.3s ease; /* Effetto di transizione sul cambio di colore */
+  padding: 8px 12px;
+  transition: background-color 0.3s ease;
 }
 
 .button {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
   padding: 15px 40px;
-  /* border-radius: 4px; */
   font-weight: normal;
   text-transform: uppercase;
   transition: all 0.2s ease-in-out;
-}
-
-.btn1:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #c6d8ff;
-  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
 }
 
 .btn2:hover {
@@ -283,7 +238,7 @@ nav .nav-link {
 
 .btn3:hover {
   color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #6b5ca5;
+  box-shadow: 5px 5px 15px #df9f15;
   background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -306,10 +261,5 @@ nav .nav-link {
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-}
-
-main {
-  flex: 1;
-  padding: 0px;
 }
 </style>
