@@ -5,7 +5,6 @@ export interface Nota {
   autore: string
   data: string
   testo: string
-  anteprima: string
   stato: string
 }
 

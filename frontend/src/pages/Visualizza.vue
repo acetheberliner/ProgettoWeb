@@ -2,6 +2,9 @@
   <div class="note">
     <div class="note-details">
       <h1 v-if="nota" class="titolo">{{ nota.titolo }}</h1>
+      <p v-if="nota?.stato == 'approvata'" class="stato bg-success text-light">{{ nota.stato }}</p>
+      <p v-if="nota?.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+      <p v-if="nota?.stato == 'rifiutata'" class="stato bg-danger text-light">{{ nota.stato }}</p>
       <div v-if="nota" class="secondary_info">
         {{ nota.categoria }}<br />
         {{ nota.autore }}<br />
@@ -11,7 +14,9 @@
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">
         <button class="btn btn-danger" v-if="checkUserPermission()" @click="nota && deleteNote(nota.idnote)">Elimina</button>
-        <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
+        <RouterLink to="/edit">
+          <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
+        </RouterLink>
         <button class="btn btn-warning" @click="closeNote()">Chiudi</button>
       </div>
     </div>
@@ -100,7 +105,7 @@ export default defineComponent({
   border-radius: 10px;
   background-color: white;
   color: #183252;
-  width: 90%;
+  width: 80%;
   height: fit-content;
   padding: 2em;
   position: relative;
@@ -118,6 +123,18 @@ p {
   margin-left: 10px;
   color: #235971;
   filter: drop-shadow(normal);
+}
+
+p.stato {
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: fit-content;
+  padding: 0.4em;
+  border-radius: 12px;
+  font-size: 13px;
+  margin-left: 0px;
+  cursor: default;
 }
 
 .secondary_info {

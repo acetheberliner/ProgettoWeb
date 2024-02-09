@@ -10,6 +10,7 @@ import Register from "./pages/Register.vue";
 import MyAccount from "./pages/MyAccount.vue";
 import NotFound from "./pages/NotFound.vue";
 import Aggiungi from "./pages/Aggiungi.vue";
+import Modifica from "./pages/Modifica.vue";
 import Visualizza from "./pages/Visualizza.vue";
 
 
@@ -24,6 +25,7 @@ const router: Router = createRouter({
     { path: "/register", component: Register, meta: { requireLogout: true } },
     { path: "/myaccount", component: MyAccount },
     { path: "/aggiungi", component: Aggiungi },
+    { path: "/edit", component: Modifica },
     { path: "/view/:id", component: Visualizza, name: 'viewNote' },
     { path: "/:pathMatch(.*)*", component: NotFound },
   ],

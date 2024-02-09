@@ -32,8 +32,8 @@
         }
       },
 
-      async createNote() {
-      const res = await axios.post("/api/createPost", {
+      async editNote() {
+      const res = await axios.post("/api/editPost", {
         title: this.newNote.title,
         category: this.newNote.category,
         date: this.newNote.date,
@@ -54,7 +54,7 @@
   </script>
 
 <template>
-  <h2 class="titolo">Aggiungi Nota</h2>
+  <h2 class="titolo">Modifica Nota</h2>
   <div class="page">
     <div class="contenitore">
       <div id="light" class="white_content">
@@ -71,7 +71,7 @@
         </div>
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
-        <button class="create bg-success" @click="createNote">Crea nota</button>
+        <button class="create bg-success" @click="editNote()">Modifica</button>
         <a id="close" class="bg-danger" @click="closeNote()">Chiudi</a>
       </div>
     </div>

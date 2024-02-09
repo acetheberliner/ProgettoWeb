@@ -40,8 +40,8 @@ export async function createPost(req: Request, res: Response) {
     const newNoteID = (await getLastNotesID()) + 1;
   
     await connection.execute(
-      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo, anteprima) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [newNoteID, title, category, date, user.username, text, text]
+      'INSERT INTO note (idnote, titolo, categoria, data, autore, testo) VALUES (?, ?, ?, ?, ?, ?)',
+      [newNoteID, title, category, date, user.username, text]
     );
     res.status(201).json({ idnote: newNoteID, title, category, date, author: user.username, text });
   } catch (error) {
