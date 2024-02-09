@@ -18,14 +18,6 @@ export default defineComponent({
       await axios.post("/api/auth/logout");
       window.location.href="/";
     },
-
-    // async setMod(passinput: string) {
-    //   if(passinput == this.passMod){
-    //     await axios.post("/api/auth/setmod");
-    //   }else{
-    //     alert("Errore");
-    //   }
-    // }
   },
 });
 </script>
@@ -115,6 +107,10 @@ span#usermod {
   border-radius: 15px;
   padding: 5px;
   vertical-align: middle;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  cursor: default;
 }
 
 * {
