@@ -23,9 +23,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{
-    'bg-warning': user?.role == 'mod'
-  }">Moderatore</span></h1>
+  <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{'bg-warning': user?.role == 'mod'}">Moderatore</span></h1>
   <h1 v-else>Profilo Utente</h1>
   <main>
     <article>
@@ -45,16 +43,15 @@ export default defineComponent({
     <div class="animation">
       <lottie-player src="https://lottie.host/734e9cf7-ddf2-4380-a671-99d11d4a6240/JauVdy6sdh.json" background="transparent" speed="1" style="width: 550px; height: 550px" direction="1" mode="normal" loop autoplay></lottie-player>
     </div>
-    <!-- <div class="moderator">
-      <p>Password Moderatore:</p>
-      <input type="text" name="password" id="password" placeholder="Password" v-model="passinput">
-      <button type="submit" class="submit btn btn-outline-light">Invia</button>
-    </div> -->
   </main>
 </template>
 
   
 <style scoped>
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
 @media screen and (max-width: 1300px){
   .user-image {
     display: flex;
@@ -113,50 +110,9 @@ span#usermod {
   cursor: default;
 }
 
-* {
-  font-family: "Montserrat", sans-serif;
-}
-
 img, svg {
   width: 25px;
   margin: 0px;
-}
-
-/* .moderator{
-  font-size: 16px;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  height: fit-content;
-  padding: 4vh;
-  border: 1px solid white;
-  border-radius: 10px;
-  background:transparent;
-  text-align: center;
-  backdrop-filter:blur(20px);
-  box-shadow: rgb(100, 170, 245) 0px 20px 30px -10px;
-  align-items: center;
-} */
-
-/* input {
-  border: white;
-  border-radius: 10px;
-  padding: 1vh;
-  margin-bottom: 5px;
-  text-align: center;
-  background-color: transparent;
-  color: white;
-}
-
-input::placeholder {
-  color: white;
-  opacity: 0.5;
-} */
-
-.submit {
-  cursor: pointer;
-  text-transform: uppercase;
 }
 
 .ruolo {
@@ -231,6 +187,4 @@ h2.username{
   filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.884));
 
 }
-
-/*---------------------------------------------------------------------------- */
 </style>
