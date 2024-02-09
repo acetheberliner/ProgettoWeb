@@ -97,7 +97,7 @@ export async function editPost(req: Request, res: Response) {
     res.status(403).send("Questa operazione richiede l'autenticazione.");
     return;
   }
-  const { idnote, newTitle, newText, newCategory} = req.body;
+  const { idnote, title, text, category} = req.body;
 
   try {
     const connection = await getConnection();
@@ -112,7 +112,7 @@ export async function editPost(req: Request, res: Response) {
     const date = await dateToString();
 
     await connection.execute("UPDATE note SET titolo = ?, categoria = ?, data = ?, testo = ?, stato ='da approvare' WHERE idnote = ?",
-    [newTitle, newCategory, date, newText, idnote]
+    [title, category, date, text, idnote]
     );
 
   } catch(e) {
