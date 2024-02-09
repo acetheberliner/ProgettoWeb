@@ -9,21 +9,23 @@ export default defineComponent({
   },
   methods: {
     async logout() {
-      await axios.post("/api/auth/logout");
-      window.location.href="/";
+      if(confirm("Conferma disconnessione")){
+        await axios.post("/api/auth/logout");
+        window.location.href="/";
+      }
     },
   },
 });
 </script>
 
 <template>
-  <RouterLink to="/myaccount">
+  <RouterLink to="/myaccount" class="routerlink">
     <div class="profile">
       <span id="user" class="text-sm">{{ user?.username }}</span>
       <img src="/user.svg" alt="user" />
     </div>
   </RouterLink>
-  <img id="logout" src="/logout.svg" alt="Logout" @click="logout"/>
+  <img id="logout" src="/logout.svg" alt="Logout" @click="logout()"/>
 </template>
 
 <style scoped>
@@ -102,6 +104,10 @@ img#red-logout {
 
 img#logout:hover{
   transform: scale(1.3);
+}
+
+.routerlink:hover {
+  text-decoration: none;
 }
 
 </style>

@@ -31,11 +31,15 @@ export default defineComponent({
         <div class="col-12">
           <nav id="nav" class="container-fluid">
             <div class="header-logo col-12 col-md-2">
+              <RouterLink to="/" class="routerlink">
+                <div class="title">
+                  <p>Note<span>Sync</span></p><br>
+                </div>
+              </RouterLink>
               <!-- <img src="/PaperFileText.svg" alt="" /> -->
-              <p>Note<span>Sync</span></p><br>
             </div>
             <div class="navigation ">
-              <RouterLink class="nav-link button btn1 col-6" to="/">Home</RouterLink>
+              <!-- <RouterLink class="nav-link button btn1 col-6" to="/">Home</RouterLink> -->
               <RouterLink class="nav-link button btn2 col-6" to="/explore">Appunti</RouterLink>
               <RouterLink class="nav-link button btn5 col-6" to="/aggiungi" v-if="user" :user="user">Aggiungi</RouterLink>
             </div>
@@ -173,7 +177,16 @@ img:not(:hover) {
   height: 100vh;
 }
 
-.header-logo > p {
+.title {
+  transition: all 0.2s ease-in-out;
+}
+
+.title:hover, .routerlink:hover {
+  text-decoration: none;
+  transform: scale(1.2);
+}
+
+.header-logo > .routerlink > .title > p {
   font-weight: bold;
   font-style: italic;
   font-size: 45px;
