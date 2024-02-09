@@ -22,7 +22,8 @@ export default defineComponent({
         if (e.response) {
           alert(
             `${e.response.status} - ${e.response.statusText}\n${e.response.data}`
-          );
+            );
+          window.location.reload();
         } else {
           alert(e.message);
         }
