@@ -58,7 +58,7 @@
       async approvaNota() {
         alert("Nota approvata correttamente!");
         window.location.href = "/explore";
-        await axios.post(`/api/updateState/${this.newNote.idnote}`, {
+        await axios.post(`/api/updateState`, {
             idnote: this.newNote.idnote,
             comment: this.newNote.comment,
             state: 'approvata',
@@ -68,7 +68,7 @@
       async rifiutaNota() {
         alert("Nota rifiutata correttamente!");
         window.location.href = "/explore";
-        await axios.post(`/api/updateState/${this.newNote.idnote}`, {
+        await axios.post(`/api/updateState`, {
             idnote: this.newNote.idnote,
             comment: this.newNote.comment,
             state: 'rifiutata',
@@ -127,6 +127,7 @@
             <button class="check" @click="approvaNota()"><img id="conf-button" src="/check.svg" title="Approva nota"></button>
             <button class="cross" @click="rifiutaNota()"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
           </div>
+          <!--------------------------------------------------------------------------------------------------------->
           <div class="comment" v-if="user?.role == 'mod' && (nota?.stato == 'da approvare' || nota?.stato == 'rifiutata')">
             <textarea v-model="newNote.comment" placeholder="Commento moderatore..." cols="40" rows="3"></textarea>
           </div>
