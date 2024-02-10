@@ -56,14 +56,15 @@ export default defineComponent({
 </script>
 
 <template>
-  <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{'bg-warning': user?.role == 'mod'}">Moderatore</span></h1>
+  <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{'bg-warning font-italic': user?.role == 'mod'}">Moderatore</span></h1>
   <h1 v-else>Profilo Utente</h1>
   <main>
     <!----------------------------------------------------------------------------------------------------------------->
     <div class="page">
       <article>
         <div class="user-image">
-          <img id="user" src="/user.svg" alt="User image empty">
+          <img v-if="user?.role == 'user'" id="user" src="/user.svg" alt="User image empty">
+          <img v-else id="user" src="/crown.svg" alt="User image empty">
         </div>
         <div class="title">
           <h2>Bentornato</h2>
@@ -212,9 +213,9 @@ span.role:hover {
 }
 
 img#user{
-  width: 85px;
+  width: 100px;
   margin: 10px;
-  padding: 1vh;
+  padding: 1.5vh;
   border: 3px solid white;
   border-radius: 50px;
 }
