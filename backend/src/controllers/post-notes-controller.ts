@@ -123,12 +123,12 @@ export async function editPost(req: Request, res: Response) {
 /* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function updateState(req: Request, res: Response) {
-  const {idnote, state} = req.body
+  const {idnote, state, comment} = req.body
 
   try{
     const connection = await getConnection();
-    await connection.execute("UPDATE note SET stato = ? WHERE idnote = ?",
-      [state, idnote]
+    await connection.execute("UPDATE note SET stato = ?, commento = ? WHERE idnote = ?",
+      [state, comment, idnote]
     );
   } catch(e) {
     res.status(500).send("Errore interno del server durante l'update dello stato.");
