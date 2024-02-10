@@ -40,3 +40,12 @@ export async function notesFromState(req: Request, res: Response) {
   );
   res.json(results);
 }
+
+export async function notesFromUser(req: Request, res: Response) {
+  const connection = await getConnection();
+  const [results] = await connection.execute(
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE autore = ?",
+    [req.params.id]
+  );
+  res.json(results);
+}
