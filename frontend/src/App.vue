@@ -38,14 +38,14 @@ export default defineComponent({
               </RouterLink>
             </div>
             <div class="navigation ">
-              <RouterLink class="nav-link button btn2 col-6" to="/explore">Appunti</RouterLink>
-              <RouterLink class="nav-link button btn5 col-6" to="/aggiungi" v-if="user" :user="user">Aggiungi</RouterLink>
+              <RouterLink class="nav-link button col-6" to="/explore">Appunti</RouterLink>
+              <RouterLink class="nav-link button col-6" to="/aggiungi" v-if="user" :user="user">Aggiungi</RouterLink>
             </div>
             <div class="auth">
               <UserInfo v-if="user" :user="user" />
               <template v-else>
-                <RouterLink class="nav-link button btn3 col-6" to="/login">Accedi</RouterLink>
-                <RouterLink class="nav-link button btn4 col-6" to="/register">Registrati</RouterLink>
+                <RouterLink class="nav-link button col-6" to="/login">Accedi</RouterLink>
+                <RouterLink class="nav-link button col-6" to="/register">Registrati</RouterLink>
               </template>
             </div>
           </nav>
@@ -122,6 +122,7 @@ export default defineComponent({
     flex: 0 0 0;
     height: fit-content;
     max-width: 100%;
+    transition: all 0.2s ease-in-out;
   }
 
   .nav-link {
@@ -215,7 +216,10 @@ nav .nav-link {
   font-size: 20px;
   font-weight: bold;
   padding: 8px 12px;
-  transition: background-color 0.3s ease;
+}
+
+.col-6:hover{
+  transform: scale(1.1);
 }
 
 .button {
@@ -224,39 +228,11 @@ nav .nav-link {
   padding: 15px 40px;
   font-weight: normal;
   text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
 }
 
-.btn2:hover {
+.button:hover {
   color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #1265da;
-  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.btn3:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #df9f15;
-  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.btn4:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #ee42c0;
-  background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-.btn5:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 5px 5px 15px #7efc00;
+  box-shadow: 5px 5px 15px #c5c9ce;
   background: linear-gradient(to right, #fff 0%, #c6d8ff 100%);
   background-clip: text;
   -webkit-background-clip: text;

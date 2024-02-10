@@ -128,6 +128,10 @@ p {
   filter: drop-shadow(normal);
 }
 
+button#open {
+  font-weight: bold;
+}
+
 p.categoria, p.autore {
   font-weight: bold;
   text-align: end;
