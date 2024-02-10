@@ -25,6 +25,9 @@
   <div v-if="user?.role == 'mod'" class="container">
     <div class="approva">
       <h3>Approva</h3>
+      <div class="single-note" v-for="nota in notePerState" :key="nota.idnote">
+        <p v-if="nota.stato === 'da approvare'">{{ nota.titolo }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -39,9 +42,17 @@ import PostNotes from "../components/posts-notes.vue";
 
 export default defineComponent({
   components: { PostNotes },
+  props: {
+    nota: {
+      type: Object as () => Nota,
+      required: true,
+      default: () => ({})
+    }
+  },
   data() {
     return {
       datiNote: [] as Nota[],
+      notePerState: [] as Nota[],
       user: null as User | null,
       categories: [] as String[],
       selectedCategory: '',
@@ -73,6 +84,14 @@ export default defineComponent({
       this.user = res.data;
     },
 
+    async fetchNotesState() {
+      try {
+        const response = await axios.get(`/api/state/${this.nota?.stato}`);
+        this.notePerState = response.data;
+      } catch (error) {
+        console.error("Errore durante il recupero delle note per stato", error);
+      }
+    },
   },
   watch: {
     selectedCategory() {
@@ -84,6 +103,7 @@ export default defineComponent({
     this.getUser();
     this.getCategories();
     this.getNotebyCategory();
+    this.fetchNotesState();
   },
 });
 </script>

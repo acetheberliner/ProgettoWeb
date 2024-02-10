@@ -14,8 +14,6 @@ export default defineComponent({
   },
   data() {
     return {
-      passMod: "setmod",
-      passinput: "",
       userNotes: [] as Nota[]
     }
   },
@@ -36,16 +34,7 @@ export default defineComponent({
 
     async visualizzaNota(idnote: number) {
       this.$router.push({ 
-        path: `/view/${idnote}`,
-        query: { 
-          titolo: this.nota.titolo,
-          categoria: this.nota.categoria,
-          autore: this.nota.autore,
-          data: this.nota.data,
-          testo: this.nota.testo,
-          stato: this.nota.stato,
-          commento: this.nota.commento,
-        }
+        path: `/view/${idnote}`
       });
     }
   },

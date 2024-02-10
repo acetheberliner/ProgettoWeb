@@ -14,16 +14,7 @@ export default defineComponent({
   methods: {
     async visualizzaNota() {
       this.$router.push({ 
-        path: `/view/${this.nota.idnote}`,
-        query: { 
-          titolo: this.nota.titolo,
-          categoria: this.nota.categoria,
-          autore: this.nota.autore,
-          data: this.nota.data,
-          testo: this.nota.testo,
-          stato: this.nota.stato,
-          commento: this.nota.commento,
-        }
+        path: `/view/${this.nota.idnote}`
       });
     },
   },
