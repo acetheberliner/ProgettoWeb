@@ -80,6 +80,10 @@
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
         <button class="create bg-primary" @click="editNote()">Modifica</button>
         <a id="close" class="btn btn-warning text-dark" @click="closeNote()">Chiudi</a>
+        <div class="confirmation" v-if="user?.role == 'mod' && nota?.stato == 'da approvare'">
+          <button class="check"><img id="conf-button" src="/check.svg" title="Approva nota"></button>
+          <button class="cross"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
+        </div>
       </div>
     </div>
   </div>
@@ -124,10 +128,35 @@
   margin-right: 10px;
 }
 
+div.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 35px;
+}
+
 img#document{
   width: 50px;
   margin: 0px;
 }
+
+img#conf-button{
+  width: 50px;
+  margin: 0px;
+}
+
+button.check, button.cross {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  margin-bottom: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+button.check:hover, button.cross:hover {
+  transform: scale(1.2);
+} 
 
 .secondary_info {
   text-align: end;
@@ -153,6 +182,11 @@ button.create {
   z-index: 0;
   overflow: hidden;
   box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
+  transition: all 0.1s ease-in-out;
+}
+
+button.create:hover {
+  transform: scale(1.06);
 }
 
 hr {
@@ -203,6 +237,11 @@ a#close {
   z-index: 0;
   overflow: hidden;
   box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
+  transition: all 0.1s ease-in-out;
+}
+
+a#close:hover {
+  transform: scale(1.06);
 }
 
 </style>
