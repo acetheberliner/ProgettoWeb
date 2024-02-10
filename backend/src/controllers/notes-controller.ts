@@ -5,7 +5,7 @@ import { getConnection } from "../utils/db";
 export async function allNotes(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note",
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato, commento FROM note",
     []
   );
 
@@ -16,7 +16,7 @@ export async function allNotes(req: Request, res: Response) {
 export async function notesCategory(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE categoria = ?",
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato, commento FROM note WHERE categoria = ?",
     [req.params.n]
   );
   res.json(results);
@@ -26,7 +26,7 @@ export async function notesCategory(req: Request, res: Response) {
 export async function notesFromID(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE idnote = ?",
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato, commento FROM note WHERE idnote = ?",
     [req.params.id]
   );
   res.json(results);
@@ -35,7 +35,7 @@ export async function notesFromID(req: Request, res: Response) {
 export async function notesFromState(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE stato = ?",
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato, commento FROM note WHERE stato = ?",
     [req.params.id]
   );
   res.json(results);

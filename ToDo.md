@@ -17,6 +17,6 @@
 
 # prof
 - Utente moderatore. [FATTO]
-- Quando un utente aggiunge o modifica gli appunti, questi vengono messi in stato di attesa di approvazione. [FATTO/2]
-- L'utente moderatore vede gli appunti in attesa di approvazione, può accettarli e questi vengono pubblicati. Se li rifiuta, può aggiungere un commento.
-- L'utente può modificare gli appunti rifiutati e provare a ripubblicarli.
+- Quando un utente aggiunge o modifica gli appunti, questi vengono messi in stato di attesa di approvazione. [FATTO]
+- L'utente moderatore vede gli appunti in attesa di approvazione, può accettarli e questi vengono pubblicati. Se li rifiuta, può aggiungere un commento. [FATTO]
+- L'utente può modificare gli appunti rifiutati e provare a ripubblicarli. [FATTO]

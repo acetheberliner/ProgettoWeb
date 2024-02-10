@@ -1,7 +1,6 @@
 <script lang="ts">
 import {defineComponent } from "vue";
 import { Nota } from "../types";
-import axios from "axios";
 
 export default defineComponent({
   props: {
@@ -13,24 +12,10 @@ export default defineComponent({
   },
   data() {
     return {
-      notes: null as Nota | null,
-      vocab: [] as Nota[],
-      noteid: 0 as Number,
+      notes: null as Nota | null
     };
   },
   methods: {
-    async deleteNote(id: Number) {
-      console.log("ID della nota:", id);
-      if (confirm("Sei sicuro di voler eliminare questa nota?")) {
-        try {
-          const response = await axios.delete(`/api/deletePost/${id}`);
-          console.log("Nota eliminata con successo:", response.data);
-        } catch (error) {
-          console.error("Errore durante l'eliminazione della nota:", error);
-        }
-      }
-    },
-
     async visualizzaNota() {
       this.$router.push({ 
         path: `/view/${this.nota.idnote}`,
@@ -40,7 +25,8 @@ export default defineComponent({
           autore: this.nota.autore,
           data: this.nota.data,
           testo: this.nota.testo,
-          stato: this.nota.stato
+          stato: this.nota.stato,
+          commento: this.nota.commento,
         }
       });
     },
@@ -59,6 +45,9 @@ export default defineComponent({
         <p v-if="nota.stato == 'approvata'" class="stato bg-success">{{ nota.stato }}</p>
         <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
         <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p>
+      </div>
+      <div class="commento">
+        <p v-if="nota.stato == 'rifiutata'" class="note-comment">MOD: {{ nota.commento }}</p>
       </div>
     </section>
     <div class="open">
@@ -146,7 +135,7 @@ p.categoria, p.autore {
 }
 
 p.stato {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: bold;
   width: fit-content;
@@ -156,5 +145,11 @@ p.stato {
   color: #fff;
   cursor: default;
   box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
+}
+
+p.note-comment {
+  text-align: start;
+  color: red;
+  font-weight: bold;
 }
 </style>
