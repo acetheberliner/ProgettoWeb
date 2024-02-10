@@ -32,6 +32,7 @@ export async function notesFromID(req: Request, res: Response) {
   res.json(results);
 }
 
+//note per stato
 export async function notesFromState(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
@@ -41,10 +42,11 @@ export async function notesFromState(req: Request, res: Response) {
   res.json(results);
 }
 
+//note per utente
 export async function notesFromUser(req: Request, res: Response) {
   const connection = await getConnection();
   const [results] = await connection.execute(
-    "SELECT idnote, titolo, categoria, data, autore, testo, stato FROM note WHERE autore = ?",
+    "SELECT idnote, titolo, categoria, data, autore, testo, stato, commento FROM note WHERE autore = ?",
     [req.params.id]
   );
   res.json(results);

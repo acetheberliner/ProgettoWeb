@@ -15,7 +15,8 @@ export default defineComponent({
   data() {
     return {
       passMod: "setmod",
-      passinput: ""
+      passinput: "",
+      userNotes: [] as Nota[]
     }
   },
   methods: {
@@ -23,7 +24,19 @@ export default defineComponent({
       await axios.post("/api/auth/logout");
       window.location.href="/";
     },
+    
+    async fetchUserNotes() {
+      try {
+        const response = await axios.get(`/api/usernote/${this.user?.username}`);
+        this.userNotes = response.data; // Assumendo che la risposta contenga un array di note
+      } catch (error) {
+        console.error("Errore durante il recupero delle note dell'utente", error);
+      }
+    },
   },
+  mounted(){
+    this.fetchUserNotes();
+  }
 });
 </script>
 
@@ -51,15 +64,21 @@ export default defineComponent({
       </div>
       <div class="personal-notes">
         <h1>Le tue note</h1>
-        <div class="single-note">
-          <p v-if="user?.username == nota.autore">{{ nota.titolo }}</p>
+        <hr>
+        <div class="single-note" v-for="nota in userNotes" :key="nota.idnote">
+          <p class="note-title"><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
+          <!----------------------------------------------------------------------------------------------------------------->
+          <p v-if="nota.stato == 'approvata'" class="stato bg-success text-white">{{ nota.stato }}</p>
+          <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+          <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
+          <!----------------------------------------------------------------------------------------------------------------->
+          <p v-if="nota.stato == 'da approvare' || nota.stato == 'rifiutata'" class="comment">*MOD: {{ nota.commento }}</p>
         </div>
       </div>
     </div>
   </main>
 </template>
 
-  
 <style scoped>
 * {
   font-family: "Montserrat", sans-serif;
@@ -93,7 +112,6 @@ export default defineComponent({
     flex-direction: column;
     width: fit-content;
     height: fit-content;
-    /* margin-left: 29em; */
     padding: 4vh;
     border: 1px solid white;
     border-radius: 10px;
@@ -219,5 +237,51 @@ div.personal-notes {
   backdrop-filter:blur(20px);
   box-shadow: rgb(168, 184, 201) 0px 10px 30px -10px;
   padding: 4vh;
+}
+
+hr {
+  border: 1px solid white;
+  border-radius: 50px;
+}
+
+.single-note {
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 0.8em;
+  margin-bottom: 0.5em;
+  background-color: white;
+  color: #235971;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
+}
+
+img#document{
+  width: 35px;
+  margin-right: 5px;
+}
+
+p.note-title {
+  margin: 0px;
+}
+
+p.stato {
+  text-transform: uppercase;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
+}
+
+p.comment {
+  color: red;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 15px;
+  padding-top: 5px;
+  margin-bottom: 0px;
 }
 </style>
