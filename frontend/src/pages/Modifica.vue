@@ -53,6 +53,42 @@
       async closeNote() {
         window.location.href = "/explore";
       },
+
+      async approvaNota() {
+        alert("Nota approvata correttamente!");
+        window.location.href = "/explore";
+        await axios.post(`/api/updateState/${this.newNote.idnote}`, {
+            idnote: this.newNote.idnote,
+            state: 'approvata'
+        });
+      },
+
+      async rifiutaNota() {
+        alert("Nota rifiutata correttamente!");
+        window.location.href = "/explore";
+        await axios.post(`/api/updateState/${this.newNote.idnote}`, {
+            idnote: this.newNote.idnote,
+            state: 'rifiutata'
+        });
+      },
+
+      checkUserPermission() {
+        return this.user && (this.user.role === 'mod' || this.user.username === this.nota?.autore);
+      },
+
+      async deleteNote(id: number) {
+        console.log("ID della nota:", id);
+        if (confirm("Sei sicuro di voler eliminare questa nota?")) {
+          try {
+            const response = await axios.delete(`/api/deletePost/${id}`);
+            console.log("Nota eliminata con successo:", response.data);
+            this.closeNote();
+          } catch (error) {
+            console.error("Errore durante l'eliminazione della nota:", error);
+          }
+        }
+      },
+
     },
     mounted() {
       this.getNote();
@@ -78,12 +114,21 @@
         </div>
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
+        <!--------------------------------------------------------------------------------------------------------->
+        <button class="delete btn-danger" v-if="checkUserPermission()" @click="nota && deleteNote(nota.idnote)">Elimina</button>
         <button class="create bg-primary" @click="editNote()">Modifica</button>
         <a id="close" class="btn btn-warning text-dark" @click="closeNote()">Chiudi</a>
-        <div class="confirmation" v-if="user?.role == 'mod' && nota?.stato == 'da approvare'">
-          <button class="check"><img id="conf-button" src="/check.svg" title="Approva nota"></button>
-          <button class="cross"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
+        <!--------------------------------------------------------------------------------------------------------->
+        <div class="confirmation" v-if="user?.role == 'mod' && (nota?.stato == 'da approvare' || nota?.stato == 'rifiutata')">
+          <div class="buttons">
+            <button class="check" @click="approvaNota()"><img id="conf-button" src="/check.svg" title="Approva nota"></button>
+            <button class="cross" @click="rifiutaNota()"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
+          </div>
+          <div class="comment" v-if="user?.role == 'mod' && (nota?.stato == 'da approvare' || nota?.stato == 'rifiutata')">
+            <textarea placeholder="Commento moderatore..." cols="40" rows="3"></textarea>
+          </div>
         </div>
+        <!--------------------------------------------------------------------------------------------------------->
       </div>
     </div>
   </div>
@@ -130,9 +175,15 @@
 
 div.confirmation {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: flex-start;
   margin-top: 35px;
+  align-items: center;
+}
+
+div.buttons {
+  display: flex;
+  flex-direction: column;
 }
 
 img#document{
@@ -185,7 +236,28 @@ button.create {
   transition: all 0.1s ease-in-out;
 }
 
-button.create:hover {
+button.delete {
+  position: absolute;
+  bottom: 10px;
+  right: 192px;
+  padding: 0.8em 1em;
+  display: flex;
+  cursor: pointer;
+  border: none;
+  text-transform: uppercase;
+  background-color: #e92b12;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: inherit;
+  z-index: 0;
+  overflow: hidden;
+  box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
+  transition: all 0.1s ease-in-out;
+}
+
+button.create:hover, button.delete:hover {
   transform: scale(1.06);
 }
 
