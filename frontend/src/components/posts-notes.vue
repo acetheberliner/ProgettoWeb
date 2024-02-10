@@ -35,7 +35,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="note"> 
+  <div class="note" v-if="nota.stato == 'approvata'"> 
     <section>
       <h3>{{ nota.titolo }}</h3>
       <p class="categoria">{{ nota.categoria }}</p>
@@ -43,12 +43,12 @@ export default defineComponent({
       <hr />
       <div>
         <p v-if="nota.stato == 'approvata'" class="stato bg-success">{{ nota.stato }}</p>
-        <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
-        <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p>
+        <!-- <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+        <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p> -->
       </div>
-      <div class="commento">
+      <!-- <div class="commento">
         <p v-if="nota.stato == 'rifiutata'" class="note-comment">MOD: {{ nota.commento }}</p>
-      </div>
+      </div> -->
     </section>
     <div class="open">
       <button @click="visualizzaNota()" id="open">Visualizza</button>
