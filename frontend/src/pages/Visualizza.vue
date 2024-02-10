@@ -128,6 +128,7 @@ p.stato {
   font-size: 13px;
   margin-left: 0px;
   cursor: default;
+  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
 }
 
 .secondary_info {
@@ -152,12 +153,14 @@ hr {
   bottom: 0;
   right: 0;
   margin: 20px;
+  
 }
 
 button {
-  margin-right: 8px;
+  margin-right: 10px;
   text-transform: uppercase;
   font-weight: bold;
+  box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
 }
 
 .svgicon {

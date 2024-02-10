@@ -96,6 +96,7 @@ button {
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
+  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
 }
 
 .note {
@@ -154,5 +155,6 @@ p.stato {
   font-size: 13px;
   color: #fff;
   cursor: default;
+  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
 }
 </style>
