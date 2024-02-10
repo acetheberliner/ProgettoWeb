@@ -40,18 +40,14 @@
       },
 
       async editNote() {
-        try {
-          await axios.post("/api/editPost", {
-            idnote: this.newNote.idnote,
-            title: this.newNote.title,
-            category: this.newNote.category,
-            text: this.newNote.text,
-          });
-        } catch(e) {
-          console.error('Errore', e)
-        }
         alert("Nota modificata con successo!");
-        window.location.href = "/";
+        window.location.href = "/explore";
+        await axios.post("/api/editPost", {
+          idnote: this.newNote.idnote,
+          title: this.newNote.title,
+          category: this.newNote.category,
+          text: this.newNote.text,
+        });
       },
 
       async closeNote() {
@@ -82,8 +78,12 @@
         </div>
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
-        <button class="create bg-success" @click="editNote()">Modifica</button>
-        <a id="close" class="btn btn-danger" @click="closeNote()">Chiudi</a>
+        <button class="create bg-primary" @click="editNote()">Modifica</button>
+        <a id="close" class="btn btn-warning text-dark" @click="closeNote()">Chiudi</a>
+        <div class="confirmation" v-if="user?.role == 'mod' && nota?.stato == 'da approvare'">
+          <button class="check"><img id="conf-button" src="/check.svg" title="Approva nota"></button>
+          <button class="cross"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
+        </div>
       </div>
     </div>
   </div>
@@ -128,22 +128,40 @@
   margin-right: 10px;
 }
 
+div.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 35px;
+}
+
 img#document{
   width: 50px;
   margin: 0px;
 }
 
+img#conf-button{
+  width: 50px;
+  margin: 0px;
+}
+
+button.check, button.cross {
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  background-color: transparent;
+  margin-bottom: 10px;
+  transition: all 0.1s ease-in-out;
+}
+
+button.check:hover, button.cross:hover {
+  transform: scale(1.2);
+} 
+
 .secondary_info {
   text-align: end;
   font-weight: bold;
   margin-right: 10px;
-}
-
-.create{
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 0.6em;
-  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
 }
 
 button.create {
@@ -156,13 +174,19 @@ button.create {
   border: none;
   text-transform: uppercase;
   background-color: #356cb1;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #fff;
-  font-weight: 300;
+  font-weight: bold;
   font-size: 13px;
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
+  box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
+  transition: all 0.1s ease-in-out;
+}
+
+button.create:hover {
+  transform: scale(1.06);
 }
 
 hr {
@@ -207,12 +231,17 @@ a#close {
   text-transform: uppercase;
   border-radius: 10px;
   color: #fff;
-  font-weight: 300;
+  font-weight: bold;
   font-size: 13px;
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+  box-shadow: rgb(29, 44, 59) 0px 10px 10px -10px;
+  transition: all 0.1s ease-in-out;
+}
+
+a#close:hover {
+  transform: scale(1.06);
 }
 
 </style>

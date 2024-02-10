@@ -48,7 +48,7 @@
       },
     },
   })
-  </script>
+</script>
 
 <template>
   <h2 class="titolo">Aggiungi Nota</h2>
@@ -69,7 +69,7 @@
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
         <button class="create bg-success" @click="createNote">Crea nota</button>
-        <a id="close" class="btn btn-danger" @click="closeNote()">Chiudi</a>
+        <a id="close" class="btn btn-warning text-dark" @click="closeNote()">Chiudi</a>
       </div>
     </div>
   </div>
@@ -125,13 +125,6 @@ img#document{
   margin-right: 10px;
 }
 
-.create{
-  border: 1px solid white;
-  border-radius: 10px;
-  padding: 0.6em;
-  box-shadow: rgb(29, 44, 59) 0px 10px 30px -10px;
-}
-
 button.create {
   position: absolute;
   bottom: 10px;
@@ -144,11 +137,12 @@ button.create {
   background-color: #356cb1;
   border-radius: 10px;
   color: #fff;
-  font-weight: 300;
+  font-weight: bold;;
   font-size: 13px;
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
+  box-shadow: rgb(29, 44, 59) 0px 10px 30px -10px;
 }
 
 hr {
@@ -192,8 +186,7 @@ a#close {
   border: none;
   text-transform: uppercase;
   border-radius: 10px;
-  color: #fff;
-  font-weight: 300;
+  font-weight: bolder;
   font-size: 13px;
   font-family: inherit;
   z-index: 0;
