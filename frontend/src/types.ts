@@ -6,6 +6,7 @@ export interface Nota {
   data: string
   testo: string
   stato: string
+  commento: string
 }
 
 export interface User {

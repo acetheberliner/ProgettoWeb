@@ -17,6 +17,7 @@
             title: '',
             category: '',
             text: '',
+            comment: ''
         },
       };
     },
@@ -35,8 +36,8 @@
           this.newNote.title = this.nota.titolo;
           this.newNote.category = this.nota.categoria;
           this.newNote.text = this.nota.testo;
+          this.newNote.comment = this.nota.commento;
         }
-        
       },
 
       async editNote() {
@@ -59,7 +60,8 @@
         window.location.href = "/explore";
         await axios.post(`/api/updateState/${this.newNote.idnote}`, {
             idnote: this.newNote.idnote,
-            state: 'approvata'
+            comment: this.newNote.comment,
+            state: 'approvata',
         });
       },
 
@@ -68,7 +70,8 @@
         window.location.href = "/explore";
         await axios.post(`/api/updateState/${this.newNote.idnote}`, {
             idnote: this.newNote.idnote,
-            state: 'rifiutata'
+            comment: this.newNote.comment,
+            state: 'rifiutata',
         });
       },
 
@@ -125,7 +128,7 @@
             <button class="cross" @click="rifiutaNota()"><img id="conf-button" src="/cross.svg" title="Rifiuta nota"></button>
           </div>
           <div class="comment" v-if="user?.role == 'mod' && (nota?.stato == 'da approvare' || nota?.stato == 'rifiutata')">
-            <textarea placeholder="Commento moderatore..." cols="40" rows="3"></textarea>
+            <textarea v-model="newNote.comment" placeholder="Commento moderatore..." cols="40" rows="3"></textarea>
           </div>
         </div>
         <!--------------------------------------------------------------------------------------------------------->
