@@ -34,9 +34,9 @@ export default defineComponent({
       }
     },
 
-    async visualizzaNota() {
+    async visualizzaNota(idnote: number) {
       this.$router.push({ 
-        path: `/view/${this.nota.idnote}`,
+        path: `/view/${idnote}`,
         query: { 
           titolo: this.nota.titolo,
           categoria: this.nota.categoria,
@@ -84,7 +84,7 @@ export default defineComponent({
         <h1>Le tue note</h1>
         <hr>
         <div class="single-note" v-for="nota in userNotes" :key="nota.idnote">
-          <a class="note-button" @click="visualizzaNota()">
+          <a class="note-button" @click="visualizzaNota(nota.idnote)">
             <p class="note-title"><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
             <!----------------------------------------------------------------------------------------------------------------->
             <p v-if="nota.stato == 'approvata'" class="stato bg-success text-white">{{ nota.stato }}</p>
