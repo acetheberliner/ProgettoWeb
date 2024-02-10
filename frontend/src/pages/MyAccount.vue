@@ -28,11 +28,26 @@ export default defineComponent({
     async fetchUserNotes() {
       try {
         const response = await axios.get(`/api/usernote/${this.user?.username}`);
-        this.userNotes = response.data; // Assumendo che la risposta contenga un array di note
+        this.userNotes = response.data;
       } catch (error) {
         console.error("Errore durante il recupero delle note dell'utente", error);
       }
     },
+
+    async visualizzaNota() {
+      this.$router.push({ 
+        path: `/view/${this.nota.idnote}`,
+        query: { 
+          titolo: this.nota.titolo,
+          categoria: this.nota.categoria,
+          autore: this.nota.autore,
+          data: this.nota.data,
+          testo: this.nota.testo,
+          stato: this.nota.stato,
+          commento: this.nota.commento,
+        }
+      });
+    }
   },
   mounted(){
     this.fetchUserNotes();
@@ -44,6 +59,7 @@ export default defineComponent({
   <h1 v-if="user?.role == 'mod'">Profilo <span id="usermod" :class="{'bg-warning': user?.role == 'mod'}">Moderatore</span></h1>
   <h1 v-else>Profilo Utente</h1>
   <main>
+    <!----------------------------------------------------------------------------------------------------------------->
     <div class="page">
       <article>
         <div class="user-image">
@@ -59,20 +75,24 @@ export default defineComponent({
         </div>
         <button @click="logout()" class="btn btn-outline-danger"><img id="logout" src="/logout.svg" alt="Logout"/></button>
       </article>
+      <!----------------------------------------------------------------------------------------------------------------->
       <div class="animation">
         <lottie-player src="https://lottie.host/734e9cf7-ddf2-4380-a671-99d11d4a6240/JauVdy6sdh.json" background="transparent" speed="1" style="width: 550px; height: 550px" direction="1" mode="normal" loop autoplay></lottie-player>
       </div>
+      <!----------------------------------------------------------------------------------------------------------------->
       <div class="personal-notes">
         <h1>Le tue note</h1>
         <hr>
         <div class="single-note" v-for="nota in userNotes" :key="nota.idnote">
-          <p class="note-title"><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
-          <!----------------------------------------------------------------------------------------------------------------->
-          <p v-if="nota.stato == 'approvata'" class="stato bg-success text-white">{{ nota.stato }}</p>
-          <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
-          <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
-          <!----------------------------------------------------------------------------------------------------------------->
-          <p v-if="nota.stato == 'da approvare' || nota.stato == 'rifiutata'" class="comment">*MOD: {{ nota.commento }}</p>
+          <a class="note-button" @click="visualizzaNota()">
+            <p class="note-title"><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
+            <!----------------------------------------------------------------------------------------------------------------->
+            <p v-if="nota.stato == 'approvata'" class="stato bg-success text-white">{{ nota.stato }}</p>
+            <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+            <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
+            <!----------------------------------------------------------------------------------------------------------------->
+            <p v-if="nota.stato == 'da approvare' || nota.stato == 'rifiutata'" class="comment">*MOD: {{ nota.commento }}</p>
+          </a>
         </div>
       </div>
     </div>
@@ -141,6 +161,7 @@ main {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
 
 span#usermod {
@@ -237,6 +258,8 @@ div.personal-notes {
   backdrop-filter:blur(20px);
   box-shadow: rgb(168, 184, 201) 0px 10px 30px -10px;
   padding: 4vh;
+  max-height: 60vh;
+  overflow-y: scroll;
 }
 
 hr {
@@ -248,12 +271,18 @@ hr {
   border: 1px solid white;
   border-radius: 10px;
   padding: 0.8em;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
   background-color: white;
   color: #235971;
   font-weight: bold;
   font-size: 18px;
   width: 100%;
+  transition: all 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.single-note:hover {
+  transform: scale(1.08);
 }
 
 img#document{
@@ -284,4 +313,34 @@ p.comment {
   padding-top: 5px;
   margin-bottom: 0px;
 }
+
+.note-button {
+  border: none;
+}
+
+/*- SCROLLBAR -----------------------------------------------------------------------------------------------------------------------------------*/
+.personal-notes {
+  --sb-thumb-color: #ffffff;
+  --sb-track-color: #2568bf00;
+  --sb-size: 6px;
+
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  overflow-y: scroll;
+  cursor: pointer;
+}
+
+.personal-notes::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+.personal-notes::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 12px;
+}
+
+.personal-notes::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 12px;
+}
+
 </style>

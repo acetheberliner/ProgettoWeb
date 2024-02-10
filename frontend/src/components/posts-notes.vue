@@ -10,11 +10,7 @@ export default defineComponent({
       default: () => ({})
     }  
   },
-  data() {
-    return {
-      notes: null as Nota | null
-    };
-  },
+  data() {},
   methods: {
     async visualizzaNota() {
       this.$router.push({ 
@@ -42,13 +38,8 @@ export default defineComponent({
       <p class="autore">{{ nota.autore }}</p>
       <hr />
       <div>
-        <p v-if="nota.stato == 'approvata'" class="stato bg-success">{{ nota.stato }}</p>
-        <!-- <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
-        <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger">{{ nota.stato }}</p> -->
+        <p class="stato bg-success">{{ nota.stato }}</p>
       </div>
-      <!-- <div class="commento">
-        <p v-if="nota.stato == 'rifiutata'" class="note-comment">MOD: {{ nota.commento }}</p>
-      </div> -->
     </section>
     <div class="open">
       <button @click="visualizzaNota()" id="open">Visualizza</button>

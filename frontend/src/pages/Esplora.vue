@@ -128,10 +128,11 @@ option {
 .content {
   --sb-thumb-color: #ffffff;
   --sb-track-color: #2568bf00;
-  --sb-size: 6px;
+  --sb-size: 8px;
 
   scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
-  overflow: scroll;
+  overflow-y: scroll;
+  cursor: pointer;
 }
 
 .content::-webkit-scrollbar {
