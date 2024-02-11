@@ -99,10 +99,10 @@ export default defineComponent({
     </div>
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
-  <div v-if="user?.role == 'mod'" class="container">
+  <div v-if="user?.role == 'mod'" id="appr">
     <h3>Approva</h3>
     <div class="approva">
-      <div class="note-approvation container">
+      <div class="note-approvation">
         <div v-for="nota in datiNote">
           <a class="note-button" @click="visualizzaNota(nota.idnote)">
             <div class="bubble" v-if="nota.stato != 'approvata'">
@@ -128,7 +128,7 @@ export default defineComponent({
 div.bubble {
   border: 1px solid white;
   border-radius: 10px;
-  margin-right: 10px;
+  margin-right: 20px;
   padding: 0.6em;
   background-color: #fff;
   width: 11em;
@@ -137,7 +137,7 @@ div.bubble {
 }
 
 div.bubble:hover {
-  transform: scale(1.06);
+  transform: scale(1.09);
 }
 
 .note-button {
@@ -153,6 +153,12 @@ p.note-title {
 img#document{
   width: 35px;
   margin-right: 5px;
+}
+
+div#appr {
+  justify-content: end;
+  margin-left: 1.5em;
+  margin-top: 30px;
 }
 
 p.stato {
@@ -260,7 +266,7 @@ option {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow: auto; /*  <-------------------DOPO AVER PULITO App.vue RICONTROLLARE-----------------------  */
+  overflow: auto;
 }
 
 .pre {
@@ -305,11 +311,13 @@ hr {
 .note-approvation {
   display: flex;
   flex-direction: row;
+  /* justify-content: center; */
 }
 
 h3{
   font-weight: bold;
-  text-align: center;
+  /* text-align: center; */
+  margin-left: 0.5em;
 }
 
 .postnotes {
