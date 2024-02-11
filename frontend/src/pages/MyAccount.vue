@@ -80,8 +80,6 @@ export default defineComponent({
             <p v-if="nota.stato == 'approvata'" class="stato bg-success text-white">{{ nota.stato }}</p>
             <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
             <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
-            <!----------------------------------------------------------------------------------------------------------------->
-            <!-- <p v-if="nota.stato == 'rifiutata'" class="comment">*MOD: {{ nota.commento }}</p> -->
           </a>
         </div>
       </div>

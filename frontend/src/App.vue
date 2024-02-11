@@ -90,6 +90,12 @@ export default defineComponent({
   .header-logo > p {
     text-align: center;
   }
+
+  main {
+    background-size: 110% 110%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 /*------------------------------------------------------------------------------------ */
 
