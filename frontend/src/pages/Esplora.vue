@@ -311,12 +311,10 @@ hr {
 .note-approvation {
   display: flex;
   flex-direction: row;
-  /* justify-content: center; */
 }
 
 h3{
   font-weight: bold;
-  /* text-align: center; */
   margin-left: 0.5em;
 }
 
