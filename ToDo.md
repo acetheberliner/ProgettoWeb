@@ -13,7 +13,7 @@
 - elimina solo se mod o creatore [FATTO]
 - modifica solo se mod o creatore [FATTO]
 - aggiunto updateState (sottoforma di post, sia l'id della nota e che lo stato) [FATTO]
-- approvazione delle note in esplora
+- approvazione delle note in esplora [FATTO]
 
 # prof
 - Utente moderatore. [FATTO]
