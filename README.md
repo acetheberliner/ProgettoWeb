@@ -1,6 +1,6 @@
 **NoteSync**
 
-<u>Funzionalità</u>
+Funzionalità
 NoteSync è una piattafroma di condivisione appunti e note, in particolare il servizio permette all'utente che visita la pagina di accedervi creando un profilo tramite l'inserimento di un nome utente e una password e tramite tale consente di tenere traccia del proprio apporto alla pagina per quanto riguarda le varie pubblicazioni.
 
 All'accesso l'utente ha a disposizione quattro pagine:
