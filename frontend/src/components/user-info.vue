@@ -21,7 +21,8 @@ export default defineComponent({
 <template>
   <RouterLink to="/myaccount" class="routerlink">
     <div class="profile">
-      <span id="user" class="text-sm">{{ user?.username }}</span>
+      <span id="user" v-if="user?.role == 'mod'" class="text-sm text-warning">{{ user?.username }}</span>
+      <span id="user" v-else class="text-sm">{{ user?.username }}</span>
       <img src="/user.svg" alt="user" />
     </div>
   </RouterLink>
