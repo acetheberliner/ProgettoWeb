@@ -299,7 +299,6 @@ hr {
   width: 100%;
   color: #fff;
   margin-top: 0px;
-  margin-bottom: 10px;
   --sb-thumb-color: #ffffff;
   --sb-track-color: #2568bf00;
   --sb-size2: 4px;

@@ -13,13 +13,12 @@
         {{ nota.autore }}<br />
         {{ nota.data }}
       </div>
+      <p v-if="nota?.stato == 'rifiutata'" class="comment"><span class="font-weight-bold">*Moderatore:</span> {{ nota.commento }}</p>
       <hr>
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">
         <button class="btn btn-danger" v-if="checkUserPermission()" @click="nota && deleteNote(nota.idnote)">Elimina</button>
-        
         <button class="btn btn-primary" v-if="checkUserPermission()" @click="editNote()">Modifica</button>
-        
         <button class="btn btn-warning" @click="closeNote()">Chiudi</button>
       </div>
     </div>
@@ -91,6 +90,12 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+.comment {
+  color: red;
+  font-weight: 100;
+  font-style: italic;
 }
 
 .note-details {
