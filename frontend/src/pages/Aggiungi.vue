@@ -51,9 +51,9 @@
 </script>
 
 <template>
-  <h2 class="titolo">Aggiungi Nota</h2>
   <div class="page">
     <div class="contenitore">
+      <h2 class="titolo">Aggiungi Nota</h2>
       <div id="light" class="white_content">
         <div class="title">
           <h2>
@@ -68,7 +68,7 @@
         </div>
         <hr />
         <textarea v-model="newNote.text" placeholder="Scrivi qui..." required></textarea>
-        <button class="create bg-success" @click="createNote">Crea nota</button>
+        <button class="create btn bg-success" @click="createNote">Crea nota</button>
         <a id="close" class="btn btn-warning text-dark" @click="closeNote()">Chiudi</a>
       </div>
     </div>
@@ -80,17 +80,32 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+@media screen and (max-width: 1550px) {
+  .contenitore {
+    display: block;
+  }
+  
+  h2 {
+    font-size: 20px;
+  }
+  .white_content {
+    margin-top:6%;
+    margin-left: 18%;
+  }
+}
+
+@media screen and (min-width: 1551px) {
+  .contenitore {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
 .titolo {
   text-align: center;
   font-weight: bold;
   margin-bottom: 25px;
-}
-
-
-.contenitore {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .white_content {
@@ -152,6 +167,14 @@ hr {
   margin: 10px 0;
 }
 
+.btn {
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.08);
+}
+
 input {
   border: 1px solid rgb(211, 208, 208);
   border-radius: 10px;
@@ -191,6 +214,5 @@ a#close {
   font-family: inherit;
   z-index: 0;
   overflow: hidden;
-  transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
 }
 </style>

@@ -11,7 +11,6 @@
     data() {
       return {
         nota: null as Nota | null,
-        textInput: '',
         newNote: {
             idnote: 0,
             title: '',
@@ -27,7 +26,7 @@
         try {
           const response = await axios.get(`/api/noteid/${notaId}`);
           this.nota = response.data[0];
-          console.log(this.nota);
+          // console.log(this.nota);
         } catch(error) {
           console.error("Errore durante il recupero delle informazioni della nota:", error);
         }
@@ -104,9 +103,9 @@
   <div class="page">
     <div class="contenitore">
       <div id="light" class="white_content">
-        <div class="title">
+        <div>
           <h2>
-            <input v-model="newNote.title" placeholder="Titolo" required/>
+            <input class="title" v-model="newNote.title" placeholder="Titolo" required/>
             <div class="svgicon">
               <img id="document" src="/paper-document-svgrepo-com.svg" alt="" />
             </div>
@@ -278,6 +277,10 @@ input {
   border-radius: 10px;
   padding: 8px;
   margin-top: 5px;
+}
+
+input.title {
+  width: 45%;
 }
 
 textarea {

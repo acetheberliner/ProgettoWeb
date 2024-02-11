@@ -23,7 +23,8 @@ export default defineComponent({
     <div class="profile">
       <span id="user" v-if="user?.role == 'mod'" class="text-sm text-warning">{{ user?.username }}</span>
       <span id="user" v-else class="text-sm">{{ user?.username }}</span>
-      <img src="/user.svg" alt="user" />
+      <img v-if="user?.role == 'mod'" src="/crown.svg" alt="mod" />
+      <img v-else src="/user.svg" alt="user" />
     </div>
   </RouterLink>
   <img id="logout" src="/logout.svg" alt="Logout" @click="logout()"/>
@@ -39,6 +40,7 @@ export default defineComponent({
   .profile{
     width: fit-content;
     height: fit-content;
+    vertical-align: middle;
   }
 }
 

@@ -46,7 +46,7 @@ export default defineComponent({
       try {
         const response = await axios.get(`/api/noteid/${notaId}`);
         this.nota = response.data[0];
-        console.log(this.nota);
+        // console.log(this.nota);
       } catch(error) {
         console.error("Errore durante il recupero delle informazioni della nota:", error);
       }
@@ -96,6 +96,14 @@ export default defineComponent({
   color: red;
   font-weight: 100;
   font-style: italic;
+}
+
+.btn {
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.1);
 }
 
 .note-details {

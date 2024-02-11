@@ -1,24 +1,21 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { PropType, defineComponent } from "vue";
+import { User, Nota } from "../types";
 import axios from "axios";
-import { Nota } from "../types";
-import { User } from "../types";
 import PostNotes from "../components/posts-notes.vue";
 
 export default defineComponent({
   components: { PostNotes },
   props: {
+    user: Object as PropType<User>,
     nota: {
       type: Object as () => Nota,
-      required: true,
       default: () => ({})
     }
   },
   data() {
     return {
       datiNote: [] as Nota[],
-      notePerState: [] as Nota[],
-      user: null as User | null,
       categories: [] as String[],
       selectedCategory: '',
       newNote: {
@@ -44,24 +41,8 @@ export default defineComponent({
       this.categories = res.data.map((categoria: { categoria: any; }) => categoria.categoria); // Supponendo che le categorie siano restituite come un array di stringhe
     },
 
-    async getUser() {
-      const res = await axios.get("/api/auth/profile");
-      this.user = res.data;
-    },
-
-    async fetchNotesState() {
-      try {
-        const response = await axios.get(`/api/state/${this.nota?.stato}`);
-        this.notePerState = response.data;
-      } catch (error) {
-        console.error("Errore durante il recupero delle note per stato", error);
-      }
-    },
-
     async visualizzaNota(idnote: number) {
-      this.$router.push({ 
-        path: `/view/${idnote}`
-      });
+      this.$router.push({ path: `/view/${idnote}` });
     }
   },
   watch: {
@@ -71,10 +52,8 @@ export default defineComponent({
   },
   mounted() {
     this.getNote();
-    this.getUser();
     this.getCategories();
     this.getNotebyCategory();
-    this.fetchNotesState();
   },
 });
 </script>
@@ -100,16 +79,15 @@ export default defineComponent({
   </div>
   <!------------------------------------------------------------------------------------------------------------------------------------------->
   <div v-if="user?.role == 'mod'" id="appr">
-    <h3>Approva</h3>
+    <h3>Approvazione</h3>
     <div class="approva">
       <div class="note-approvation">
         <div v-for="nota in datiNote">
           <a class="note-button" @click="visualizzaNota(nota.idnote)">
-            <div class="bubble" v-if="nota.stato != 'approvata'">
+            <div class="bubble" v-if="nota.stato == 'da approvare'">
               <p class="note-title "><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
               <!----------------------------------------------------------------------------------------------------------------->
               <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
-              <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
             </div>
           </a>
         </div>

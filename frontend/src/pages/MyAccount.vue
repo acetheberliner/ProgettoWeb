@@ -8,15 +8,16 @@ export default defineComponent({
     user: Object as PropType<User>,
     nota: {
       type: Object as () => Nota,
-      required: true,
       default: () => ({})
     }
   },
+
   data() {
     return {
       userNotes: [] as Nota[]
     }
   },
+
   methods: {
     async logout() {
       await axios.post("/api/auth/logout");
@@ -57,7 +58,8 @@ export default defineComponent({
         </div>
         <div class="title">
           <h2>Bentornato</h2>
-          <h2 class="username">{{ user?.username }}!</h2>
+          <h2 v-if="user?.role == 'mod'" class="username text-warning">{{ user?.username }}!</h2>
+          <h2 v-else class="username text-light">{{ user?.username }}!</h2>
         </div>
         <div class="ruolo">
           <p class="role" v-if="user?.role == 'mod' ">Ruolo: <span class="role">Moderatore</span></p>
@@ -73,6 +75,7 @@ export default defineComponent({
       <div class="personal-notes">
         <h1>Le tue note</h1>
         <hr>
+        <p class="no-notes text-center" v-if="userNotes.length==0">Non hai note</p>
         <div class="single-note" v-for="nota in userNotes" :key="nota.idnote">
           <a class="note-button" @click="visualizzaNota(nota.idnote)">
             <p class="note-title"><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
@@ -92,7 +95,7 @@ export default defineComponent({
   font-family: "Montserrat", sans-serif;
 }
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1550px){
   .user-image {
     display: flex;
     justify-content: center;
@@ -103,45 +106,57 @@ export default defineComponent({
     justify-content: center;
     align-items: center;
   }
+
+  lottie-player {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 1551px) {
+  lottie-player {
+    display: block;
+  }
 }
 /*------------------------------------------------------------------------------------ */
+main {
+  display: flex;
+  flex-direction: row;
+  place-items: center;
+}
 
-@media screen and (min-width: 1301px){
-  main {
-    display: flex;
-    flex-direction: row;
-    place-items: center;
-  }
-  
-  article {
-    font-size: 16px;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    padding: 4vh;
-    border: 1px solid white;
-    border-radius: 10px;
-    background:transparent;
-    place-items: center;
-    backdrop-filter:blur(20px);
-    box-shadow: rgb(100, 170, 245) 0px 20px 30px -10px;
-  }
+article {
+  font-size: 16px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+  padding: 4vh;
+  border: 1px solid white;
+  border-radius: 10px;
+  background:transparent;
+  place-items: center;
+  backdrop-filter:blur(20px);
+  box-shadow: rgb(100, 170, 245) 0px 20px 30px -10px;
+}
 
-  .animation{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 10em;
-    margin-right: 4em;
-  }
+.animation{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10em;
+  margin-right: 4em;
 }
 /*------------------------------------------------------------------------------------ */
 
 main {
   display: flex;
   justify-content: center;
+}
+
+.no-notes {
+  opacity: 0.7;
+  font-weight: lighter;
 }
 
 .page {
@@ -235,9 +250,7 @@ h2 {
 }
 
 h2.username{
-  color: #ffa600;
   filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.884));
-
 }
 
 div.personal-notes {
