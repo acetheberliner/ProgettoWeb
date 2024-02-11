@@ -130,11 +130,35 @@ export default defineComponent({
   }
 }
 /*------------------------------------------------------------------------------------ */
+body {
+  --sb-thumb-color: #ffffff;
+  --sb-track-color: #2568bf00;
+  --sb-size: 8px;
 
-body, html {
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  overflow-y: scroll;
+  cursor: pointer;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track{
+  background: var(--sb-track-color);
+  border-radius: 12px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: var(--sb-thumb-color);
+  border-radius: 12px;
+}
+/*------------------------------------------------------------------------------------ */
+
+body {
   margin: 0px;
   padding: 0;
-  height: 100%;
+  height: 140%;
   font-family: "Montserrat", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
@@ -195,8 +219,7 @@ p {
 main {
   padding: 40px;
   color: #fff;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)),
-    url(/Cloudy.svg);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)), url(/Cloudy.svg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

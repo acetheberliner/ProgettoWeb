@@ -1,38 +1,3 @@
-<template>
-  <div class="pre">
-    <div class="title">
-      <h2>Appunti di studenti</h2>
-    </div>
-    <div class="intro">
-      <p class="slogan">Esplora un ricco assortimento di appunti per ogni materia, arricchisci la tua cultura ed espandi i limiti della tua conoscenza in un solo click!</p>
-    </div>
-    <!------------------------------------------------------------------------------------------------------------------------------------------->
-    <div class="filter selectdiv">
-      <form id="radio" action="#">
-        <select name="Categoria" v-model="selectedCategory">
-          <option id="tutti" value="">Tutti</option>
-          <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
-        </select>
-      </form>
-    </div>
-  </div>
-  <!------------------------------------------------------------------------------------------------------------------------------------------->
-  <div class="background">
-    <div class="content">
-      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" class="postnotes"/>
-    </div>
-  </div>
-  <div v-if="user?.role == 'mod'" class="container">
-    <div class="approva">
-      <h3>Approva</h3>
-      <div class="single-note" v-for="nota in notePerState" :key="nota.idnote">
-        <p v-if="nota.stato === 'da approvare'">{{ nota.titolo }}</p>
-      </div>
-    </div>
-  </div>
-</template>
-<!------------------------------------------------------------------------------------------------------------------------------------------->
-
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
@@ -92,6 +57,12 @@ export default defineComponent({
         console.error("Errore durante il recupero delle note per stato", error);
       }
     },
+
+    async visualizzaNota(idnote: number) {
+      this.$router.push({ 
+        path: `/view/${idnote}`
+      });
+    }
   },
   watch: {
     selectedCategory() {
@@ -107,8 +78,94 @@ export default defineComponent({
   },
 });
 </script>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
+
+<template>
+  <div class="pre">
+    <div class="title">
+      <h2>Appunti di studenti</h2>
+    </div>
+    <div class="intro">
+      <p class="slogan">Esplora un ricco assortimento di appunti per ogni materia, arricchisci la tua cultura ed espandi i limiti della tua conoscenza in un solo click!</p>
+    </div>
+    <!------------------------------------------------------------------------------------------------------------------------------------------->
+    <div class="filter selectdiv">
+      <form id="radio" action="#">
+        <select name="Categoria" v-model="selectedCategory">
+          <option id="tutti" value="">Tutti</option>
+          <option v-for="categoria in categories" :value="categoria">{{ categoria }}</option>
+        </select>
+      </form>
+    </div>
+  </div>
+  <!------------------------------------------------------------------------------------------------------------------------------------------->
+  <div v-if="user?.role == 'mod'" class="container">
+    <h3>Approva</h3>
+    <div class="approva">
+      <div class="note-approvation container">
+        <div v-for="nota in datiNote">
+          <a class="note-button" @click="visualizzaNota(nota.idnote)">
+            <div class="bubble" v-if="nota.stato != 'approvata'">
+              <p class="note-title "><img id="document" src="/paper-document-svgrepo-com.svg" alt="" />{{ nota.titolo }}</p>
+              <!----------------------------------------------------------------------------------------------------------------->
+              <p v-if="nota.stato == 'da approvare'" class="stato bg-warning text-dark">{{ nota.stato }}</p>
+              <p v-if="nota.stato == 'rifiutata'" class="stato bg-danger text-white">{{ nota.stato }}</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="background">
+    <div class="content">
+      <PostNotes v-for="(nota, index) in datiNote" :nota="nota" :key="index" class="postnotes"/>
+    </div>
+  </div>
+</template>
+<!------------------------------------------------------------------------------------------------------------------------------------------->
 
 <style scoped>
+div.bubble {
+  border: 1px solid white;
+  border-radius: 10px;
+  margin-right: 10px;
+  padding: 0.6em;
+  background-color: #fff;
+  width: 11em;
+  height: 5.2em;
+  transition: all 0.1s ease-in-out;
+}
+
+div.bubble:hover {
+  transform: scale(1.06);
+}
+
+.note-button {
+  border: none;
+}
+
+p.note-title {
+  margin: 0px;
+  color: #235971;
+  font-weight: bold;
+}
+
+img#document{
+  width: 35px;
+  margin-right: 5px;
+}
+
+p.stato {
+  text-transform: uppercase;
+  width: fit-content;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 13px;
+  margin: auto;
+  font-weight: bold;
+  box-shadow: rgb(29, 44, 59) 0px 10px 20px -10px;
+}
+
 hr {
   border: none;
   height: 1px;
@@ -148,7 +205,7 @@ option {
 .content {
   --sb-thumb-color: #ffffff;
   --sb-track-color: #2568bf00;
-  --sb-size: 8px;
+  --sb-size: 5px;
 
   scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   overflow-y: scroll;
@@ -159,12 +216,16 @@ option {
   width: var(--sb-size);
 }
 
-.content::-webkit-scrollbar-track {
+.approva::-webkit-scrollbar {
+  height: var(--sb-size2);
+}
+
+.content::-webkit-scrollbar-track, .approva::-webkit-scrollbar-track{
   background: var(--sb-track-color);
   border-radius: 12px;
 }
 
-.content::-webkit-scrollbar-thumb {
+.content::-webkit-scrollbar-thumb, .approva::-webkit-scrollbar-thumb{
   background: var(--sb-thumb-color);
   border-radius: 12px;
 }
@@ -228,15 +289,22 @@ hr {
 }
 
 .approva {
-  border: 1px solid white;
-  border-radius: 12px;
-  padding: 0.8em;
+  padding: 0.9em;
   width: 100%;
-  background-color: white;
-  color: #183252;
-  box-shadow: 5px -5px 10px #f0f0f038, -5px 5px 10px #ffffff1c;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  color: #fff;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  --sb-thumb-color: #ffffff;
+  --sb-track-color: #2568bf00;
+  --sb-size2: 4px;
+  scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  overflow-x: auto;
+  cursor: pointer;
+} 
+
+.note-approvation {
+  display: flex;
+  flex-direction: row;
 }
 
 h3{
