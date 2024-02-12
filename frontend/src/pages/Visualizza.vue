@@ -13,7 +13,7 @@
         {{ nota.autore }}<br />
         {{ nota.data }}
       </div>
-      <p v-if="nota?.stato == 'rifiutata'" class="comment"><span class="font-weight-bold">*Moderatore: <span class="font-weight-light" v-if="nota.commento == null">Nessun commento...</span></span> {{ nota.commento }}</p>
+      <p v-if="nota?.stato == 'rifiutata'" class="comment"><span class="font-weight-bold">*Moderatore: </span> {{ nota.commento }}</p>
       <hr>
       <p v-if="nota" class="testo">{{ nota.testo }}</p>
       <div class="button-area">

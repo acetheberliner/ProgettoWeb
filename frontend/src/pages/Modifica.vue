@@ -65,17 +65,17 @@
       },
 
       async rifiutaNota() {
-        // if(this.newNote.comment == null){
-        //   alert("Commento necessario per rifiutare la nota");
-        // }else {
-        // }
-        alert("Nota rifiutata correttamente!");
-        window.location.href = "/explore";
-        await axios.post(`/api/updateState`, {
-            idnote: this.newNote.idnote,
-            comment: this.newNote.comment,
-            state: 'rifiutata',
-        });
+        if(this.newNote.comment == null){
+          alert("Commento necessario per rifiutare la nota");
+        }else {
+          alert("Nota rifiutata correttamente!");
+          window.location.href = "/explore";
+          await axios.post(`/api/updateState`, {
+              idnote: this.newNote.idnote,
+              comment: this.newNote.comment,
+              state: 'rifiutata',
+          });
+        }
       },
 
       checkUserPermission() {
