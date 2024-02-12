@@ -56,4 +56,5 @@ Il mockup di riferimento è stato realizzato tramite Balsamiq in maniera semplic
 ![Home](https://github.com/filippo16/ProgettoWeb/assets/145445359/8d38f9e8-c1a9-4293-baac-18c149614fd1)
 ![loggedIn](https://github.com/filippo16/ProgettoWeb/assets/145445359/40733e65-768d-4398-8f45-65112421093e)
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
