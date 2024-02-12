@@ -34,8 +34,7 @@ export async function createPost(req: Request, res: Response) {
   try {
     const date = await dateToString();
 
-    const { title, category, text } = req.body; // tolto author e data
-    // preview piuttosto che mandarlo con axios lo crerei qua con const preview = 'qua metterei una funzione che mi accorci text'  
+    const { title, category, text } = req.body;
     const connection = await getConnection();
     const newNoteID = (await getLastNotesID()) + 1;
   
@@ -46,7 +45,6 @@ export async function createPost(req: Request, res: Response) {
     res.status(201).json({ idnote: newNoteID, title, category, date, author: user.username, text });
   } catch (error) {
     console.error('Errore durante la creazione della nota:', error);
-    // Gestisci eventuali errori, ad esempio inviando una risposta di errore al client
     res.status(500).send('Errore durante la creazione della nota.');
   }
 }

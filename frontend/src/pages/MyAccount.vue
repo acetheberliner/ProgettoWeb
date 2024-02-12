@@ -343,5 +343,4 @@ p.comment {
   background: var(--sb-thumb-color);
   border-radius: 12px;
 }
-
 </style>

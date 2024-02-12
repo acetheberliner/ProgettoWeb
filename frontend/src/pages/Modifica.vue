@@ -90,7 +90,6 @@
           }
         }
       },
-
     },
     mounted() {
       this.getNote();
@@ -131,7 +130,6 @@
             <textarea v-model="newNote.comment" placeholder="Commento moderatore..." cols="40" rows="3"></textarea>
           </div>
         </div>
-        <!--------------------------------------------------------------------------------------------------------->
       </div>
     </div>
   </div>

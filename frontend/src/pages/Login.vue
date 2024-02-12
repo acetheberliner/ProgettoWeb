@@ -153,7 +153,6 @@ export default defineComponent({
 }
 /*------------------------------------------------------------------------------ */
 
-
 .title {
   margin-bottom: 2rem;
 }
