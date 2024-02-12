@@ -2,12 +2,12 @@
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Presentazione:
+Presentazione:<br>
 NoteSync è una piattafroma di condivisione appunti e note, in particolare il servizio permette all'utente che visita la pagina di accedervi creando un profilo tramite l'inserimento di un nome utente e una password e tramite tale consente di tenere traccia del proprio apporto alla pagina per quanto riguarda le varie pubblicazioni.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Funzionalità:
+Funzionalità:<br>
 All'accesso l'utente ha a disposizione quattro pagine:
 - Home: homepage del sito contenente alcune informazioni riguardanti il progetto
 - Appunti: Pagina dedicata alla rappresentazione delle note in vista multipla
@@ -36,10 +36,17 @@ L'utente STANDARD invece può:
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Architettura e Presentazione:
+Architettura e Presentazione:<br>
 NoteSync è stato realizzato tramite architettura di sviluppo Vite a cui si deve aggiungere:
 - Framework Bootstrap
 - Lottie per inclusione di contenuti vettoriali
 - SVGRepo per inclusione icone
 
 Lo stile è stato interamente realizzato tramite CSS e Bootstrap
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Storia di Sviluppo:<br>
+Il corso di sviluppo dell'applicazione è stato svolto tramite strumento di controllo di versione Git, per questa ragione è possibile ottenere una documentazione precisa ed attendibile per quanto riguarda progettazione e modifiche apportate alla struttura delle pagine semplicemente accedendo alla timeline di "commit" resa disponibile dalla piattaforma GitHub.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
