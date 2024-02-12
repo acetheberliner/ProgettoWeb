@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import { getConnection } from "../utils/db";
 import { decodeAccessToken } from "../utils/auth";
-import { User } from "../types";
-import { parseArgs } from "util";
 /* ------------------------------------------------------------------------------------------------------------------- */
 
 export async function getLastNotesID() {
