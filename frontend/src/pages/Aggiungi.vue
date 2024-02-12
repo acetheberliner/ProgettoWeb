@@ -44,7 +44,7 @@
       },
 
       async closeNote() {
-        window.location.href = "/explore";
+        history.back();
       },
     },
   })
