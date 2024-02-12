@@ -109,7 +109,7 @@ div.bubble {
   margin-right: 20px;
   padding: 0.6em;
   background-color: #fff;
-  width: 11em;
+  width: 14em;
   height: 5.2em;
   transition: all 0.1s ease-in-out;
 }
