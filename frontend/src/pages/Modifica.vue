@@ -59,7 +59,7 @@
         window.location.href = "/explore";
         await axios.post(`/api/updateState`, {
             idnote: this.newNote.idnote,
-            comment: "",
+            comment: null,
             state: 'approvata',
         });
       },
