@@ -50,3 +50,6 @@ Storia di Sviluppo:<br>
 Il corso di sviluppo dell'applicazione è stato svolto tramite strumento di controllo di versione Git, per questa ragione è possibile ottenere una documentazione precisa ed attendibile per quanto riguarda progettazione e modifiche apportate alla struttura delle pagine semplicemente accedendo alla timeline di "commit" resa disponibile dalla piattaforma GitHub.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Mockup:<br>
+Il mockup di riferimento è stato realizzato tramite Balsamiq in maniera semplice e approsimativa all'inizio del processo e per questo motivo ha subito notevoli cambiamenti e differenziazioni durante il corso della progettazione per quanto riguarda la presentazione e la disposizione delle informazioni.
