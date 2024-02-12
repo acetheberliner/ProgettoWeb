@@ -53,7 +53,8 @@ Il corso di sviluppo dell'applicazione è stato svolto tramite strumento di cont
 
 Mockup:<br>
 Il mockup di riferimento è stato realizzato tramite Balsamiq in maniera semplice e approsimativa all'inizio del processo e per questo motivo ha subito notevoli cambiamenti e differenziazioni durante il corso della progettazione per quanto riguarda la presentazione e la disposizione delle informazioni. Ecco un esempio:
-![Home](https://github.com/filippo16/ProgettoWeb/assets/145445359/8d38f9e8-c1a9-4293-baac-18c149614fd1)
+![Home](https://github.com/filippo16/ProgettoWeb/assets/145445359/bb38af1c-1faa-4f54-86f9-018415565a66)
+
 ![loggedIn](https://github.com/filippo16/ProgettoWeb/assets/145445359/40733e65-768d-4398-8f45-65112421093e)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
