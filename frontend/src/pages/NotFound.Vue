@@ -1,5 +1,10 @@
-
+<script lang="ts">
+import { defineComponent } from 'vue';
 import { RouterLink } from 'vue-router';
+
+export default defineComponent({});
+</script>
+
 <template>
   <div class="error-page">
     <div class="container text-center">
