@@ -118,6 +118,10 @@ div.bubble:hover {
   transform: scale(1.09);
 }
 
+option {
+  font-weight: bold;
+}
+
 .note-button {
   border: none;
 }

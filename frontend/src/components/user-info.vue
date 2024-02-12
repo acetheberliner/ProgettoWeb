@@ -27,7 +27,7 @@ export default defineComponent({
       <img v-else src="/user.svg" alt="user" />
     </div>
   </RouterLink>
-  <img id="logout" src="/logout.svg" alt="Logout" @click="logout()"/>
+  <img id="logout" src="/logout.svg" alt="Logout" title="Logout" @click="logout()"/>
 </template>
 
 <style scoped>
