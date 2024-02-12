@@ -32,6 +32,54 @@ INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (15, 'S
 
 INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (16, 'Costituzione Italiana', 'Diritto', 'matteo.laghi', '2021-09-29', "La Costituzione Italiana, adottata nel 1947, rappresenta il pilastro del sistema legale e politico della Repubblica Italiana. È un documento che stabilisce i principi fondamentali, i diritti dei cittadini, le istituzioni pubbliche e i valori su cui si basa la nazione.");
 
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (17, 'Teoria della Gravitazione', 'Fisica', 'laura.bianchi', '2022-11-15', "La teoria della gravitazione è una delle più importanti teorie della fisica moderna, formulata da Isaac Newton nel XVII secolo. Descrive la forza di attrazione tra due corpi massivi in base alla loro massa e alla distanza tra di essi.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (18, 'Letteratura del Rinascimento', 'Letteratura', 'marco.ferrari', '2023-05-02', "Il Rinascimento è stato un periodo di grande fervore culturale in Europa, caratterizzato da un rinnovato interesse per le arti, la letteratura, la scienza e la filosofia. Nella letteratura, si manifesta attraverso opere di autori come Dante Alighieri, Giovanni Boccaccio e William Shakespeare.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (19, 'Architettura Romanica', 'Arte', 'giovanni.rossi', '2023-08-20', "L'architettura romanica è uno stile architettonico predominante in Europa tra l'XI e il XII secolo. Caratterizzata da archi a tutto sesto, volte a crociera e muri massicci, è spesso associata all'architettura delle chiese durante il Medioevo.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (20, 'Biologia Molecolare', 'Biologia', 'lucia.conti', '2024-01-10', "La biologia molecolare è una disciplina che studia i processi biologici a livello molecolare, concentrando l'attenzione sulle molecole di DNA, RNA e proteine e sulle interazioni tra di esse.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (21, 'Romanzo Realista', 'Letteratura', 'serena.monti', '2023-07-05', "Il romanzo realista è un genere letterario che si propone di rappresentare la realtà in modo fedele e accurato, focalizzandosi sui dettagli della vita quotidiana e sui personaggi realistici.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (22, 'Teoria della Relatività Generale', 'Fisica', 'matteo.rossi', '2022-12-30', "La teoria della relatività generale, sviluppata da Albert Einstein, è una teoria della gravitazione che generalizza e sostituisce la legge di gravitazione universale di Newton, spiegando la gravità come una conseguenza della curvatura dello spazio-tempo causata dalla presenza di materia ed energia.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (23, 'Filosofia Antica', 'Filosofia', 'francesca.rossi', '2023-03-15', "La filosofia antica è la fase iniziale della storia della filosofia occidentale, che si estende dalla sua nascita nel VII secolo a.C. fino alla fine dell'antichità classica. Comprende le scuole filosofiche dei presocratici, di Platone, di Aristotele e dei filosofi stoici, epicurei e scettici.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (24, 'Medioevo Europeo', 'Storia', 'luigi.rossi', '2022-08-12', "Il Medioevo europeo è un periodo della storia europea che si estende dal V al XV secolo, caratterizzato dalla decentralizzazione del potere politico, dall'affermarsi del cristianesimo, dall'ascesa e caduta di imperi e regni, e dalla crescita delle città e del commercio.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (25, 'Chimica Organica', 'Chimica', 'simone.bianchi', '2024-02-01', "La chimica organica è il ramo della chimica che studia i composti contenenti carbonio, esclusi i carbonati, i cianuri e i carburi. È una disciplina fondamentale per la comprensione della vita e delle sue molecole costituenti.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (26, 'Scultura Rinascimentale', 'Arte', 'maria.rossi', '2023-09-18', "La scultura rinascimentale è un movimento artistico che si sviluppò in Italia nel XV secolo, caratterizzato da un ritorno ai valori classici dell'antichità greco-romana, da una maggiore attenzione alla prospettiva e alla naturalezza nel rappresentare la figura umana.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (27, 'Intelligenza Artificiale', 'Informatica', 'andrea.bianchi', '2022-07-20', "L'intelligenza artificiale è un ramo dell'informatica che si occupa dello sviluppo di sistemi in grado di eseguire compiti che richiedono intelligenza umana. Ciò include il riconoscimento di immagini, il linguaggio naturale, la pianificazione, il ragionamento e il problem solving.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (28, 'Storia della Arte Moderna', 'Arte', 'paola.rossi', '2023-11-30', "La storia dell arte moderna è il periodo della storia dell arte che va dalla fine del Rinascimento (XVI secolo) fino alla fine del XIX secolo, caratterizzato da una serie di movimenti artistici innovativi come il barocco, il rococò, il romanticismo, il realismo e l impressionismo.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (29, 'Geometria Analitica', 'Matematica', 'giorgio.bianchi', '2022-10-05', "La geometria analitica è una branca della matematica che si occupa dello studio della geometria attraverso metodi analitici, utilizzando concetti di algebra e calcolo per descrivere le figure geometriche su un sistema di coordinate.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (30, 'Elettronica Digitale', 'Ingegneria', 'elisa.bianchi', '2023-06-15', "La elettronica digitale è un ramo dell'ingegneria elettrica che si occupa di sistemi elettronici basati su segnali discreti rappresentati da numeri binari. È alla base di molte tecnologie moderne, come i computer, i dispositivi di comunicazione e i sistemi di controllo.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (31, 'Filosofia del Rinascimento', 'Filosofia', 'chiara.rossi', '2023-10-10', "La filosofia del Rinascimento è una corrente di pensiero che si sviluppò in Europa tra il XIV e il XVII secolo, caratterizzata da un rinnovato interesse per la filosofia antica, l umanesimo e una visione antropocentrica del mondo.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (32, 'Cinema Italiano', 'Arte', 'mario.bianchi', '2022-09-08', "Il cinema italiano è stato un importante contributo all'arte cinematografica mondiale, con registi come Federico Fellini, Michelangelo Antonioni, Roberto Rossellini e Vittorio De Sica che hanno influenzato il cinema internazionale con le loro opere.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (33, 'Teoria dei Numeri', 'Matematica', 'giovanni.rossi', '2023-08-25', "La teoria dei numeri è una branca della matematica che si occupa dello studio delle proprietà degli interi e delle loro relazioni, come la fattorizzazione, la primalità, le congruenze e le funzioni aritmetiche.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (34, 'Letteratura Latina', 'Letteratura', 'lucia.conti', '2024-01-20', "La letteratura latina comprende opere scritte in lingua latina e abbraccia un vasto periodo che va dalla fondazione di Roma fino alla caduta dell'Impero Romano d'Occidente nel V secolo d.C. Include autori come Ovidio, Virgilio, Orazio e Cicerone.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (35, 'Meccanica Quantistica', 'Fisica', 'marco.ferrari', '2022-11-05', "La meccanica quantistica è una teoria fisica che descrive il comportamento della materia e della radiazione a livello subatomico, dove le leggi della fisica classica non si applicano. Si basa su concetti come lo stato quantico, la sovrapposizione di stati e il principio di indeterminazione di Heisenberg.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (36, 'Arte Moderna', 'Arte', 'serena.monti', '2023-07-25', "L'arte moderna è un movimento artistico che si sviluppò tra la fine del XIX e il XX secolo, caratterizzato da una serie di stili e movimenti innovativi come l'impressionismo, il cubismo, il surrealismo e l'espressionismo.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (37, 'Algoritmi', 'Informatica', 'andrea.bianchi', '2022-07-30', "Gli algoritmi sono procedure o istruzioni step-by-step per risolvere un problema o eseguire un compito. Sono fondamentali nell'informatica per la risoluzione di problemi, l'elaborazione dei dati e l'automazione di processi.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (38, 'Teoria dell Informazione', 'Informatica', 'giorgio.bianchi', '2023-10-20', "La teoria dell'informazione è una branca dell'informatica e della matematica che si occupa dello studio della quantità di informazione contenuta in un messaggio e dei metodi per la sua trasmissione e compressione.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (39, 'Storia del Medio Oriente', 'Storia', 'paola.rossi', '2023-11-15', "La storia del Medio Oriente è ricca di eventi che hanno plasmato la politica, la cultura e la società della regione. Include antiche civiltà come quelle mesopotamiche, l'ascesa e la caduta di imperi come l'Impero Ottomano e il ruolo chiave della regione nella storia contemporanea, come nel conflitto israelo-palestinese.");
+
+INSERT INTO note (idnote, titolo, categoria, autore, data, testo) VALUES (40, 'Fisiologia Umana', 'Biologia', 'mario.bianchi', '2022-09-15', "La fisiologia umana è lo studio delle funzioni e dei processi che avvengono nel corpo umano, compresi i meccanismi delle cellule, degli organi e dei sistemi organici, come il sistema nervoso, il sistema endocrino e il sistema cardiovascolare.");
+
 UPDATE notesync.note 
 SET stato = 'approvata'
 WHERE stato = 'da approvare';
