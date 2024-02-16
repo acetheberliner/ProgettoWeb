@@ -17,12 +17,7 @@ export default defineComponent({
     return {
       datiNote: [] as Nota[],
       categories: [] as String[],
-      selectedCategory: '',
-      newNote: {
-        title: '',
-        category: '',
-        text: ''
-      }
+      selectedCategory: ''
     };
   },
   methods: {
